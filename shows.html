@@ -55,6 +55,17 @@
         /* Section Styling */
         .tour-section { margin-bottom: 40px; }
 
+        /* Add this to hide grids by default */
+        .shows-grid.hidden {
+            display: none;
+        }
+
+        /* Make the banners look clickable */
+        .region-banner, .collapsed-block {
+            cursor: pointer;
+            user-select: none; /* Prevents text highlighting on double click */
+        }
+
         .region-banner {
             background-color: #f1f1f1;
             padding: 15px 20px;
@@ -164,9 +175,13 @@
 
 <div class="container">
 
-    <div class="tour-section">
-        <div class="region-banner active">
-            <span style="margin-right: 15px; font-size: 1.5rem;">−</span> NORTHEAST CORRIDOR
+        <div class="tour-section">
+            <div class="region-banner">
+                <span class="icon" style="margin-right: 15px; font-size: 1.5rem;">+</span> WEST COAST CALM
+            </div>
+            <div class="shows-grid hidden">
+                <p style="padding: 20px;">Stay tuned! West Coast dates coming soon...</p>
+            </div>
         </div>
 
         <div class="shows-grid">
@@ -225,5 +240,29 @@
     <div style="font-size: 2rem;">⚓ 💎 🎷</div>
 </footer>
 
+<script>
+    // Select all region banners
+    const banners = document.querySelectorAll('.region-banner');
+
+    banners.forEach(banner => {
+        banner.addEventListener('click', () => {
+            // 1. Toggle the "active" class for styling
+            banner.classList.toggle('active');
+
+            // 2. Find the grid directly after this banner
+            const grid = banner.nextElementSibling;
+            grid.classList.toggle('hidden');
+
+            // 3. Update the + / − icon
+            const icon = banner.querySelector('span');
+            if (grid.classList.contains('hidden')) {
+                icon.textContent = '+';
+            } else {
+                icon.textContent = '−';
+            }
+        });
+    });
+</script>
+    
 </body>
 </html>
