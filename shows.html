@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="en">
 <head>
     <link rel="icon" type="image/png" href="yacht-icon.png">
@@ -120,6 +120,37 @@
             text-transform: uppercase;
         }
 
+        /* Container for the banner needs relative positioning so the decal stays inside it */
+        .region-banner {
+            position: relative; 
+            overflow: hidden; /* Keeps the decal from sticking out of the edges */
+        }
+
+        /* The "Sold Out" Decal Styling */
+        .sold-out-decal {
+            display: none; /* Hidden by default */
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%) rotate(-10deg);
+            background-color: #d9534f; /* Red */
+            color: white;
+            padding: 5px 15px;
+            border: 3px solid white;
+            font-size: 1.2rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            border-radius: 5px;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+            z-index: 10;
+            pointer-events: none; /* Allows clicks to pass through to the banner */
+        }
+
+        /* Class to show the decal */
+        .is-sold-out .sold-out-decal {
+            display: block;
+        }
+
         footer { background: var(--navy); color: white; text-align: center; padding: 60px 20px; margin-top: 40px; }
 
         @media (max-width: 600px) {
@@ -143,10 +174,15 @@
 
 <div class="container">
 
-    <div class="tour-section">
-        <div class="region-banner active">
-            <span class="icon" style="margin-right: 15px; font-size: 1.5rem;">−</span> NORTHEAST CORRIDOR
+   <div class="tour-section" id="northeast-section">
+    <div class="region-banner active">
+        <span class="icon" style="margin-right: 15px; font-size: 1.5rem;">−</span> 
+        NORTHEAST CORRIDOR
+        <span class="sold-out-decal">Sold Out</span>
+    </div>
+    <div class="shows-grid">
         </div>
+</div>
         <div class="shows-grid">
             <div class="show-card">
                 <div class="date-block">
@@ -189,18 +225,26 @@
 </footer>
 
 <script>
-    const banners = document.querySelectorAll('.region-banner');
+   const banners = document.querySelectorAll('.region-banner');
 
-    banners.forEach(banner => {
-        banner.addEventListener('click', () => {
-            banner.classList.toggle('active');
-            const grid = banner.nextElementSibling;
-            grid.classList.toggle('hidden');
+banners.forEach(banner => {
+    banner.addEventListener('click', () => {
+        banner.classList.toggle('active');
+        
+        // Find the grid
+        const grid = banner.nextElementSibling;
+        grid.classList.toggle('hidden');
 
-            const icon = banner.querySelector('.icon');
-            icon.textContent = grid.classList.contains('hidden') ? '+' : '−';
-        });
+        // Update the +/- icon
+        const icon = banner.querySelector('.icon');
+        icon.textContent = grid.classList.contains('hidden') ? '+' : '−';
+
+        // NEW: If this is the Northeast banner, show the Sold Out decal
+        if (banner.textContent.includes("NORTHEAST")) {
+            banner.classList.add('is-sold-out');
+        }
     });
+});
 </script>
 
 </body>
