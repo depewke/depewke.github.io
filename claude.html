@@ -37,17 +37,31 @@
             font-family: 'Playfair Display', serif;
         }
 
+        /* Updated Neon Text with Animation */
         .neon-text {
             color: var(--neon-cyan);
-            text-shadow: 0 0 10px var(--neon-cyan);
+            text-shadow: 0 0 10px var(--neon-cyan), 0 0 20px var(--neon-cyan);
             margin-bottom: 20px;
+            animation: flicker 4s infinite alternate;
         }
 
         .neon-text-alt {
             color: var(--neon-magenta);
-            text-shadow: 0 0 10px var(--neon-magenta);
+            text-shadow: 0 0 10px var(--neon-magenta), 0 0 20px var(--neon-magenta);
+            animation: flicker 6s infinite alternate-reverse;
         }
 
+        /* The "Grit" Animation */
+        @keyframes flicker {
+            0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100% {
+                opacity: 1;
+            }
+            20%, 21.999%, 63%, 63.999%, 65%, 69.999% {
+                opacity: 0.7;
+                text-shadow: none;
+            }
+        }
+        
         /* Header & Hero */
        header {
             height: 100vh;
