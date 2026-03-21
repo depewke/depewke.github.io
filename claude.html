@@ -207,14 +207,9 @@
 </head>
 <body>
 
-    /* autoplay music on interaction */
-    <div style="text-align: center; padding: 10px; background: var(--navy); border-bottom: 2px solid var(--gold);">
-        <p style="color: var(--gold); margin: 5px 0; font-size: 0.8rem;">PRESS PLAY FOR THE FULL EXPERIENCE</p>
-        <audio id="bg-music" autoplay loop controls>
+     <audio id="yacht-audio" loop>
         <source src="bagpipes-on-the-water.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-        </audio>
-    </div>
+     </audio>
     
     <header>
         <nav>
@@ -285,5 +280,26 @@
         <p>&copy; 2024 Claude Gerstenhauber | Architect of Neon-Noir</p>
     </footer>
 
+    <script>
+        const smoothAudio = document.getElementById("yacht-audio");
+
+        function startTheVibes() {
+            // Try to play the audio
+            smoothAudio.play().then(() => {
+                console.log("The night has begun.");
+                // SUCCESS: Remove the scroll listener so we don't trigger it again
+                window.removeEventListener('scroll', startTheVibes);
+                window.removeEventListener('click', startTheVibes);
+            }).catch(error => {
+                // If the browser still blocks it, we just wait for the next interaction
+                console.log("Waiting for more movement...");
+            });
+        }
+
+        // Listen for both scroll and click to be safe
+        window.addEventListener('scroll', startTheVibes);
+        window.addEventListener('click', startTheVibes);
+    </script>
+    
 </body>
 </html>
