@@ -65,9 +65,50 @@
             border: 5px solid white;
             box-shadow: 5px 5px 15px rgba(0,0,0,0.2);
             transition: transform 0.3s;
+            cursor: pointer; /* Shows it is clickable */
         }
 
         .gallery-item img:hover { transform: scale(1.03); }
+
+        /* Pop-up (Modal) Styles */
+        .modal {
+            display: none; 
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,31,63,0.9); /* Navy overlay */
+            overflow: hidden;
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: auto;
+            max-width: 90%;
+            max-height: 85vh;
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
+            border: 5px solid var(--gold);
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: var(--gold);
+            font-size: 60px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            line-height: 1;
+        }
+
+        .close-modal:hover { color: var(--sunset-orange); }
 
         /* Discography Table */
         table {
@@ -86,16 +127,14 @@
         th { background-color: var(--navy); color: white; }
         tr:hover { background-color: #f9f9f9; }
 
-        /* Custom Audio Player Styling */
         audio {
             height: 30px;
             width: 200px;
-            filter: sepia(20%) saturate(70%) hue-rotate(170deg); /* Subtle blue tint */
+            filter: sepia(20%) saturate(70%) hue-rotate(170deg);
         }
         
         td { vertical-align: middle; }
         
-        /* Show Card */
         .show-card {
             background: var(--yacht-white);
             border: 3px double var(--gold);
@@ -128,7 +167,7 @@
         footer { background: var(--navy); color: white; text-align: center; padding: 60px 20px; }
     </style>
 </head>
-<body>
+<body id="top">
 
 <header>
     <h1>Diamond Rock Monument</h1>
@@ -162,31 +201,31 @@
                 <img src="captain-jack.jpg" alt="Captain Jack">
                 <h3>Captain Jack Sterling</h3>
                 <p><em>Lead Vocals & Keytar</em></p>
-                <p>A voice like velvet and a blazer like fresh snow. The undisputed frontman and stylistic anchor. With a voice as smooth as a glass-calm harbor at sunset, Jack commands the stage in his signature tailored white blazer. He handles the band's iconic synth lines on a keytar he claims was once owned by a member of Toto.</p>
+                <p>A voice like velvet and a blazer like fresh snow. Jack commands the stage in his signature tailored white blazer.</p>
             </div>
             <div class="member-card">
                 <img src="brody-breeze.jpg" alt="Brody Fairfield">
                 <h3>Brody "The Breeze" Fairfield</h3>
                 <p><em>Lead Guitar</em></p>
-                <p>Master of the 12-string acoustic and the chorus-pedal solo. The architect of those airy, chorus-drenched guitar solos. Brody expertly blends technical skill with melodic ease, crafting riffs that feel like a cool breeze. His laid-back demeanor and perfectly featthered hair make him a fan favorite.</p>
+                <p>Master of the 12-string acoustic and the architect of those airy, chorus-drenched guitar solos.</p>
             </div>
             <div class="member-card">
                 <img src="chase-rhythm.jpg" alt="Chase Montrose">
                 <h3>Chase "The Rhythm" Montrose</h3>
                 <p><em>Drums</em></p>
-                <p>The impeccably groomed engine room. Chase keeps the pulse steady, driving sophisticated grooves with polished precision. Kown for his crisp drumming and cripier attire, he believes the only thing tighter than his fills is his collection of vintage silk shirts.</p>
+                <p>The impeccably groomed engine room. Kown for his crisp drumming and even crispier attire.</p>
             </div>
             <div class="member-card">
                 <img src="tanner-titan.jpg" alt="Tanner Reed">
                 <h3>Tanner "The Titan" Reed</h3>
                 <p><em>Bass Guitar</em></p>
-                <p>Tanner provides the deep, resonant groove that anchors every track. If his signature thick mustache and gold chain don't impress you, his unwavering sense of rhythm certainly will. He's the foundation that allows the others to sail smoothly.</p>
+                <p>Tanner provides the deep, resonant groove that anchors every track with polished precision.</p>
             </div>
             <div class="member-card">
                 <img src="vance-velvet.jpg" alt="Vance Yates">
                 <h3>Vance "The Velvet" Yates</h3>
                 <p><em>Percussion & Backing Vocals</em></p>
-                <p>A true journeyman of the scene, Vance posesses a vibe so smooth it has its own zip code. Legend has it he has played session gigs for half the billboard charts in 1982, and his beats add an extra layer of authentic yach-rock soul.</p>
+                <p>A true journeyman of the scene, Vance possesses a vibe so smooth it has its own zip code.</p>
             </div>
         </div>
     </section>
@@ -201,7 +240,7 @@
         </div>
     </section>
 
-  <section id="music">
+    <section id="music">
         <h2 style="text-align:center;">The Catalog</h2>
         <table>
             <thead>
@@ -220,12 +259,11 @@
                     <td>
                         <audio controls>
                             <source src="bagpipes-on-the-water.mp3" type="audio/mpeg">
-                            Your browser does not support the audio element.
                         </audio>
                     </td>
                 </tr>
                 <tr>
-                   <td>1985</td>
+                    <td>1985</td>
                     <td>Champagne & Seafoam</td>
                     <td>"Sunset Drive Serenade"</td>
                     <td>
@@ -244,21 +282,24 @@
                         </audio>
                     </td>
                 </tr>
-                 <tr>
+                <tr>
                     <td>1985</td>
                     <td>Champagne & Seafoam</td>
                     <td>"Punny Girl"</td>
                     <td>
                         <audio controls>
                             <source src="Lettuce_Romaine_for_You.mp3" type="audio/mpeg">
-                            Your browser does not support the audio element.
                         </audio>
                     </td>
                 </tr>
             </tbody>
         </table>
     </section>
+</div>
 
+<div id="imageModal" class="modal">
+    <span class="close-modal">&times;</span>
+    <img class="modal-content" id="fullImage">
 </div>
 
 <footer>
@@ -266,6 +307,32 @@
     <p>For bookings: management@diamondrockmonument.band</p>
     <div style="margin-top:20px; font-size: 2rem;">⚓ 💎 🎷</div>
 </footer>
+
+<script>
+    const modal = document.getElementById("imageModal");
+    const modalImg = document.getElementById("fullImage");
+    const closeBtn = document.querySelector(".close-modal");
+
+    // Click an image to open the modal
+    document.querySelectorAll('.gallery-item img').forEach(img => {
+        img.onclick = function() {
+            modal.style.display = "block";
+            modalImg.src = this.src;
+        }
+    });
+
+    // Click 'X' to close
+    closeBtn.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // Click outside the image to close
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
 
 </body>
 </html>
