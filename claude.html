@@ -1,73 +1,182 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Claude Gerstenhauber | The Neon-Noir Saxophone</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Raleway:wght@200;400;600&display=swap" rel="stylesheet">
-</head>
-<body>
+:root {
+    --bg-dark: #050505;
+    --neon-cyan: #00f2ff;
+    --neon-magenta: #ff00ff;
+    --text-gray: #b0b0b0;
+    --glass: rgba(255, 255, 255, 0.05);
+}
 
-    <header class="hero">
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-            <h1>CLAUDE GERSTENHAUBER</h1>
-            <p class="tagline">The Undisputed Architect of the Neon-Noir Sound</p>
-        </div>
-    </header>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-    <main>
-        <section class="bio-intro">
-            <div class="container grid">
-                <div class="image-box">
-                    <img src="Claude_sax1.jpg" alt="Claude Gerstenhauber Saxophone Graphic" class="main-img">
-                </div>
-                <div class="text-box">
-                    <h2>The Man, The Myth, The Reed</h2>
-                    <p>While most musicians chase the spotlight, Claude lives in the shadows of the world's most dramatic cinematic moments. He provides the emotional gravity for high-stakes urban drama.</p>
-                    
-                    <div class="feature-item">
-                        <h3>The Cinematic Specialist</h3>
-                        <p>The industry’s first call for soundtracks requiring a long, brooding gaze across a rain-slicked cityscape.</p>
-                    </div>
+body {
+    background-color: var(--bg-dark);
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
 
-                    <div class="feature-item">
-                        <h3>A Legend in His Own Right</h3>
-                        <p>With a reputation built on sophisticated technical mastery, he is a titan of the session musician circuit.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+/* Typography */
+h1, h2, h3 {
+    font-family: 'Playfair Display', serif;
+}
 
-        <section class="accent-bar">
-            <div class="container">
-                <p class="quote">"Sometimes the most powerful note is the one you don't play, allowing the space and the rain of the soundtrack to breathe."</p>
-            </div>
-        </section>
+.neon-text {
+    color: var(--neon-cyan);
+    text-shadow: 0 0 10px var(--neon-cyan);
+    margin-bottom: 20px;
+}
 
-        <section class="details container">
-            <div class="card">
-                <h3>Visual Iconography</h3>
-                <p>A fedora tipped just low enough to catch the sunset and a tenor sax that has seen more miles than most tour buses.</p>
-            </div>
-            <div class="card">
-                <h3>The Sound of the City</h3>
-                <p>A "velvet-and-grit" tone equally at home in a smoky 1940s jazz club or a late-night 1980s synth-pop masterpiece.</p>
-            </div>
-            <div class="card">
-                <h3>The Sophistication Guarantee</h3>
-                <p>Claude’s presence is a seal of quality that guarantees the highest level of musical sophistication.</p>
-            </div>
-        </section>
-    </main>
+.neon-text-alt {
+    color: var(--neon-magenta);
+    text-shadow: 0 0 10px var(--neon-magenta);
+}
 
-    <footer>
-        <p>&copy; 2024 Claude Gerstenhauber | <span>Neon-Noir Sessions</span></p>
-    </footer>
+/* Header & Hero */
+header {
+    height: 100vh;
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1444212477490-ca407925329e?q=80&w=2000'); /* Placeholder for rainy city */
+    background-size: cover;
+    background-attachment: fixed;
+}
 
-</body>
-</html>
+nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 30px 10%;
+    align-items: center;
+}
 
-</body>
-</html>
+nav .logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 5px;
+    border: 1px solid white;
+    padding: 5px 15px;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+}
+
+nav ul li {
+    margin-left: 30px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+}
+
+.hero {
+    height: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 4.5rem;
+    letter-spacing: 10px;
+}
+
+/* Sections */
+.container {
+    padding: 100px 10%;
+}
+
+.bio-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.bio-img img {
+    width: 100%;
+    filter: grayscale(100%) contrast(120%);
+    border: 1px solid var(--neon-cyan);
+    box-shadow: 0 0 20px rgba(0, 242, 255, 0.2);
+}
+
+.img-caption {
+    font-size: 0.8rem;
+    color: var(--text-gray);
+    margin-top: 10px;
+    text-align: center;
+}
+
+.feature {
+    margin-top: 30px;
+    background: var(--glass);
+    padding: 20px;
+    border-left: 3px solid var(--neon-cyan);
+}
+
+/* Sound Section */
+.sound-city {
+    background: #0a0a0a;
+    text-align: center;
+    padding: 150px 10%;
+    border-top: 1px solid #222;
+    border-bottom: 1px solid #222;
+}
+
+.large-p {
+    font-size: 1.4rem;
+    max-width: 800px;
+    margin: 30px auto;
+    font-weight: 300;
+}
+
+blockquote {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.8rem;
+    color: var(--text-gray);
+    margin-top: 40px;
+}
+
+/* Venues */
+.venue-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.card {
+    background: var(--glass);
+    padding: 40px;
+    border: 1px solid #333;
+    transition: 0.3s;
+}
+
+.card:hover {
+    border-color: var(--neon-magenta);
+}
+
+footer {
+    text-align: center;
+    padding: 50px;
+    border-top: 1px solid #222;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    color: var(--text-gray);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .bio-grid { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 2.5rem; }
+    .venue-cards { grid-template-columns: 1fr; }
+}
