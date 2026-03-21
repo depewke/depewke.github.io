@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tour Dates | Diamond Rock Monument</title>
+    <style>
+        :root {
+            --gold: #d4af37;
+            --ocean-blue: #0077be;
+            --cream: #fdf5e6;
+            --navy: #001f3f;
+            --sunset-orange: #ff8c00;
+            --yacht-white: #ffffff;
+            --card-beige: #e5dfd3; /* Inspired by reference image */
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--cream);
+            color: var(--navy);
+            line-height: 1.6;
+        }
+
+        /* Nautical Header */
+        header {
+            background: linear-gradient(rgba(0,31,63,0.85), rgba(0,31,63,0.85)), url('header-bg.jpg') center/cover;
+            color: white;
+            text-align: center;
+            padding: 60px 20px;
+            border-bottom: 8px solid var(--gold);
+        }
+
+        h1 { font-family: 'Georgia', serif; text-transform: uppercase; font-size: 3rem; margin: 0; letter-spacing: 3px; }
+
+        nav {
+            background: var(--navy);
+            padding: 15px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            text-align: center;
+            border-bottom: 2px solid var(--gold);
+        }
+
+        nav a { color: white; text-decoration: none; margin: 0 15px; font-weight: bold; transition: 0.3s; }
+        nav a:hover { color: var(--sunset-orange); }
+
+        .container { max-width: 1100px; margin: auto; padding: 40px 20px; }
+
+        /* Section Styling */
+        .tour-section { margin-bottom: 40px; }
+
+        .region-banner {
+            background-color: #f1f1f1;
+            padding: 15px 20px;
+            border: 1px solid #ddd;
+            border-bottom: none;
+            font-family: 'Georgia', serif;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+
+        .region-banner.active { background-color: var(--card-beige); }
+
+        /* The Grid */
+        .shows-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 20px;
+            background: #f9f9f9;
+            padding: 25px;
+            border: 1px solid #ddd;
+        }
+
+        /* The Show Card */
+        .show-card {
+            display: flex;
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .show-card:hover { 
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            border-color: var(--gold);
+        }
+
+        /* Left Side: Date */
+        .date-block {
+            background-color: var(--card-beige);
+            min-width: 100px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-right: 1px solid #ccc;
+        }
+
+        .date-block .day { font-size: 2.5rem; font-weight: bold; color: var(--navy); line-height: 1; }
+        .date-block .month { text-transform: uppercase; font-weight: bold; color: #666; font-size: 0.9rem; }
+
+        /* Right Side: Details */
+        .details-block {
+            padding: 20px;
+            flex-grow: 1;
+        }
+
+        .details-block h3 { margin: 0 0 5px 0; color: var(--ocean-blue); font-size: 1.2rem; }
+        .details-block p { margin: 2px 0; font-size: 0.9rem; color: #444; }
+
+        .ticket-link {
+            display: inline-block;
+            margin-top: 12px;
+            color: var(--sunset-orange);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+        }
+
+        .ticket-link:hover { text-decoration: underline; }
+
+        /* Collapsed Blocks */
+        .collapsed-block {
+            background: #eee;
+            padding: 15px 20px;
+            border: 1px solid #ddd;
+            margin-top: 10px;
+            font-weight: bold;
+            color: #888;
+            cursor: pointer;
+        }
+
+        footer { background: var(--navy); color: white; text-align: center; padding: 60px 20px; margin-top: 40px; }
+
+        /* Mobile Adjustments */
+        @media (max-width: 600px) {
+            .shows-grid { grid-template-columns: 1fr; padding: 15px; }
+            h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>The Smooth Sailing Tour</h1>
+    <p style="color: var(--gold); font-style: italic; font-size: 1.2rem;">Diamond Rock Monument Live in 2026</p>
+</header>
+
+<nav>
+    <a href="index.html">Home</a>
+    <a href="shows.html">Tour Dates</a>
+    <a href="index.html#members">The Crew</a>
+</nav>
+
+<div class="container">
+
+    <div class="tour-section">
+        <div class="region-banner active">
+            <span style="margin-right: 15px; font-size: 1.5rem;">−</span> NORTHEAST CORRIDOR
+        </div>
+
+        <div class="shows-grid">
+            <div class="show-card">
+                <div class="date-block">
+                    <span class="day">27</span>
+                    <span class="month">Jun</span>
+                </div>
+                <div class="details-block">
+                    <h3>SAGAPONACK, NY</h3>
+                    <p>Saturday, 8:00pm - 11:00pm</p>
+                    <p><strong>Town Line Barbeque</strong></p>
+                    <p>3593 Montauk Hwy, Sagaponack, NY</p>
+                    <a href="#" class="ticket-link">Tickets & Info →</a>
+                </div>
+            </div>
+
+            <div class="show-card">
+                <div class="date-block">
+                    <span class="day">04</span>
+                    <span class="month">Jul</span>
+                </div>
+                <div class="details-block">
+                    <h3>MONTAUK, NY</h3>
+                    <p>Friday, 7:00pm - 10:00pm</p>
+                    <p><strong>The Yacht Club Marina</strong></p>
+                    <p>32 Star Island Rd, Montauk, NY</p>
+                    <a href="#" class="ticket-link">Tickets & Info →</a>
+                </div>
+            </div>
+
+            <div class="show-card">
+                <div class="date-block">
+                    <span class="day">12</span>
+                    <span class="month">Jul</span>
+                </div>
+                <div class="details-block">
+                    <h3>NEWPORT, RI</h3>
+                    <p>Sunday, 6:00pm - 9:00pm</p>
+                    <p><strong>The Regatta Room</strong></p>
+                    <p>100 Thames St, Newport, RI</p>
+                    <a href="#" class="ticket-link">Tickets & Info →</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="collapsed-block">+ WEST COAST CALM</div>
+    <div class="collapsed-block">+ THE RIVIERA RUN</div>
+    <div class="collapsed-block">+ PACIFIC PASSAGE</div>
+
+</div>
+
+<footer>
+    <p>&copy; 2026 Diamond Rock Monument Productions</p>
+    <div style="font-size: 2rem;">⚓ 💎 🎷</div>
+</footer>
+
+</body>
+</html>
