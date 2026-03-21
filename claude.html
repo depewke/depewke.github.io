@@ -77,8 +77,19 @@
             justify-content: space-between;
             padding: 30px 10%;
             align-items: center;
+        /* Sticky Logic */
+            position: fixed; /* Fixes it to the viewport */
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000; /* Ensures it stays above all other content */
+            
+            /* Glassmorphism effect so it's readable over images/text */
+            background: rgba(5, 5, 5, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
-
+        
         nav .logo {
             font-size: 1.5rem;
             font-weight: 700;
