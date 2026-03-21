@@ -51,7 +51,6 @@
 
         .tour-section { margin-bottom: 20px; }
 
-        /* Hiding Logic */
         .shows-grid.hidden { display: none; }
 
         .region-banner {
@@ -137,4 +136,102 @@
             font-weight: 900;
             text-transform: uppercase;
             border-radius: 5px;
-            z-
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        /* Show the decal when the parent has this class */
+        .is-sold-out .sold-out-decal {
+            display: block;
+        }
+
+        footer { background: var(--navy); color: white; text-align: center; padding: 60px 20px; margin-top: 40px; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>The Smooth Sailing Tour</h1>
+    <p style="color: var(--gold); font-style: italic; font-size: 1.2rem;">Diamond Rock Monument Live in 2026</p>
+</header>
+
+<nav>
+    <a href="#">Home</a>
+    <a href="#">Tour Dates</a>
+    <a href="#">The Crew</a>
+</nav>
+
+<div class="container">
+
+    <div class="tour-section" id="northeast-section">
+        <div class="region-banner active">
+            <span class="icon" style="margin-right: 15px; font-size: 1.5rem;">−</span> 
+            NORTHEAST CORRIDOR
+            <span class="sold-out-decal">Sold Out</span>
+        </div>
+        <div class="shows-grid">
+            <div class="show-card">
+                <div class="date-block">
+                    <span class="day">27</span>
+                    <span class="month">Jun</span>
+                </div>
+                <div class="details-block">
+                    <h3>SAGAPONACK, NY</h3>
+                    <p>Saturday, 8:00pm - 11:00pm</p>
+                    <p><strong>Town Line Barbeque</strong></p>
+                    <a href="#" class="ticket-link">Tickets & Info →</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="tour-section">
+        <div class="region-banner">
+            <span class="icon" style="margin-right: 15px; font-size: 1.5rem;">+</span> WEST COAST CALM
+        </div>
+        <div class="shows-grid hidden">
+            <p style="padding: 20px;">Dates for Los Angeles and San Diego coming soon!</p>
+        </div>
+    </div>
+
+    <div class="tour-section">
+        <div class="region-banner">
+            <span class="icon" style="margin-right: 15px; font-size: 1.5rem;">+</span> THE RIVIERA RUN
+        </div>
+        <div class="shows-grid hidden">
+            <p style="padding: 20px;">International dates currently being finalized.</p>
+        </div>
+    </div>
+
+</div>
+
+<footer>
+    <p>&copy; 2026 Diamond Rock Monument Productions</p>
+    <div style="font-size: 2rem;">⚓ 💎 🎷</div>
+</footer>
+
+<script>
+    const banners = document.querySelectorAll('.region-banner');
+
+    banners.forEach(banner => {
+        banner.addEventListener('click', () => {
+            banner.classList.toggle('active');
+            
+            const grid = banner.nextElementSibling;
+            if (grid) {
+                grid.classList.toggle('hidden');
+                
+                const icon = banner.querySelector('.icon');
+                icon.textContent = grid.classList.contains('hidden') ? '+' : '−';
+            }
+
+            // Trigger the Sold Out decal for Northeast
+            if (banner.textContent.includes("NORTHEAST")) {
+                banner.classList.add('is-sold-out');
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
