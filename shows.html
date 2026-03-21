@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
     <link rel="icon" type="image/png" href="yacht-icon.png">
-    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tour Dates | Diamond Rock Monument</title>
@@ -15,7 +13,7 @@
             --navy: #001f3f;
             --sunset-orange: #ff8c00;
             --yacht-white: #ffffff;
-            --card-beige: #e5dfd3; /* Inspired by reference image */
+            --card-beige: #e5dfd3;
         }
 
         body {
@@ -26,7 +24,6 @@
             line-height: 1.6;
         }
 
-        /* Nautical Header */
         header {
             background: linear-gradient(rgba(0,31,63,0.85), rgba(0,31,63,0.85)), url('header-bg.jpg') center/cover;
             color: white;
@@ -52,34 +49,26 @@
 
         .container { max-width: 1100px; margin: auto; padding: 40px 20px; }
 
-        /* Section Styling */
-        .tour-section { margin-bottom: 40px; }
+        .tour-section { margin-bottom: 20px; }
 
-        /* Add this to hide grids by default */
-        .shows-grid.hidden {
-            display: none;
-        }
-
-        /* Make the banners look clickable */
-        .region-banner, .collapsed-block {
-            cursor: pointer;
-            user-select: none; /* Prevents text highlighting on double click */
-        }
+        /* Hiding Logic */
+        .shows-grid.hidden { display: none; }
 
         .region-banner {
             background-color: #f1f1f1;
             padding: 15px 20px;
             border: 1px solid #ddd;
-            border-bottom: none;
             font-family: 'Georgia', serif;
             font-weight: bold;
             display: flex;
             align-items: center;
+            cursor: pointer;
+            user-select: none;
+            transition: background 0.2s;
         }
 
-        .region-banner.active { background-color: var(--card-beige); }
+        .region-banner.active { background-color: var(--card-beige); border-bottom: none; }
 
-        /* The Grid */
         .shows-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
@@ -89,7 +78,6 @@
             border: 1px solid #ddd;
         }
 
-        /* The Show Card */
         .show-card {
             display: flex;
             background: white;
@@ -105,7 +93,6 @@
             border-color: var(--gold);
         }
 
-        /* Left Side: Date */
         .date-block {
             background-color: var(--card-beige);
             min-width: 100px;
@@ -119,12 +106,7 @@
         .date-block .day { font-size: 2.5rem; font-weight: bold; color: var(--navy); line-height: 1; }
         .date-block .month { text-transform: uppercase; font-weight: bold; color: #666; font-size: 0.9rem; }
 
-        /* Right Side: Details */
-        .details-block {
-            padding: 20px;
-            flex-grow: 1;
-        }
-
+        .details-block { padding: 20px; flex-grow: 1; }
         .details-block h3 { margin: 0 0 5px 0; color: var(--ocean-blue); font-size: 1.2rem; }
         .details-block p { margin: 2px 0; font-size: 0.9rem; color: #444; }
 
@@ -138,22 +120,8 @@
             text-transform: uppercase;
         }
 
-        .ticket-link:hover { text-decoration: underline; }
-
-        /* Collapsed Blocks */
-        .collapsed-block {
-            background: #eee;
-            padding: 15px 20px;
-            border: 1px solid #ddd;
-            margin-top: 10px;
-            font-weight: bold;
-            color: #888;
-            cursor: pointer;
-        }
-
         footer { background: var(--navy); color: white; text-align: center; padding: 60px 20px; margin-top: 40px; }
 
-        /* Mobile Adjustments */
         @media (max-width: 600px) {
             .shows-grid { grid-template-columns: 1fr; padding: 15px; }
             h1 { font-size: 2rem; }
@@ -168,22 +136,17 @@
 </header>
 
 <nav>
-    <a href="index.html">Home</a>
-    <a href="shows.html">Tour Dates</a>
-    <a href="index.html#members">The Crew</a>
+    <a href="#">Home</a>
+    <a href="#">Tour Dates</a>
+    <a href="#">The Crew</a>
 </nav>
 
 <div class="container">
 
-        <div class="tour-section">
-            <div class="region-banner">
-                <span class="icon" style="margin-right: 15px; font-size: 1.5rem;">+</span> WEST COAST CALM
-            </div>
-            <div class="shows-grid hidden">
-                <p style="padding: 20px;">Stay tuned! West Coast dates coming soon...</p>
-            </div>
+    <div class="tour-section">
+        <div class="region-banner active">
+            <span class="icon" style="margin-right: 15px; font-size: 1.5rem;">−</span> NORTHEAST CORRIDOR
         </div>
-
         <div class="shows-grid">
             <div class="show-card">
                 <div class="date-block">
@@ -194,44 +157,29 @@
                     <h3>SAGAPONACK, NY</h3>
                     <p>Saturday, 8:00pm - 11:00pm</p>
                     <p><strong>Town Line Barbeque</strong></p>
-                    <p>3593 Montauk Hwy, Sagaponack, NY</p>
                     <a href="#" class="ticket-link">Tickets & Info →</a>
                 </div>
             </div>
+            </div>
+    </div>
 
-            <div class="show-card">
-                <div class="date-block">
-                    <span class="day">04</span>
-                    <span class="month">Jul</span>
-                </div>
-                <div class="details-block">
-                    <h3>MONTAUK, NY</h3>
-                    <p>Friday, 7:00pm - 10:00pm</p>
-                    <p><strong>The Yacht Club Marina</strong></p>
-                    <p>32 Star Island Rd, Montauk, NY</p>
-                    <a href="#" class="ticket-link">Tickets & Info →</a>
-                </div>
-            </div>
-
-            <div class="show-card">
-                <div class="date-block">
-                    <span class="day">12</span>
-                    <span class="month">Jul</span>
-                </div>
-                <div class="details-block">
-                    <h3>NEWPORT, RI</h3>
-                    <p>Sunday, 6:00pm - 9:00pm</p>
-                    <p><strong>The Regatta Room</strong></p>
-                    <p>100 Thames St, Newport, RI</p>
-                    <a href="#" class="ticket-link">Tickets & Info →</a>
-                </div>
-            </div>
+    <div class="tour-section">
+        <div class="region-banner">
+            <span class="icon" style="margin-right: 15px; font-size: 1.5rem;">+</span> WEST COAST CALM
+        </div>
+        <div class="shows-grid hidden">
+            <p>Dates for Los Angeles and San Diego coming soon!</p>
         </div>
     </div>
 
-    <div class="collapsed-block">+ WEST COAST CALM</div>
-    <div class="collapsed-block">+ THE RIVIERA RUN</div>
-    <div class="collapsed-block">+ PACIFIC PASSAGE</div>
+    <div class="tour-section">
+        <div class="region-banner">
+            <span class="icon" style="margin-right: 15px; font-size: 1.5rem;">+</span> THE RIVIERA RUN
+        </div>
+        <div class="shows-grid hidden">
+            <p>International dates currently being finalized.</p>
+        </div>
+    </div>
 
 </div>
 
@@ -241,28 +189,19 @@
 </footer>
 
 <script>
-    // Select all region banners
     const banners = document.querySelectorAll('.region-banner');
 
     banners.forEach(banner => {
         banner.addEventListener('click', () => {
-            // 1. Toggle the "active" class for styling
             banner.classList.toggle('active');
-
-            // 2. Find the grid directly after this banner
             const grid = banner.nextElementSibling;
             grid.classList.toggle('hidden');
 
-            // 3. Update the + / − icon
-            const icon = banner.querySelector('span');
-            if (grid.classList.contains('hidden')) {
-                icon.textContent = '+';
-            } else {
-                icon.textContent = '−';
-            }
+            const icon = banner.querySelector('.icon');
+            icon.textContent = grid.classList.contains('hidden') ? '+' : '−';
         });
     });
 </script>
-    
+
 </body>
 </html>
