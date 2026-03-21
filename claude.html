@@ -1,182 +1,280 @@
-:root {
-    --bg-dark: #050505;
-    --neon-cyan: #00f2ff;
-    --neon-magenta: #ff00ff;
-    --text-gray: #b0b0b0;
-    --glass: rgba(255, 255, 255, 0.05);
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claude Gerstenhauber | Neon-Noir Saxophone</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+    <style>
+        :root {
+            --bg-dark: #050505;
+            --neon-cyan: #00f2ff;
+            --neon-magenta: #ff00ff;
+            --text-gray: #b0b0b0;
+            --glass: rgba(255, 255, 255, 0.05);
+        }
 
-body {
-    background-color: var(--bg-dark);
-    color: white;
-    font-family: 'Montserrat', sans-serif;
-    line-height: 1.6;
-    overflow-x: hidden;
-}
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-/* Typography */
-h1, h2, h3 {
-    font-family: 'Playfair Display', serif;
-}
+        body {
+            background-color: var(--bg-dark);
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
 
-.neon-text {
-    color: var(--neon-cyan);
-    text-shadow: 0 0 10px var(--neon-cyan);
-    margin-bottom: 20px;
-}
+        /* Typography */
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+        }
 
-.neon-text-alt {
-    color: var(--neon-magenta);
-    text-shadow: 0 0 10px var(--neon-magenta);
-}
+        .neon-text {
+            color: var(--neon-cyan);
+            text-shadow: 0 0 10px var(--neon-cyan);
+            margin-bottom: 20px;
+        }
 
-/* Header & Hero */
-header {
-    height: 100vh;
-    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1444212477490-ca407925329e?q=80&w=2000'); /* Placeholder for rainy city */
-    background-size: cover;
-    background-attachment: fixed;
-}
+        .neon-text-alt {
+            color: var(--neon-magenta);
+            text-shadow: 0 0 10px var(--neon-magenta);
+        }
 
-nav {
-    display: flex;
-    justify-content: space-between;
-    padding: 30px 10%;
-    align-items: center;
-}
+        /* Header & Hero */
+        header {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1444212477490-ca407925329e?q=80&w=2000');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+        }
 
-nav .logo {
-    font-size: 1.5rem;
-    font-weight: 700;
-    letter-spacing: 5px;
-    border: 1px solid white;
-    padding: 5px 15px;
-}
+        nav {
+            display: flex;
+            justify-content: space-between;
+            padding: 30px 10%;
+            align-items: center;
+        }
 
-nav ul {
-    display: flex;
-    list-style: none;
-}
+        nav .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 5px;
+            border: 1px solid white;
+            padding: 5px 15px;
+        }
 
-nav ul li {
-    margin-left: 30px;
-}
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
 
-nav ul li a {
-    color: white;
-    text-decoration: none;
-    text-transform: uppercase;
-    font-size: 0.8rem;
-    letter-spacing: 2px;
-}
+        nav ul li {
+            margin-left: 30px;
+        }
 
-.hero {
-    height: 80%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-}
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+        }
 
-.hero h1 {
-    font-size: 4.5rem;
-    letter-spacing: 10px;
-}
+        .hero {
+            height: 80%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
 
-/* Sections */
-.container {
-    padding: 100px 10%;
-}
+        .hero h1 {
+            font-size: 4.5rem;
+            letter-spacing: 10px;
+        }
 
-.bio-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
-    align-items: center;
-}
+        .tagline {
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--neon-cyan);
+        }
 
-.bio-img img {
-    width: 100%;
-    filter: grayscale(100%) contrast(120%);
-    border: 1px solid var(--neon-cyan);
-    box-shadow: 0 0 20px rgba(0, 242, 255, 0.2);
-}
+        /* Sections */
+        .container {
+            padding: 100px 10%;
+        }
 
-.img-caption {
-    font-size: 0.8rem;
-    color: var(--text-gray);
-    margin-top: 10px;
-    text-align: center;
-}
+        .bio-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
 
-.feature {
-    margin-top: 30px;
-    background: var(--glass);
-    padding: 20px;
-    border-left: 3px solid var(--neon-cyan);
-}
+        .bio-img img {
+            width: 100%;
+            filter: grayscale(100%) contrast(120%);
+            border: 1px solid var(--neon-cyan);
+            box-shadow: 0 0 20px rgba(0, 242, 255, 0.2);
+        }
 
-/* Sound Section */
-.sound-city {
-    background: #0a0a0a;
-    text-align: center;
-    padding: 150px 10%;
-    border-top: 1px solid #222;
-    border-bottom: 1px solid #222;
-}
+        .img-caption {
+            font-size: 0.8rem;
+            color: var(--text-gray);
+            margin-top: 10px;
+            text-align: center;
+        }
 
-.large-p {
-    font-size: 1.4rem;
-    max-width: 800px;
-    margin: 30px auto;
-    font-weight: 300;
-}
+        .feature {
+            margin-top: 30px;
+            background: var(--glass);
+            padding: 20px;
+            border-left: 3px solid var(--neon-cyan);
+        }
 
-blockquote {
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-size: 1.8rem;
-    color: var(--text-gray);
-    margin-top: 40px;
-}
+        /* Sound Section */
+        .sound-city {
+            background: #0a0a0a;
+            text-align: center;
+            padding: 150px 10%;
+            border-top: 1px solid #222;
+            border-bottom: 1px solid #222;
+        }
 
-/* Venues */
-.venue-cards {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 30px;
-    margin-top: 50px;
-}
+        .large-p {
+            font-size: 1.4rem;
+            max-width: 800px;
+            margin: 30px auto;
+            font-weight: 300;
+        }
 
-.card {
-    background: var(--glass);
-    padding: 40px;
-    border: 1px solid #333;
-    transition: 0.3s;
-}
+        blockquote {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.8rem;
+            color: var(--text-gray);
+            margin-top: 40px;
+        }
 
-.card:hover {
-    border-color: var(--neon-magenta);
-}
+        /* Venues */
+        .venues h2 {
+            margin-bottom: 20px;
+        }
 
-footer {
-    text-align: center;
-    padding: 50px;
-    border-top: 1px solid #222;
-    font-size: 0.8rem;
-    letter-spacing: 2px;
-    color: var(--text-gray);
-}
+        .venue-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 50px;
+        }
 
-/* Responsive */
-@media (max-width: 768px) {
-    .bio-grid { grid-template-columns: 1fr; }
-    .hero h1 { font-size: 2.5rem; }
-    .venue-cards { grid-template-columns: 1fr; }
-}
+        .card {
+            background: var(--glass);
+            padding: 40px;
+            border: 1px solid #333;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            border-color: var(--neon-magenta);
+            transform: translateY(-5px);
+        }
+
+        footer {
+            text-align: center;
+            padding: 50px;
+            border-top: 1px solid #222;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            color: var(--text-gray);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .bio-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 2.5rem; }
+            .venue-cards { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <div class="logo">CLAUDE</div>
+            <ul>
+                <li><a href="#about">The Myth</a></li>
+                <li><a href="#sound">The Sound</a></li>
+                <li><a href="#venues">Live Sessions</a></li>
+            </ul>
+        </nav>
+        <div class="hero">
+            <div class="hero-content">
+                <h1>CLAUDE GERSTENHAUBER</h1>
+                <p class="tagline">The Undisputed Architect of Neon-Noir</p>
+            </div>
+        </div>
+    </header>
+
+    <section id="about" class="container">
+        <div class="bio-grid">
+            <div class="bio-img">
+                <img src="Claude_sax1.jpg" alt="Claude Gerstenhauber">
+                <p class="img-caption">Visual Iconography: The Fedora & The Tenor</p>
+            </div>
+            <div class="bio-text">
+                <h2 class="neon-text">The Man, The Myth, The Reed</h2>
+                <p>Claude Gerstenhauber lives in the shadows of the world’s most dramatic cinematic moments. He is the industry’s first call for soundtracks that require a long, brooding gaze across a rain-slicked cityscape.</p>
+                
+                <div class="feature">
+                    <h3>The Cinematic Specialist</h3>
+                    <p>His notes provide the emotional gravity for high-stakes urban drama. A legend in the session circuit with technical mastery that is second to none.</p>
+                </div>
+
+                <div class="feature">
+                    <h3>The Sophistication Guarantee</h3>
+                    <p>Whether he’s a special guest or the headliner, Claude’s presence is a seal of quality that guarantees the highest level of musical sophistication.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="sound" class="sound-city">
+        <div class="container">
+            <h2 class="neon-text-alt">The Sound of the City</h2>
+            <p class="large-p">A "velvet-and-grit" tone that feels equally at home in a smoky 1940s jazz club or a 1980s synth-pop masterpiece.</p>
+            <blockquote>
+                "Sometimes the most powerful note is the one you don't play, allowing the space and the 'rain' of the soundtrack to breathe."
+            </blockquote>
+        </div>
+    </section>
+
+    <section id="venues" class="container venues">
+        <h2 class="neon-text">Intimate Encounters</h2>
+        <p>Claude eschews the stadium for the soul of the city. He favors the raw energy of small venues where the music becomes a shared breath between performer and audience.</p>
+        <div class="venue-cards">
+            <div class="card">
+                <h3>Dive Bars</h3>
+                <p>Where the grit of the city meets the velvet of the sax.</p>
+            </div>
+            <div class="card">
+                <h3>Beach Huts</h3>
+                <p>Midnight sessions where the tide provides the percussion.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Claude Gerstenhauber | Architect of Neon-Noir</p>
+    </footer>
+
+</body>
+</html>
