@@ -1,4 +1,4 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <link rel="icon" type="image/png" href="yacht-icon.png">
@@ -65,6 +65,8 @@
             cursor: pointer;
             user-select: none;
             transition: background 0.2s;
+            position: relative; 
+            overflow: hidden;
         }
 
         .region-banner.active { background-color: var(--card-beige); border-bottom: none; }
@@ -120,132 +122,19 @@
             text-transform: uppercase;
         }
 
-        /* Container for the banner needs relative positioning so the decal stays inside it */
-        .region-banner {
-            position: relative; 
-            overflow: hidden; /* Keeps the decal from sticking out of the edges */
-        }
-
-        /* The "Sold Out" Decal Styling */
+        /* Sold Out Decal */
         .sold-out-decal {
-            display: none; /* Hidden by default */
+            display: none;
             position: absolute;
             right: 20px;
             top: 50%;
             transform: translateY(-50%) rotate(-10deg);
-            background-color: #d9534f; /* Red */
+            background-color: #d9534f;
             color: white;
             padding: 5px 15px;
-            border: 3px solid white;
-            font-size: 1.2rem;
+            border: 2px solid white;
+            font-size: 1rem;
             font-weight: 900;
             text-transform: uppercase;
             border-radius: 5px;
-            box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
-            z-index: 10;
-            pointer-events: none; /* Allows clicks to pass through to the banner */
-        }
-
-        /* Class to show the decal */
-        .is-sold-out .sold-out-decal {
-            display: block;
-        }
-
-        footer { background: var(--navy); color: white; text-align: center; padding: 60px 20px; margin-top: 40px; }
-
-        @media (max-width: 600px) {
-            .shows-grid { grid-template-columns: 1fr; padding: 15px; }
-            h1 { font-size: 2rem; }
-        }
-    </style>
-</head>
-<body>
-
-<header>
-    <h1>The Smooth Sailing Tour</h1>
-    <p style="color: var(--gold); font-style: italic; font-size: 1.2rem;">Diamond Rock Monument Live in 2026</p>
-</header>
-
-<nav>
-    <a href="#">Home</a>
-    <a href="#">Tour Dates</a>
-    <a href="#">The Crew</a>
-</nav>
-
-<div class="container">
-
-   <div class="tour-section" id="northeast-section">
-    <div class="region-banner active">
-        <span class="icon" style="margin-right: 15px; font-size: 1.5rem;">−</span> 
-        NORTHEAST CORRIDOR
-        <span class="sold-out-decal">Sold Out</span>
-    </div>
-    <div class="shows-grid">
-        </div>
-</div>
-        <div class="shows-grid">
-            <div class="show-card">
-                <div class="date-block">
-                    <span class="day">27</span>
-                    <span class="month">Jun</span>
-                </div>
-                <div class="details-block">
-                    <h3>SAGAPONACK, NY</h3>
-                    <p>Saturday, 8:00pm - 11:00pm</p>
-                    <p><strong>Town Line Barbeque</strong></p>
-                    <a href="#" class="ticket-link">Tickets & Info →</a>
-                </div>
-            </div>
-            </div>
-    </div>
-
-    <div class="tour-section">
-        <div class="region-banner">
-            <span class="icon" style="margin-right: 15px; font-size: 1.5rem;">+</span> WEST COAST CALM
-        </div>
-        <div class="shows-grid hidden">
-            <p>Dates for Los Angeles and San Diego coming soon!</p>
-        </div>
-    </div>
-
-    <div class="tour-section">
-        <div class="region-banner">
-            <span class="icon" style="margin-right: 15px; font-size: 1.5rem;">+</span> THE RIVIERA RUN
-        </div>
-        <div class="shows-grid hidden">
-            <p>International dates currently being finalized.</p>
-        </div>
-    </div>
-
-</div>
-
-<footer>
-    <p>&copy; 2026 Diamond Rock Monument Productions</p>
-    <div style="font-size: 2rem;">⚓ 💎 🎷</div>
-</footer>
-
-<script>
-   const banners = document.querySelectorAll('.region-banner');
-
-banners.forEach(banner => {
-    banner.addEventListener('click', () => {
-        banner.classList.toggle('active');
-        
-        // Find the grid
-        const grid = banner.nextElementSibling;
-        grid.classList.toggle('hidden');
-
-        // Update the +/- icon
-        const icon = banner.querySelector('.icon');
-        icon.textContent = grid.classList.contains('hidden') ? '+' : '−';
-
-        // NEW: If this is the Northeast banner, show the Sold Out decal
-        if (banner.textContent.includes("NORTHEAST")) {
-            banner.classList.add('is-sold-out');
-        }
-    });
-});
-</script>
-
-</body>
-</html>
+            z-
