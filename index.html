@@ -11,37 +11,29 @@
             --cream: #fdf5e6;
             --navy: #001f3f;
             --sunset-orange: #ff8c00;
+            --yacht-white: #ffffff;
         }
 
         body {
             margin: 0;
-            font-family: 'Georgia', serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: var(--cream);
             color: var(--navy);
             line-height: 1.6;
         }
 
+        /* Typography */
+        h1, h2, h3 { font-family: 'Georgia', serif; text-transform: uppercase; letter-spacing: 2px; }
+
         header {
-            background: linear-gradient(rgba(0,31,63,0.8), rgba(0,31,63,0.8)), url('header-bg.jpg') center/cover;
+            background: linear-gradient(rgba(0,31,63,0.7), rgba(0,31,63,0.7)), url('yacht-sunset-bg.jpg') center/cover;
             color: white;
             text-align: center;
-            padding: 80px 20px;
-            border-bottom: 5px solid var(--gold);
+            padding: 100px 20px;
+            border-bottom: 8px solid var(--gold);
         }
 
-        h1 {
-            font-size: 3.5rem;
-            margin: 0;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            text-shadow: 2px 2px var(--sunset-orange);
-        }
-
-        .subtitle {
-            font-style: italic;
-            font-size: 1.2rem;
-            color: var(--gold);
-        }
+        h1 { font-size: 4rem; margin: 0; text-shadow: 3px 3px var(--sunset-orange); }
 
         nav {
             background: var(--navy);
@@ -50,53 +42,69 @@
             top: 0;
             z-index: 1000;
             text-align: center;
+            border-bottom: 2px solid var(--gold);
         }
 
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin: 0 20px;
-            font-weight: bold;
-            text-transform: uppercase;
-            transition: color 0.3s;
+        nav a { color: white; text-decoration: none; margin: 0 15px; font-weight: bold; font-size: 0.9rem; transition: 0.3s; }
+        nav a:hover { color: var(--sunset-orange); }
+
+        .container { max-width: 1100px; margin: auto; padding: 40px 20px; }
+
+        section { margin-bottom: 80px; }
+
+        /* Gallery Styles */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
         }
 
-        nav a:hover {
-            color: var(--sunset-orange);
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            border: 5px solid white;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.2);
+            transition: transform 0.3s;
         }
 
-        .container {
-            max-width: 1000px;
-            margin: auto;
-            padding: 40px 20px;
-        }
+        .gallery-item img:hover { transform: scale(1.03); }
 
-        section {
-            margin-bottom: 60px;
-        }
-
-        .show-card {
+        /* Discography Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
             background: white;
-            border: 2px solid var(--gold);
-            padding: 30px;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th { background-color: var(--navy); color: white; }
+        tr:hover { background-color: #f9f9f9; }
+
+        /* Show Card */
+        .show-card {
+            background: var(--yacht-white);
+            border: 3px double var(--gold);
+            padding: 40px;
             text-align: center;
-            box-shadow: 10px 10px 0px var(--ocean-blue);
+            box-shadow: 15px 15px 0px var(--ocean-blue);
         }
 
         .cta-button {
             display: inline-block;
             background: var(--sunset-orange);
             color: white;
-            padding: 15px 30px;
+            padding: 18px 35px;
             text-decoration: none;
             font-weight: bold;
-            border-radius: 5px;
-            margin-top: 20px;
-            transition: transform 0.2s;
-        }
-
-        .cta-button:hover {
-            transform: scale(1.05);
+            border-radius: 50px;
+            margin-top: 25px;
+            box-shadow: 0 4px 0 #b36200;
         }
 
         .member-grid {
@@ -105,121 +113,101 @@
             gap: 30px;
         }
 
-        .member-card {
-            background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
+        .member-card { background: #fff; padding: 20px; border-radius: 4px; border-left: 5px solid var(--gold); }
+        .member-card img { width: 100%; height: auto; margin-bottom: 15px; }
 
-        .member-card img {
-            width: 100%;
-            height: auto;
-            border-radius: 4px;
-            border: 3px solid var(--cream);
-        }
-
-        .member-card h3 {
-            color: var(--ocean-blue);
-            margin-bottom: 5px;
-        }
-
-        .role {
-            font-weight: bold;
-            color: var(--gold);
-            display: block;
-            margin-bottom: 10px;
-        }
-
-        footer {
-            background: var(--navy);
-            color: white;
-            text-align: center;
-            padding: 40px;
-            margin-top: 40px;
-        }
-
-        .social-links a {
-            color: var(--gold);
-            margin: 0 10px;
-            text-decoration: none;
-        }
+        footer { background: var(--navy); color: white; text-align: center; padding: 60px 20px; }
     </style>
 </head>
 <body>
 
 <header>
     <h1>Diamond Rock Monument</h1>
-    <p class="subtitle">The Smoothest Sounds of the Atlantic Coast</p>
+    <p style="font-style: italic; font-size: 1.4rem; color: var(--gold);">Setting sail on a sea of smooth since 1982</p>
 </header>
 
 <nav>
-    <a href="#shows">Upcoming Show</a>
-    <a href="#members">The Band</a>
-    <a href="#contact">Contact</a>
+    <a href="#shows">Tour</a>
+    <a href="#members">The Crew</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#music">Discography</a>
 </nav>
 
 <div class="container">
     
     <section id="shows">
         <div class="show-card">
-            <h2>LIVE AT TOWN LINE BARBEQUE</h2>
-            <p><strong>Thursday, June 27th</strong><br>Sagaponack, NY</p>
-            <p>Featuring Special Guest: <strong>Claude Gerstenhauber</strong></p>
-            <a href="#" class="cta-button">SECURE TICKETS NOW</a>
+            <h2 style="color: var(--ocean-blue)">One Night Only in the Hamptons</h2>
+            <p style="font-size: 1.5rem;"><strong>Thursday, June 27th</strong><br>Town Line Barbeque | Sagaponack, NY</p>
+            <hr style="width: 50%; border: 1px solid var(--gold);">
+            <p>Special Saxophone Performance by <strong>Claude Gerstenhauber</strong></p>
+            <a href="https://diamondrockmonument.band" class="cta-button">TICKETS AT DIAMONDROCKMONUMENT.BAND</a>
         </div>
     </section>
 
     <section id="members">
-        <h2 style="text-align:center; border-bottom: 2px solid var(--gold); padding-bottom: 10px;">Meet The Crew</h2>
+        <h2 style="text-align:center;">The Artisans of Audio</h2>
         <div class="member-grid">
-            
             <div class="member-card">
-                <img src="captain-jack.jpg" alt="Captain Jack Sterling">
-                <h3>"Captain" Jack Sterling</h3>
-                <span class="role">Lead Vocals & Keytar</span>
-                <p>The undisputed frontman and stylistic anchor. With a voice as smooth as a glass-calm harbor, Jack commands the stage in his signature white blazer.</p>
+                <img src="captain-jack.jpg" alt="Captain Jack">
+                <h3>Captain Jack Sterling</h3>
+                <p><em>Lead Vocals & Keytar</em></p>
+                <p>A voice like velvet and a blazer like fresh snow.</p>
             </div>
-
             <div class="member-card">
                 <img src="brody-breeze.jpg" alt="Brody Fairfield">
                 <h3>Brody "The Breeze" Fairfield</h3>
-                <span class="role">Lead Guitar</span>
-                <p>The architect of those airy, chorus-drenched guitar solos that feel like a cool ocean breeze on a June afternoon.</p>
+                <p><em>Lead Guitar</em></p>
+                <p>Master of the 12-string acoustic and the chorus-pedal solo.</p>
             </div>
-
-            <div class="member-card">
-                <img src="chase-rhythm.jpg" alt="Chase Montrose">
-                <h3>Chase "The Rhythm" Montrose</h3>
-                <span class="role">Drums</span>
-                <p>The impeccably groomed engine room. Chase keeps the pulse steady, driving sophisticated grooves with polished precision.</p>
-            </div>
-
-            <div class="member-card">
-                <img src="tanner-titan.jpg" alt="Tanner Reed">
-                <h3>Tanner "The Titan" Reed</h3>
-                <span class="role">Bass Guitar</span>
-                <p>Tanner provides the deep, resonant groove that anchors every track. The foundation that allows the others to sail smoothly.</p>
-            </div>
-
-            <div class="member-card">
-                <img src="vance-velvet.jpg" alt="Vance The Velvet">
-                <h3>Vance "The Velvet"</h3>
-                <span class="role">Percussion & Vocals</span>
-                <p>A true journeyman of the scene. Vance possesses a vibe so smooth it has its own zip code and a legacy in session work.</p>
-            </div>
-
         </div>
+    </section>
+
+    <section id="gallery">
+        <h2 style="text-align:center;">Tour Gallery</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item"><img src="poster-1.jpg" alt="Tour Poster 1"></div>
+            <div class="gallery-item"><img src="poster-2.jpg" alt="Tour Poster 2"></div>
+            <div class="gallery-item"><img src="band-on-yacht.jpg" alt="Band on Yacht"></div>
+        </div>
+    </section>
+
+    <section id="music">
+        <h2 style="text-align:center;">The Catalog</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Year</th>
+                    <th>Album Title</th>
+                    <th>Top Single</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1983</td>
+                    <td>Sailing Into the Sunset</td>
+                    <td>"Midnight Marina"</td>
+                </tr>
+                <tr>
+                    <td>1985</td>
+                    <td>Champagne & Seafoam</td>
+                    <td>"Dockside Desire"</td>
+                </tr>
+                <tr>
+                    <td>1987</td>
+                    <td>High Tide, Low Profile</td>
+                    <td>"Linen Dreams"</td>
+                </tr>
+            </tbody>
+        </table>
     </section>
 
 </div>
 
-<footer id="contact">
+<footer>
     <p>&copy; 2026 Diamond Rock Monument Productions</p>
-    <p>www.diamondrockmonument.band</p>
-    <div class="social-links">
-        <a href="#">Instagram</a> | <a href="#">Facebook</a> | <a href="#">Spotify</a>
-    </div>
+    <p>For bookings: management@diamondrockmonument.band</p>
+    <div style="margin-top:20px; font-size: 2rem;">⚓ 💎 🎷</div>
 </footer>
 
 </body>
