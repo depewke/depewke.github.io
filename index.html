@@ -57,17 +57,20 @@
 
         section { margin-bottom: 80px; }
 
-        /* Gallery Styles */
-       .gallery-grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center; /* This centers the odd items */
+       /* Gallery Styles */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 20px;
         }
 
-        .gallery-item {
-            flex: 1 1 300px; /* Grow, Shrink, Basis */
-            max-width: 350px; /* Prevents an odd item from getting too huge */
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            border: 5px solid white;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.2);
+            transition: transform 0.3s;
+            cursor: pointer; /* Shows it is clickable */
         }
         
         .gallery-item img:hover { transform: scale(1.03); }
