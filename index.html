@@ -141,11 +141,24 @@
         td { vertical-align: middle; }
         
         .show-card {
-            background: var(--yacht-white);
+            /* 1. Add the background image with the Navy overlay */
+            background: linear-gradient(rgba(0,31,63,0.75), rgba(0,31,63,0.75)), 
+                url('shows-bg.jpg') center/cover; 
+    
+            /* 2. Change text to white for contrast */
+            color: var(--yacht-white); 
+    
+            /* 3. structure */
             border: 3px double var(--gold);
             padding: 40px;
             text-align: center;
             box-shadow: 15px 15px 0px var(--ocean-blue);
+        }
+
+            /* Ensure the sub-header is readable */
+        .show-card h2 {
+            color: var(--gold) !important; /* Gold looks better than Blue on the dark background */
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
 
         .cta-button {
