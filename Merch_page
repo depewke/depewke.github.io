@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/png" href="yacht-icon.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Quarterdeck Shop | Diamond Rock Monument</title>
+    <style>
+        :root {
+            --gold: #d4af37;
+            --ocean-blue: #0077be;
+            --cream: #fdf5e6;
+            --navy: #001f3f;
+            --sunset-orange: #ff8c00;
+            --yacht-white: #ffffff;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--cream);
+            color: var(--navy);
+            line-height: 1.6;
+        }
+
+        /* Typography */
+        h1, h2, h3 { font-family: 'Georgia', serif; text-transform: uppercase; letter-spacing: 2px; }
+
+        header {
+            background: linear-gradient(rgba(0,31,63,0.6), rgba(0,31,63,0.6)), url('header-bg.jpg') center/cover;
+            color: white;
+            text-align: center;
+            padding: 80px 20px;
+            border-bottom: 8px solid var(--gold);
+        }
+
+        h1 { font-size: 3.5rem; margin: 0; text-shadow: 3px 3px var(--sunset-orange); }
+
+        nav {
+            background: var(--navy);
+            padding: 15px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            text-align: center;
+            border-bottom: 2px solid var(--gold);
+        }
+
+        nav a { color: white; text-decoration: none; margin: 0 15px; font-weight: bold; font-size: 0.9rem; transition: 0.3s; }
+        nav a:hover { color: var(--sunset-orange); }
+
+        .container { max-width: 1100px; margin: auto; padding: 40px 20px; }
+
+        /* Merch Grid */
+        .merch-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .merch-card { 
+            background: #fff; 
+            padding: 0; 
+            border-radius: 4px; 
+            border: 1px solid #ddd;
+            border-bottom: 5px solid var(--gold);
+            text-align: center;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .merch-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .merch-card img { 
+            width: 100%; 
+            height: 300px; 
+            object-fit: cover;
+            background-color: #eee;
+        }
+
+        .merch-info {
+            padding: 20px;
+        }
+
+        .price {
+            font-size: 1.25rem;
+            color: var(--ocean-blue);
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .buy-button {
+            display: inline-block;
+            background: var(--sunset-orange);
+            color: white;
+            padding: 12px 25px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 50px;
+            margin-top: 10px;
+            box-shadow: 0 4px 0 #b36200;
+            transition: 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .buy-button:hover {
+            background: #e67e00;
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 #b36200;
+        }
+
+        .category-header {
+            border-left: 10px solid var(--ocean-blue);
+            padding-left: 15px;
+            margin: 50px 0 20px 0;
+        }
+
+        footer { background: var(--navy); color: white; text-align: center; padding: 60px 20px; margin-top: 80px; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>The Quarterdeck Shop</h1>
+    <p style="font-style: italic; font-size: 1.4rem; color: var(--yacht-white);">Premium threads for the smooth-sailing lifestyle</p>
+</header>
+
+<nav>
+    <a href="index.html">Home</a>
+    <a href="shows.html">Tour</a>
+    <a href="index.html#members">The Crew</a>
+    <a href="merch.html" style="color: var(--sunset-orange);">Merch</a>
+</nav>
+
+<div class="container">
+    
+    <h2 class="category-header">Summer Tour T-Shirts</h2>
+    <div class="merch-grid">
+        <div class="merch-card">
+            <img src="merch-shirt-white.jpg" alt="Vintage Logo Tee">
+            <div class="merch-info">
+                <h3>Vintage Logo Tee</h3>
+                <p>100% Ringspun Cotton in 'Yacht White'</p>
+                <div class="price">$30.00</div>
+                <button class="buy-button">ADD TO CART</button>
+            </div>
+        </div>
+
+        <div class="merch-card">
+            <img src="merch-shirt-navy.jpg" alt="Midnight Harbor Tee">
+            <div class="merch-info">
+                <h3>Midnight Harbor Tee</h3>
+                <p>Deep Navy with Gold Metallic Ink</p>
+                <div class="price">$30.00</div>
+                <button class="buy-button">ADD TO CART</button>
+            </div>
+        </div>
+
+        <div class="merch-card">
+            <img src="merch-shirt-sunset.jpg" alt="Sunset Solstice Tee">
+            <div class="merch-info">
+                <h3>Sunset Solstice Tee</h3>
+                <p>Limited Edition 1982 Anniversary Print</p>
+                <div class="price">$35.00</div>
+                <button class="buy-button">ADD TO CART</button>
+            </div>
+        </div>
+    </div>
+
+    <h2 class="category-header">High Tide Hoodies</h2>
+    <div class="merch-grid">
+        <div class="merch-card">
+            <img src="merch-hoodie-grey.jpg" alt="Marina Mist Hoodie">
+            <div class="merch-info">
+                <h3>Marina Mist Hoodie</h3>
+                <p>Heavyweight fleece for chilly nights at sea</p>
+                <div class="price">$55.00</div>
+                <button class="buy-button">ADD TO CART</button>
+            </div>
+        </div>
+
+        <div class="merch-card">
+            <img src="merch-hoodie-navy.jpg" alt="Captain's Choice Hoodie">
+            <div class="merch-info">
+                <h3>Captain's Choice Hoodie</h3>
+                <p>Navy blue with embroidered anchor logo</p>
+                <div class="price">$60.00</div>
+                <button class="buy-button">ADD TO CART</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<footer>
+    <p>&copy; 2026 Diamond Rock Monument Productions</p>
+    <p>Secure Payments via Maritime Express</p>
+    <div style="margin-top:20px; font-size: 2rem;">⚓ 💎 🎷</div>
+</footer>
+
+</body>
+</html>
