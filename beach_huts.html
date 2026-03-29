@@ -193,6 +193,10 @@
     
 <body>
 
+     <audio id="yacht_sax-audio" loop>
+        <source src="Bagpipes-on-the-water_Sax heavy.mp3" type="audio/mpeg">
+     </audio>
+
     <nav>
         <div class="logo" style="letter-spacing: 5px; font-weight: 700; border: 1px solid white; padding: 5px 15px;">CLAUDE</div>
         <a href="claude.html" class="back-link">← Return to Shadows</a>
@@ -273,6 +277,27 @@
                 lightbox.style.display = 'none';
             }
         });
+    </script>
+
+    <script>
+        const smoothAudio = document.getElementById("yacht_sax-audio");
+
+        function startTheVibes() {
+            // Try to play the audio
+            smoothAudio.play().then(() => {
+                console.log("The sax has begun.");
+                // SUCCESS: Remove the scroll listener so we don't trigger it again
+                window.removeEventListener('scroll', startTheVibes);
+                window.removeEventListener('click', startTheVibes);
+            }).catch(error => {
+                // If the browser still blocks it, we just wait for the next interaction
+                console.log("Waiting for more movement...");
+            });
+        }
+
+        // Listen for both scroll and click to be safe
+        window.addEventListener('scroll', startTheVibes);
+        window.addEventListener('click', startTheVibes);
     </script>
     
 </body>
