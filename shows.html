@@ -214,7 +214,7 @@
                 </div>
             </div>
 
-        <div class="show-card" id="sagaponack-card">
+        <div class="show-card" >
             <span class="card-sold-out">Sold Out</span> 
                 <div class="date-block">
                     <span class="day">27</span>
@@ -223,13 +223,13 @@
             <div class="details-block">
                 <h3>SAGAPONACK, NY</h3>
                 <p>Saturday, 8:00pm - 11:00pm</p>
-                <p><strong>Town Line Barbeque</strong></p>
+                <p><strong>Town Line BBQ</strong></p>
                 <p>3593 Montauk Hwy, Sagaponack, NY 11962</p>
                 <a href="#" class="ticket-link sold-out-trigger">Tickets & Info →</a>
             </div>
         </div>
 
-          <div class="show-card" id="sagaponack-card">
+          <div class="show-card" >
                 <span class="card-sold-out">Sold Out</span>  
                   <div class="date-block">
                     <span class="day">04</span>
@@ -315,16 +315,21 @@
         });
     });
 
-    // 2. Specific Sold Out Logic for Sagaponack
-    const sagTrigger = document.querySelector('.sold-out-trigger');
-    const sagCard = document.getElementById('sagaponack-card');
+// 2. Flexible Sold Out Logic for all cards
+const soldOutButtons = document.querySelectorAll('.sold-out-trigger');
 
-    if (sagTrigger) {
-        sagTrigger.addEventListener('click', (e) => {
-            e.preventDefault(); // Prevents the page from jumping to the top
-            sagCard.classList.add('is-sold-out');
-        });
-    }
+soldOutButtons.forEach(button => {
+    button.addEventListener('click', (e) => {
+        e.preventDefault();
+        
+        // Find the closest parent with the class 'show-card' 
+        // and add 'is-sold-out' to it.
+        const card = button.closest('.show-card');
+        if (card) {
+            card.classList.add('is-sold-out');
+        }
+    });
+});
 </script>
 
 </body>
