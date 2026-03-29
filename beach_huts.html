@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/svg" href="sax-icon.svg">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dive Bar Sessions | Claude Gerstenhauber</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-dark: #050505;
+            --neon-cyan: #00f2ff;
+            --neon-magenta: #ff00ff;
+            --text-gray: #b0b0b0;
+            --glass: rgba(255, 255, 255, 0.05);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                        url('night-sax.jpg') center/cover no-repeat fixed;
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+        }
+
+        h1, h2 { font-family: 'Playfair Display', serif; }
+
+        .neon-text {
+            color: var(--neon-cyan);
+            text-shadow: 0 0 10px var(--neon-cyan), 0 0 20px var(--neon-cyan);
+            animation: flicker 4s infinite alternate;
+        }
+
+        @keyframes flicker {
+            0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100% { opacity: 1; }
+            20%, 21.999%, 63%, 63.999%, 65%, 69.999% { opacity: 0.7; text-shadow: none; }
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px 10%;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(5, 5, 5, 0.8);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .back-link {
+            color: var(--neon-magenta);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            font-weight: bold;
+        }
+
+        .container {
+            padding: 120px 10% 60px 10%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .gallery-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        /* Photo Gallery Grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            background: var(--glass);
+            border: 1px solid #333;
+            transition: 0.4s ease;
+            aspect-ratio: 4/5;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%) contrast(110%);
+            transition: 0.5s ease;
+        }
+
+        .gallery-item:hover {
+            border-color: var(--neon-cyan);
+            transform: scale(1.02);
+            box-shadow: 0 0 20px rgba(0, 242, 255, 0.2);
+        }
+
+        .gallery-item:hover img {
+            filter: grayscale(0%) contrast(100%);
+        }
+
+        .caption-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 20px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            opacity: 0;
+            transition: 0.3s;
+        }
+
+        .gallery-item:hover .caption-overlay {
+            opacity: 1;
+        }
+
+        footer {
+            text-align: center;
+            padding: 50px;
+            border-top: 1px solid #222;
+            font-size: 0.8rem;
+            color: var(--text-gray);
+        }
+
+        @media (max-width: 600px) {
+            .gallery-grid { grid-template-columns: 1fr; }
+        }
+
+    /* 2. Add these Lightbox Styles to your <style> section */
+    #lightbox {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.95);
+        display: none; /* Hidden by default */
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        z-index: 2000;
+        cursor: zoom-out;
+        backdrop-filter: blur(10px);
+    }
+
+    #lightbox img {
+        max-width: 90%;
+        max-height: 80%;
+        border: 1px solid var(--neon-cyan);
+        box-shadow: 0 0 50px rgba(0, 242, 255, 0.3);
+        transition: transform 0.3s ease;
+    }
+
+    #lightbox-caption {
+        margin-top: 20px;
+        color: var(--neon-cyan);
+        font-family: 'Playfair Display', serif;
+        font-size: 1.2rem;
+        letter-spacing: 2px;
+        text-shadow: 0 0 10px var(--neon-cyan);
+    }
+
+    .close-lightbox {
+        position: absolute;
+        top: 30px;
+        right: 50px;
+        color: white;
+        font-size: 3rem;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .close-lightbox:hover {
+        color: var(--neon-magenta);
+    }
+        
+    </style>
+
+</head>
+    
+<body>
+
+    <nav>
+        <div class="logo" style="letter-spacing: 5px; font-weight: 700; border: 1px solid white; padding: 5px 15px;">CLAUDE</div>
+        <a href="claude.html" class="back-link">← Return to Shadows</a>
+        <a href="index.html" class="back-link">← Return to the Sea</a>
+    </nav>
+
+    <div class="container">
+        <div class="gallery-header">
+            <h1 class="neon-text">Beach Hut Sessions</h1>
+            <p>Salty sessions where the tide provides the percussion.</p>
+        </div>
+
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="Captain_Jacks_Claude.png" alt="Claude at Captain Jacks">
+                <div class="caption-overlay">Captain Jack's, Sag Harbor, NY</div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="claude_clubhouse.png" alt="Saxophone solo outside the bar">
+                <div class="caption-overlay">The Clubhouse, East Hampton, NY</div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="Claude_mini-golf.png" alt="Mini-golf at the Clubhouse">
+                <div class="caption-overlay">The Clubhouse, East Hampton, NY</div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="Claude_TLB_car.png" alt="Leaving the bar">
+                <div class="caption-overlay">Townline BBQ, Sagaponack, NY</div>
+            </div>
+            
+            <div class="gallery-item">
+                <img src="Claude_TLB.png" alt="Saxophone solo at the bar">
+                <div class="caption-overlay">Townline BBQ, Sagaponack, NY</div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="Claude_clubhouse2.png" alt="Playing with Diamond Rock Monument">
+                <div class="caption-overlay">The Clubhouse, East Hampton, NY</div>
+            </div>
+            
+            </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Claude Gerstenhauber | Beach Hut Archive</p>
+    </footer>
+
+    <div id="lightbox">
+        <span class="close-lightbox">&times;</span>
+        <img id="lightbox-img" src="" alt="Full size preview">
+        <div id="lightbox-caption"></div>
+    </div>
+    
+    <script>
+        // 3. Add this Script right before the closing </body> tag
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxCap = document.getElementById('lightbox-caption');
+        const galleryItems = document.querySelectorAll('.gallery-item');
+
+        galleryItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const img = item.querySelector('img');
+                const caption = item.querySelector('.caption-overlay').innerText;
+            
+                lightbox.style.display = 'flex';
+                lightboxImg.src = img.src;
+                lightboxCap.innerText = caption;
+            });
+        });
+
+        // Close lightbox when clicking anywhere on the background or the 'X'
+        lightbox.addEventListener('click', (e) => {
+            if (e.target !== lightboxImg) {
+                lightbox.style.display = 'none';
+            }
+        });
+    </script>
+    
+</body>
+</html>
