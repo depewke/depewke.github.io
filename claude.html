@@ -316,25 +316,54 @@
     </footer>
 
     <script>
-        const smoothAudio = document.getElementById("yacht-audio");
+    const smoothAudio = document.getElementById("yacht-audio");
+    const venueLinks = document.querySelectorAll('.venue-cards a');
 
-        function startTheVibes() {
-            // Try to play the audio
-            smoothAudio.play().then(() => {
-                console.log("The night has begun.");
-                // SUCCESS: Remove the scroll listener so we don't trigger it again
-                window.removeEventListener('scroll', startTheVibes);
-                window.removeEventListener('click', startTheVibes);
-            }).catch(error => {
-                // If the browser still blocks it, we just wait for the next interaction
-                console.log("Waiting for more movement...");
-            });
-        }
+    // --- 1. FADE IN LOGIC (On Page Load/Interaction) ---
+    function startTheVibes() {
+        smoothAudio.volume = 0;
+        smoothAudio.play().then(() => {
+            window.removeEventListener('scroll', startTheVibes);
+            window.removeEventListener('click', startTheVibes);
 
-        // Listen for both scroll and click to be safe
-        window.addEventListener('scroll', startTheVibes);
-        window.addEventListener('click', startTheVibes);
-    </script>
+            let fadeIn = setInterval(() => {
+                if (smoothAudio.volume < 0.95) {
+                    smoothAudio.volume += 0.05;
+                } else {
+                    smoothAudio.volume = 1;
+                    clearInterval(fadeIn);
+                }
+            }, 50);
+        }).catch(error => {
+            console.log("Waiting for user interaction to start the vibes...");
+        });
+    }
+
+    window.addEventListener('scroll', startTheVibes);
+    window.addEventListener('click', startTheVibes);
+
+
+    // --- 2. FADE OUT LOGIC (On Venue Click) ---
+    venueLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            // Prevent the browser from leaving the page immediately
+            e.preventDefault();
+            const targetUrl = this.href;
+
+            // Start the fade out
+            let fadeOut = setInterval(() => {
+                if (smoothAudio.volume > 0.05) {
+                    smoothAudio.volume -= 0.05;
+                } else {
+                    smoothAudio.volume = 0;
+                    clearInterval(fadeOut);
+                    // Now that the music is silent, navigate to the next page
+                    window.location.href = targetUrl;
+                }
+            }, 30); // Fades out slightly faster than it fades in (approx 0.6s)
+        });
+    });
+</script>
     
 </body>
 </html>
