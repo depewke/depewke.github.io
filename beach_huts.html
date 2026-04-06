@@ -335,6 +335,28 @@
         window.addEventListener('scroll', startTheVibes);
         window.addEventListener('click', startTheVibes);
     </script>
+
+    <script>
+        // Select all your video/social links
+        const stopMusicLinks = document.querySelectorAll('.icon-link, .youtube-logo-link');
+        const saxAudio = document.getElementById("yacht_sax-audio");
+
+        stopMusicLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                // This pauses the audio immediately
+                let fadeout = setInterval(() => {
+                    if (saxAudio.volume > 0.1) {
+                        saxAudio.volume -= 0.1;
+                      } 
+                    else {
+                        saxAudio.pause();
+                        clearInterval(fadeout);
+                    }
+                }, 50); // Fades out over about half a second
+                console.log("Saxophone silenced for the video.");
+                });
+            });
+    </script>
     
 </body>
 </html>
