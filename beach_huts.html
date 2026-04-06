@@ -186,6 +186,34 @@
     .close-lightbox:hover {
         color: var(--neon-magenta);
     }
+
+        /* YouTube Link Styling */
+    .video-link-container {
+        text-align: center;
+        margin-top: 60px;
+        }
+
+    .youtube-logo-link {
+        display: inline-block;
+        transition: 0.4s ease;
+        filter: grayscale(100%); /* Matches your gallery style */
+        max-width: 200px; /* Adjust size as needed */
+        }
+
+    .youtube-logo-link:hover {
+        filter: grayscale(0%);
+        transform: scale(1.1);
+        drop-shadow: 0 0 15px var(--neon-magenta);
+        }
+
+    .video-caption {
+        color: var(--neon-magenta);
+        font-size: 0.9rem;
+        margin-top: 10px;   
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        font-weight: bold;
+        }
         
     </style>
 
@@ -241,6 +269,14 @@
             </div>
             
             </div>
+
+            <div class="video-link-container">
+                <a href="https://youtu.be/7l8_qXZpyU4" target="_blank" class="youtube-logo-link">
+                    <img src="Karaoke_logo_tnx.png" alt="Sing Along" style="width: 100%; height: auto;">
+                </a>
+                <p class="video-caption">Karaoke</p>
+            </div>
+        
     </div>
 
     <footer>
