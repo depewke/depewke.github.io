@@ -271,12 +271,11 @@
             });
         });
 
-        // Close lightbox when clicking anywhere on the background or the 'X'
-        lightbox.addEventListener('click', (e) => {
-            if (e.target !== lightboxImg) {
-                lightbox.style.display = 'none';
-            }
+       // Close lightbox when clicking anywhere on the screen
+        lightbox.addEventListener('click', () => {
+        lightbox.style.display = 'none';
         });
+        
     </script>
 
         <script>
