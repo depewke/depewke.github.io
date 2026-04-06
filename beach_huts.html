@@ -271,10 +271,13 @@
             </div>
 
             <div class="video-link-container">
+                <a href="https://youtu.be/MzT0h0Fq60k" target="_blank" class="youtube-logo-link">
+                    <img src="Lyrics_logo.png" alt="Sing Along" style="width: 100%; height: auto;">
+                </a>
+                
                 <a href="https://youtu.be/7l8_qXZpyU4" target="_blank" class="youtube-logo-link">
                     <img src="Karaoke_logo_tnx3.png" alt="Sing Along" style="width: 100%; height: auto;">
                 </a>
-                
             </div>
         
     </div>
@@ -336,26 +339,52 @@
     </script>
 
     <script>
-        // Select all your video/social links
-        const stopMusicLinks = document.querySelectorAll('.icon-link, .youtube-logo-link');
-        const saxAudio = document.getElementById("yacht_sax-audio");
+    const stopMusicLinks = document.querySelectorAll('.icon-link, .youtube-logo-link');
+    const saxAudio = document.getElementById("yacht_sax-audio");
+    let isFading = false; // Prevents overlapping fade effects
 
-        stopMusicLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                // This pauses the audio immediately
-                let fadeout = setInterval(() => {
-                    if (saxAudio.volume > 0.1) {
-                        saxAudio.volume -= 0.1;
-                      } 
-                    else {
-                        saxAudio.pause();
-                        clearInterval(fadeout);
-                    }
-                }, 50); // Fades out over about half a second
-                console.log("Saxophone silenced for the video.");
-                });
-            });
-    </script>
+    // 1. FADE OUT LOGIC
+    stopMusicLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            if (isFading) return;
+            isFading = true;
+
+            let fadeout = setInterval(() => {
+                if (saxAudio.volume > 0.05) {
+                    saxAudio.volume -= 0.03;
+                } else {
+                    saxAudio.pause();
+                    saxAudio.volume = 0; // Reset volume to 0 for the future fade-in
+                    clearInterval(fadeout);
+                    isFading = false;
+                    
+                    // After music stops, start listening for the user to come back
+                    window.addEventListener('click', resumeTheVibes, { once: true });
+                    window.addEventListener('scroll', resumeTheVibes, { once: true });
+                }
+            }, 50);
+            console.log("Saxophone silenced for the video.");
+        });
+    });
+
+    // 2. RESUME / FADE IN LOGIC
+    function resumeTheVibes() {
+        if (saxAudio.paused) {
+            saxAudio.volume = 0;
+            saxAudio.play();
+            
+            let fadein = setInterval(() => {
+                if (saxAudio.volume < 0.95) {
+                    saxAudio.volume += 0.03;
+                } else {
+                    saxAudio.volume = 1;
+                    clearInterval(fadein);
+                    console.log("The sax has returned.");
+                }
+            }, 50);
+        }
+    }
+</script>
     
 </body>
 </html>
