@@ -1,4 +1,4 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <link rel="icon" type="image/png" href="yacht-icon.png">
@@ -24,15 +24,24 @@
             line-height: 1.6;
         }
 
+        /* Typography */
+        h1, h2, h3 { font-family: 'Georgia', serif; text-transform: uppercase; letter-spacing: 2px; }
+
+        /* UPDATED HEADER: Matched to Merch Page */
         header {
-            background: linear-gradient(rgba(0,31,63,0.85), rgba(0,31,63,0.85)), url('header-bg.jpg') center/cover;
+            background: linear-gradient(rgba(0,31,63,0.6), rgba(0,31,63,0.6)), url('header-bg.jpg') center/cover;
             color: white;
             text-align: center;
-            padding: 60px 20px;
+            padding: 80px 20px;
             border-bottom: 8px solid var(--gold);
         }
 
-        h1 { font-family: 'Georgia', serif; text-transform: uppercase; font-size: 3rem; margin: 0; letter-spacing: 3px; }
+        /* UPDATED H1: Matched to Merch Page */
+        h1 { 
+            font-size: 3.5rem; 
+            margin: 0; 
+            text-shadow: 3px 3px var(--sunset-orange); 
+        }
 
         nav {
             background: var(--navy);
@@ -86,6 +95,7 @@
             border-radius: 4px;
             overflow: hidden;
             transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
         }
 
         .show-card:hover { 
@@ -121,7 +131,6 @@
             text-transform: uppercase;
         }
 
-        /* Sold Out Decal */
         .sold-out-decal {
             display: none;
             position: absolute;
@@ -140,24 +149,15 @@
             pointer-events: none;
         }
 
-        /* Show the decal when the parent has this class */
-        .is-sold-out .sold-out-decal {
-            display: block;
-        }
+        .is-sold-out .sold-out-decal { display: block; }
 
-        /* Ensure the card can hold an absolute-positioned decal */
-        .show-card {
-            position: relative;
-        }
-
-        /* Updated Decal for the card specifically */
         .card-sold-out {
             display: none;
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%) rotate(-15deg);
-            background-color: rgba(217, 83, 79, 0.9); /* Red with slight transparency */
+            background-color: rgba(217, 83, 79, 0.9);
             color: white;
             padding: 10px 20px;
             border: 3px solid white;
@@ -170,9 +170,7 @@
             box-shadow: 0 0 15px rgba(0,0,0,0.5);
         }
 
-        .is-sold-out .card-sold-out {
-            display: block;
-        }
+        .is-sold-out .card-sold-out { display: block; }
 
         footer { background: var(--navy); color: white; text-align: center; padding: 60px 20px; margin-top: 40px; }
     </style>
@@ -181,7 +179,7 @@
 
 <header>
     <h1>The Smooth Sailing Tour</h1>
-    <p style="color: var(--gold); font-style: italic; font-size: 1.2rem;">Diamond Rock Monument Live in 2026</p>
+    <p style="font-style: italic; font-size: 1.4rem; color: var(--yacht-white);">Diamond Rock Monument Live in 2026</p>
 </header>
 
 <nav>
@@ -214,24 +212,24 @@
                 </div>
             </div>
 
-        <div class="show-card" >
-            <span class="card-sold-out">Sold Out</span> 
+            <div class="show-card">
+                <span class="card-sold-out">Sold Out</span> 
                 <div class="date-block">
                     <span class="day">27</span>
                     <span class="month">Jun</span>
+                </div>
+                <div class="details-block">
+                    <h3>SAGAPONACK, NY</h3>
+                    <p>Saturday, 8:00pm - 11:00pm</p>
+                    <p><strong>Townline BBQ</strong></p>
+                    <p>3593 Montauk Hwy, Sagaponack, NY 11962</p>
+                    <a href="#" class="ticket-link sold-out-trigger">Tickets & Info →</a>
+                </div>
             </div>
-            <div class="details-block">
-                <h3>SAGAPONACK, NY</h3>
-                <p>Saturday, 8:00pm - 11:00pm</p>
-                <p><strong>Townline BBQ</strong></p>
-                <p>3593 Montauk Hwy, Sagaponack, NY 11962</p>
-                <a href="#" class="ticket-link sold-out-trigger">Tickets & Info →</a>
-            </div>
-        </div>
 
-          <div class="show-card" >
+            <div class="show-card">
                 <span class="card-sold-out">Sold Out</span>  
-                  <div class="date-block">
+                <div class="date-block">
                     <span class="day">04</span>
                     <span class="month">Jul</span>
                 </div>
@@ -258,7 +256,7 @@
                 </div>
             </div>
 
-             <div class="show-card">
+            <div class="show-card">
                 <div class="date-block">
                     <span class="day">16</span>
                     <span class="month">Aug</span>
@@ -301,7 +299,6 @@
 </footer>
 
 <script>
-    // 1. Existing Minimize/Maximize Logic
     const banners = document.querySelectorAll('.region-banner');
     banners.forEach(banner => {
         banner.addEventListener('click', () => {
@@ -315,21 +312,16 @@
         });
     });
 
-// 2. Flexible Sold Out Logic for all cards
-const soldOutButtons = document.querySelectorAll('.sold-out-trigger');
-
-soldOutButtons.forEach(button => {
-    button.addEventListener('click', (e) => {
-        e.preventDefault();
-        
-        // Find the closest parent with the class 'show-card' 
-        // and add 'is-sold-out' to it.
-        const card = button.closest('.show-card');
-        if (card) {
-            card.classList.add('is-sold-out');
-        }
+    const soldOutButtons = document.querySelectorAll('.sold-out-trigger');
+    soldOutButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
+            const card = button.closest('.show-card');
+            if (card) {
+                card.classList.add('is-sold-out');
+            }
+        });
     });
-});
 </script>
 
 </body>
