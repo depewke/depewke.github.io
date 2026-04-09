@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Sea Chest | The Quarterdeck Shop</title>
+    <style>
+        :root {
+            --gold: #d4af37; --ocean-blue: #0077be; --cream: #fdf5e6;
+            --navy: #001f3f; --sunset-orange: #ff8c00; --yacht-white: #ffffff;
+        }
+        body { font-family: 'Segoe UI', sans-serif; background-color: var(--cream); color: var(--navy); margin: 0; }
+        header { background: var(--navy); color: white; text-align: center; padding: 40px; border-bottom: 5px solid var(--gold); }
+        nav { background: var(--navy); padding: 15px; text-align: center; border-bottom: 2px solid var(--gold); }
+        nav a { color: white; text-decoration: none; margin: 0 15px; font-weight: bold; }
+        
+        .container { max-width: 800px; margin: 40px auto; padding: 20px; background: white; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        
+        .cart-item { display: flex; align-items: center; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid #eee; }
+        .cart-item img { width: 80px; height: 80px; object-fit: cover; border-radius: 4px; }
+        .item-details { flex-grow: 1; margin-left: 20px; }
+        
+        .remove-btn { color: red; cursor: pointer; font-size: 0.8rem; text-decoration: underline; border: none; background: none; }
+        .total-section { text-align: right; margin-top: 30px; font-size: 1.5rem; font-weight: bold; }
+        
+        .checkout-btn { 
+            display: block; width: 100%; padding: 15px; background: var(--ocean-blue); 
+            color: white; border: none; border-radius: 4px; font-size: 1.2rem; 
+            font-weight: bold; cursor: pointer; margin-top: 20px; transition: 0.3s;
+        }
+        .checkout-btn:hover { background: var(--navy); }
+        .empty-msg { text-align: center; padding: 40px; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Your Sea Chest</h1>
+    <p>Review your cargo before setting sail</p>
+</header>
+
+<nav>
+    <a href="index.html">Back to Shop</a>
+</nav>
+
+<div class="container">
+    <div id="cart-items">
+        </div>
+
+    <div id="cart-summary" style="display:none;">
+        <div class="total-section">
+            Total: $<span id="total-price">0.00</span>
+        </div>
+        <button class="checkout-btn" onclick="checkout()">PROCEED TO CHECKOUT</button>
+        <button onclick="clearCart()" style="margin-top:10px; background:none; border:none; color:gray; cursor:pointer;">Empty Chest</button>
+    </div>
+
+    <div id="empty-cart" class="empty-msg">
+        <h3>Your chest is empty!</h3>
+        <p>Head back to the shop to find some threads.</p>
+        <a href="index.html" class="checkout-btn" style="text-decoration:none; display:inline-block; width:auto;">Return to Shop</a>
+    </div>
+</div>
+
+<script>
+    function renderCart() {
+        const cart = JSON.parse(localStorage.getItem('deckShopCart')) || [];
+        const container = document.getElementById('cart-items');
+        const summary = document.getElementById('cart-summary');
+        const emptyMsg = document.getElementById('empty-cart');
+        const totalSpan = document.getElementById('total-price');
+
+        if (cart.length === 0) {
+            container.innerHTML = '';
+            summary.style.display = 'none';
+            emptyMsg.style.display = 'block';
+            return;
+        }
+
+        emptyMsg.style.display = 'none';
+        summary.style.display = 'block';
+        container.innerHTML = '';
+
+        let total = 0;
+
+        cart.forEach((item, index) => {
+            total += item.price;
+            container.innerHTML += `
+                <div class="cart-item">
+                    <img src="${item.image}" alt="${item.name}">
+                    <div class="item-details">
+                        <strong>${item.name}</strong><br>
+                        $${item.price.toFixed(2)}
+                    </div>
+                    <button class="remove-btn" onclick="removeItem(${index})">Remove</button>
+                </div>
+            `;
+        });
+
+        totalSpan.innerText = total.toFixed(2);
+    }
+
+    function removeItem(index) {
+        let cart = JSON.parse(localStorage.getItem('deckShopCart')) || [];
+        cart.splice(index, 1);
+        localStorage.setItem('deckShopCart', JSON.stringify(cart));
+        renderCart();
+    }
+
+    function clearCart() {
+        localStorage.removeItem('deckShopCart');
+        renderCart();
+    }
+
+    function checkout() {
+        alert("Redirecting to Maritime Express Secure Payment...");
+        // Here you would normally redirect to Stripe, PayPal, or a backend.
+    }
+
+    // Initial render
+    renderCart();
+</script>
+
+</body>
+</html>
