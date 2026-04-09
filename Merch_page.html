@@ -138,7 +138,7 @@
     <a href="index.html">Home</a>
     <a href="shows.html">Tour</a>
     <a href="index.html#members">The Crew</a>
-    <a href="#">Quartermaster</a>
+    <a href="cart.html" style="color: var(--sunset-orange);">🛒 View Cart (<span id="cart-count">0</span>)</a>
 </nav>
 
 <div class="container">
@@ -154,7 +154,12 @@
                 <h3>Vintage DRM Logo Tee</h3>
                 <p>100% Ringspun Cotton in 'Midnight Black'</p>
                 <div class="price">$30.00</div>
-                <button class="buy-button">ADD TO CART</button>
+                <button class="buy-button" 
+                    data-name="Vintage DRM Logo Tee (Black)" 
+                    data-price="30.00" 
+                    data-image="DRM_t-shirt_black_front-back.png">
+                    ADD TO CART
+                </button>
             </div>
         </div>
 
@@ -165,7 +170,12 @@
                 <h3>Vintage DRM Logo Tee</h3>
                 <p>100% Ringspun Cotton in 'Yacht White'</p>
                 <div class="price">$30.00</div>
-                <button class="buy-button">ADD TO CART</button>
+                <button class="buy-button" 
+                    data-name="Vintage DRM Logo Tee (White)" 
+                    data-price="30.00" 
+                    data-image="DRM_t-shirt_white_front-back.png">
+                    ADD TO CART
+                </button>
             </div>
         </div>
 
@@ -176,7 +186,12 @@
                 <h3>Vintage Logo Tee</h3>
                 <p>100% Ringspun Cotton in 'Cloudy Grey'</p>
                 <div class="price">$30.00</div>
-                <button class="buy-button">ADD TO CART</button>
+                <button class="buy-button" 
+                    data-name="Vintage DRM Logo Tee (Grey)" 
+                    data-price="30.00" 
+                    data-image="DRM_t-shirt_grey_front-back.png">
+                    ADD TO CART
+                </button>
             </div>
         </div>
 
@@ -187,7 +202,12 @@
                 <h3>Special Guest Claude Tee</h3>
                 <p>100% Ringspun Cotton in 'Midnight Black'</p>
                 <div class="price">$30.00</div>
-                <button class="buy-button">ADD TO CART</button>
+                <button class="buy-button" 
+                    data-name="Special Guest Claude Tee (Black)" 
+                    data-price="30.00" 
+                    data-image="Claude_t-shirt_black_front-back.png">
+                    ADD TO CART
+                </button>
             </div>
         </div>
 
@@ -198,7 +218,12 @@
                 <h3>Special Guest Claude Tee</h3>
                 <p>100% Ringspun Cotton in 'Cloudy Grey'</p>
                 <div class="price">$30.00</div>
-                <button class="buy-button">ADD TO CART</button>
+                <button class="buy-button" 
+                    data-name="Special Guest Claude Tee (Grey)" 
+                    data-price="30.00" 
+                    data-image="Claude_t-shirt_grey_front-back.png">
+                    ADD TO CART
+                </button>
             </div>
         </div>
 
@@ -209,7 +234,12 @@
                 <h3>Special Guest Claude Front Tee</h3>
                 <p>100% Ringspun Cotton in 'Midnight Black'</p>
                 <div class="price">$30.00</div>
-                <button class="buy-button">ADD TO CART</button>
+                <button class="buy-button" 
+                    data-name="Special Guest Claude Front Tee (Black)" 
+                    data-price="30.00" 
+                    data-image="Claude_shirt_black_front.jpg">
+                    ADD TO CART
+                </button>
             </div>
         </div>
     </div>
@@ -223,7 +253,12 @@
                 <h3>Marina Mist Hoodie</h3>
                 <p>Heavyweight fleece for chilly nights at sea</p>
                 <div class="price">$55.00</div>
-                <button class="buy-button">ADD TO CART</button>
+                <button class="buy-button" 
+                    data-name="DRM Hoodie (White)" 
+                    data-price="55.00" 
+                    data-image="DRM_hoodie_white_front.png">
+                    ADD TO CART
+                </button>
             </div>
         </div>
 
@@ -248,7 +283,12 @@
                 <h3>DRM Sticker</h3>
                 <p>Permanent vinyl sticker to identify your allegiance</p>
                 <div class="price">$5.00</div>
-                <button class="buy-button">ADD TO CART</button>
+                <button class="buy-button" 
+                    data-name="DRM Sticker" 
+                    data-price="5.00" 
+                    data-image="DRM_sticker_table.png">
+                    ADD TO CART
+                </button>
             </div>
         </div>
 
@@ -258,7 +298,12 @@
                 <h3>DRM Pint Glass</h3>
                 <p>Drink your Grog-A-Ponack in style</p>
                 <div class="price">$10.00</div>
-                <button class="buy-button">ADD TO CART</button>
+                <button class="buy-button" 
+                    data-name="DRM Pint Glass" 
+                    data-price="10.00" 
+                    data-image="Pint_glass.png">
+                    ADD TO CART
+                </button>
             </div>
           </div>
             
@@ -266,6 +311,37 @@
 
 
 </div>
+
+    <script>
+    const buyButtons = document.querySelectorAll('.buy-button');
+    const cartCount = document.getElementById('cart-count');
+
+    function updateCartCount() {
+        let cart = JSON.parse(localStorage.getItem('deckShopCart')) || [];
+        cartCount.innerText = cart.length;
+    }
+
+    buyButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const product = {
+                name: button.getAttribute('data-name'),
+                price: parseFloat(button.getAttribute('data-price')),
+                image: button.getAttribute('data-image'),
+                id: Date.now() // unique ID for removing later
+            };
+
+            let cart = JSON.parse(localStorage.getItem('deckShopCart')) || [];
+            cart.push(product);
+            localStorage.setItem('deckShopCart', JSON.stringify(cart));
+            
+            updateCartCount();
+            alert(`${product.name} added to your sea chest!`);
+        });
+    });
+
+    // Initialize count on load
+    updateCartCount();
+</script>
 
 <footer>
     <p>&copy; 2026 Diamond Rock Monument Productions</p>
