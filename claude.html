@@ -371,12 +371,17 @@
     const smoothAudio = document.getElementById("yacht-audio");
     const venueLinks = document.querySelectorAll('.venue-cards a');
 
-    // --- 1. FADE IN LOGIC (On Page Load/Interaction) ---
+   // --- 1. FADE IN LOGIC (On Page Load/Interaction) ---
     function startTheVibes() {
+        // Prevent the script from firing multiple times if the user taps quickly
+        if (!smoothAudio.paused && smoothAudio.currentTime > 0) return;
+
         smoothAudio.volume = 0;
         smoothAudio.play().then(() => {
+            // Success! Remove the triggers so they don't keep firing in the background
             window.removeEventListener('scroll', startTheVibes);
             window.removeEventListener('click', startTheVibes);
+            window.removeEventListener('touchstart', startTheVibes);
 
             let fadeIn = setInterval(() => {
                 if (smoothAudio.volume < 0.95) {
@@ -387,12 +392,15 @@
                 }
             }, 50);
         }).catch(error => {
-            console.log("Waiting for user interaction to start the vibes...");
+            console.log("Browser blocked audio. Waiting for a stronger tap...");
         });
     }
 
-    window.addEventListener('scroll', startTheVibes);
+    // THE FIX: 'touchstart' satisfies mobile browser security rules!
+    window.addEventListener('touchstart', startTheVibes, { passive: true });
+    
     window.addEventListener('click', startTheVibes);
+    window.addEventListener('scroll', startTheVibes); // Kept for older desktops
 
 
     // --- 2. FADE OUT LOGIC (On Venue Click) ---
