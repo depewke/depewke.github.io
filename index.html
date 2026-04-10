@@ -60,24 +60,37 @@
 
         section { margin-bottom: 80px; }
 
-       /* Gallery Styles */
+     /* Gallery Styles */
         .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center; /* This perfectly centers your uneven last row */
             gap: 20px;
         }
 
-        .gallery-item img {
+        .gallery-item {
+            /* Mimics your minmax(300px, 1fr) grid behavior */
+            flex: 1 1 300px;
+            /* 340px matches exactly 1/3 of your container minus gaps, 
+               preventing the bottom items from stretching massively */
+            max-width: 340px; 
+        }
+
+        .gallery-item img,
+        .gallery-item video {
             width: 100%;
             height: auto;
             border: 5px solid white;
             box-shadow: 5px 5px 15px rgba(0,0,0,0.2);
             transition: transform 0.3s;
             cursor: pointer; /* Shows it is clickable */
+            box-sizing: border-box;
         }
         
-        .gallery-item img:hover { transform: scale(1.03); }
-
+        .gallery-item img:hover,
+        .gallery-item video:hover { 
+            transform: scale(1.03); 
+        }
         /* Pop-up (Modal) Styles */
         .modal {
             display: none; 
