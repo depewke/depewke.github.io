@@ -135,8 +135,40 @@
             color: var(--text-gray);
         }
 
-        @media (max-width: 600px) {
-            .gallery-grid { grid-template-columns: 1fr; }
+     /* =========================================
+           📱 MOBILE RESPONSIVENESS (Screens under 768px)
+           ========================================= */
+        @media (max-width: 768px) {
+            /* 1. Background Image Anchor (Matches main page) */
+            body {
+                background-position: 80% center; 
+            }
+
+            /* 2. Navigation Stack */
+            nav {
+                flex-direction: column;
+                padding: 15px 5%;
+                gap: 10px;
+                text-align: center;
+            }
+
+            /* 3. Spacing & Padding Adjustments */
+            .container {
+                /* Ensures the content clears the taller stacked navigation */
+                padding: 140px 5% 40px 5%; 
+            }
+
+            /* 4. Grid Collapse */
+            .gallery-grid { 
+                grid-template-columns: 1fr; 
+            }
+
+            /* 5. Lightbox Close Button Adjustments */
+            .close-lightbox {
+                top: 15px;
+                right: 20px;
+                font-size: 2.5rem; 
+            }
         }
 
     /* 2. Add these Lightbox Styles to your <style> section */
