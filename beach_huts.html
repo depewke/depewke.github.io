@@ -135,8 +135,40 @@
             color: var(--text-gray);
         }
 
-        @media (max-width: 600px) {
-            .gallery-grid { grid-template-columns: 1fr; }
+    /* =========================================
+           📱 MOBILE RESPONSIVENESS (Screens under 768px)
+           ========================================= */
+        @media (max-width: 768px) {
+            /* 1. Background Image Anchor (Matches main page) */
+            body {
+                background-position: 80% center; 
+            }
+
+            /* 2. Navigation Stack */
+            nav {
+                flex-direction: column;
+                padding: 15px 5%;
+                gap: 10px;
+                text-align: center;
+            }
+
+            /* 3. Spacing & Padding Adjustments */
+            .container {
+                /* Ensures the content clears the taller stacked navigation */
+                padding: 140px 5% 40px 5%; 
+            }
+
+            /* 4. Grid Collapse */
+            .gallery-grid { 
+                grid-template-columns: 1fr; 
+            }
+
+            /* 5. Lightbox Close Button Adjustments */
+            .close-lightbox {
+                top: 15px;
+                right: 20px;
+                font-size: 2.5rem; /* Slightly smaller so it doesn't overlap on tiny screens */
+            }
         }
 
     /* 2. Add these Lightbox Styles to your <style> section */
@@ -321,19 +353,21 @@
         const smoothAudio = document.getElementById("yacht_sax-audio");
 
         function startTheVibes() {
-            // Try to play the audio
+            // Prevent multiple triggers
+            if (!smoothAudio.paused && smoothAudio.currentTime > 0) return;
+
             smoothAudio.play().then(() => {
                 console.log("The sax has begun.");
-                // SUCCESS: Remove the scroll listener so we don't trigger it again
                 window.removeEventListener('scroll', startTheVibes);
                 window.removeEventListener('click', startTheVibes);
+                window.removeEventListener('touchstart', startTheVibes);
             }).catch(error => {
-                // If the browser still blocks it, we just wait for the next interaction
                 console.log("Waiting for more movement...");
             });
         }
 
-        // Listen for both scroll and click to be safe
+        // Added touchstart for mobile browsers
+        window.addEventListener('touchstart', startTheVibes, { passive: true });
         window.addEventListener('scroll', startTheVibes);
         window.addEventListener('click', startTheVibes);
     </script>
@@ -358,7 +392,8 @@
                     clearInterval(fadeout);
                     isFading = false;
                     
-                    // After music stops, start listening for the user to come back
+                   // After music stops, start listening for the user to come back
+                    window.addEventListener('touchstart', resumeTheVibes, { once: true, passive: true });
                     window.addEventListener('click', resumeTheVibes, { once: true });
                     window.addEventListener('scroll', resumeTheVibes, { once: true });
                 }
