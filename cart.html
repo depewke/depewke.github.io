@@ -82,8 +82,63 @@
         .empty-msg { text-align: center; padding: 40px; }
 
         footer { background: var(--navy); color: white; text-align: center; padding: 60px 20px; margin-top: 80px; }
+
+        /* =========================================
+           📱 MOBILE RESPONSIVENESS (Screens under 768px)
+           ========================================= */
+        @media (max-width: 768px) {
+            /* 1. Header Adjustments */
+            header {
+                padding: 40px 15px; 
+            }
+            h1 { 
+                font-size: 2.2rem; 
+            }
+            header p {
+                font-size: 1.1rem !important; 
+            }
+
+            /* 2. Navigation (Consistent with Home/Tour/Merch) */
+            nav {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                padding: 10px;
+                gap: 5px;
+            }
+            nav a { 
+                margin: 5px 10px; 
+                padding: 8px 0;
+                width: auto; 
+            }
+
+            /* 3. Cart Specific Adjustments */
+            .container {
+                margin: 20px 15px; /* Reduces outer margin so it fits the screen */
+                padding: 20px 15px; /* Tightens inner padding */
+            }
+
+            .cart-item img {
+                width: 60px; /* Slightly smaller thumbnail */
+                height: 60px;
+            }
+
+            .item-details {
+                margin-left: 10px;
+                font-size: 0.9rem; /* Prevents text from pushing the remove button off-screen */
+            }
+
+            .total-section {
+                font-size: 1.5rem;
+                text-align: center; /* Centers the total for better mobile symmetry */
+            }
+        }
+        
     </style>
+    
 </head>
+
+    
 <body>
 
 <header>
