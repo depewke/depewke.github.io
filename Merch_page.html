@@ -4,8 +4,6 @@
 
     <link rel="icon" type="image/png" href="yacht-icon.png">
 
-
-    <link rel="icon" type="image/png" href="yacht-icon.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Quarterdeck Shop | Diamond Rock Monument</title>
@@ -146,8 +144,63 @@
         }
 
         footer { background: var(--navy); color: white; text-align: center; padding: 60px 20px; margin-top: 80px; }
+
+        /* =========================================
+           📱 MOBILE RESPONSIVENESS (Screens under 768px)
+           ========================================= */
+        @media (max-width: 768px) {
+            /* 1. Header Adjustments */
+            header {
+                padding: 40px 15px; 
+            }
+            h1 { 
+                font-size: 2.2rem; 
+            }
+            header p {
+                font-size: 1.1rem !important; 
+            }
+
+            /* 2. Navigation */
+            nav {
+                display: flex;
+                flex-direction: column; /* Stacks links neatly */
+                align-items: center;
+                padding: 10px;
+                gap: 10px;
+            }
+            nav a { 
+                margin: 0; 
+                padding: 10px;
+                width: 100%; /* Makes the whole row clickable */
+                box-sizing: border-box;
+            }
+
+            /* 3. The Grid Fix */
+            .merch-grid {
+                grid-template-columns: 1fr; /* Safely forces a single column */
+                gap: 20px;
+                margin-top: 20px;
+            }
+
+            /* 4. Tap-Friendly Buttons */
+            .buy-button, .buy-link {
+                width: 100%; /* Stretch buttons for easy thumb-tapping */
+                box-sizing: border-box;
+                padding: 15px 20px; /* Slightly taller for touch screens */
+            }
+
+            /* Adjust category headers for tighter mobile screens */
+            .category-header {
+                margin: 30px 0 15px 0;
+                font-size: 1.5rem;
+            }
+        }
+        
     </style>
+    
 </head>
+
+    
 <body>
 
 <header>
