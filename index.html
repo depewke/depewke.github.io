@@ -189,14 +189,29 @@
             box-shadow: 0 4px 0 #b36200;
         }
 
-        .member-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      .member-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center; /* Centers the uneven bottom row */
             gap: 30px;
         }
 
-        .member-card { background: #fff; padding: 20px; border-radius: 4px; border-left: 5px solid var(--gold); }
-        .member-card img { width: 100%; height: auto; margin-bottom: 15px; }
+        .member-card { 
+            background: #fff; 
+            padding: 20px; 
+            border-radius: 4px; 
+            border-left: 5px solid var(--gold); 
+            /* Flexbox layout rules */
+            flex: 1 1 300px;
+            max-width: 340px; 
+            box-sizing: border-box; /* Keeps padding from breaking the width */
+        }
+        
+        .member-card img { 
+            width: 100%; 
+            height: auto; 
+            margin-bottom: 15px; 
+        }
 
         footer { background: var(--navy); color: white; text-align: center; padding: 60px 20px; }
 
