@@ -226,14 +226,66 @@
             color: var(--text-gray);
         }
 
-        /* Responsive */
-        @media (max-width: 450px) {
-            .bio-grid { grid-template-columns: 1fr; }
-            .hero h1 { font-size: 2.5rem; }
-            .venue-cards { grid-template-columns: 1fr; }
+/* =========================================
+           📱 MOBILE RESPONSIVENESS (Screens under 768px)
+           ========================================= */
+        @media (max-width: 768px) {
+            /* 1. Background Image Anchor */
+            body {
+                /* Shifts the focal point to the left so it doesn't get cut off */
+                background-position: left center; 
+            }
+
+            /* 2. Navigation Fix */
+            nav {
+                flex-direction: column;
+                padding: 15px 5%;
+                gap: 15px;
+            }
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+            nav ul li {
+                margin-left: 0; /* Removes the rigid 30px spacing */
+            }
+
+            /* 3. Hero & Typography Adjustments */
+            .hero h1 { 
+                font-size: 2.2rem; 
+                letter-spacing: 5px; 
+            }
+            .neon-text, .neon-text-alt {
+                font-size: 1.2rem;
+            }
+            
+            /* 4. Grid Collapses */
+            .bio-grid, .venue-cards { 
+                grid-template-columns: 1fr; 
+                gap: 30px;
+            }
+
+            /* 5. Spacing & Padding Reductions */
+            .container {
+                padding: 60px 5%;
+            }
+            .sound-city {
+                padding: 80px 5%;
+            }
+            blockquote {
+                font-size: 1.3rem;
+                margin-top: 25px;
+            }
         }
+
+
+        
     </style>
+    
 </head>
+
+    
 <body>
 
      <audio id="yacht-audio" loop>
