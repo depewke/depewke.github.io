@@ -173,8 +173,70 @@
         .is-sold-out .card-sold-out { display: block; }
 
         footer { background: var(--navy); color: white; text-align: center; padding: 60px 20px; margin-top: 40px; }
+
+        /* =========================================
+           📱 MOBILE RESPONSIVENESS (Screens under 768px)
+           ========================================= */
+        @media (max-width: 768px) {
+            /* 1. Header Adjustments */
+            header {
+                padding: 50px 15px; 
+            }
+            h1 { 
+                font-size: 2.2rem; 
+            }
+            header p {
+                font-size: 1.1rem !important; 
+            }
+
+            /* 2. Navigation */
+            nav {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                padding: 10px;
+                gap: 5px;
+            }
+            nav a { 
+                margin: 5px 10px; 
+                padding: 8px 0;
+            }
+
+            /* 3. The Grid Fix (CRITICAL) */
+            .shows-grid {
+                /* Overrides the 450px minimum to fit mobile screens perfectly */
+                grid-template-columns: 1fr; 
+                padding: 15px;
+            }
+
+            /* 4. Show Card Adjustments */
+            .date-block {
+                min-width: 80px; /* Slim down the date block slightly */
+            }
+            .date-block .day {
+                font-size: 2rem;
+            }
+            .details-block {
+                padding: 15px;
+            }
+
+            /* 5. Sold Out Decal Sizing */
+            .card-sold-out {
+                font-size: 1.1rem;
+                padding: 8px 15px;
+            }
+            .sold-out-decal {
+                font-size: 0.8rem;
+                padding: 3px 8px;
+                right: 10px;
+            }
+        }
+        
     </style>
+    
 </head>
+
+    
 <body>
 
 <header>
