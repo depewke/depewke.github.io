@@ -186,8 +186,71 @@
         .member-card img { width: 100%; height: auto; margin-bottom: 15px; }
 
         footer { background: var(--navy); color: white; text-align: center; padding: 60px 20px; }
+
+        /* =========================================
+           📱 MOBILE RESPONSIVENESS (Screens under 768px)
+           ========================================= */
+        @media (max-width: 768px) {
+            /* 1. Header & Typography */
+            header {
+                padding: 50px 15px; 
+            }
+            h1 { 
+                font-size: 2.2rem; /* Shrink title */
+            }
+            header p {
+                font-size: 1.1rem !important; /* Shrink subtitle */
+            }
+
+            /* 2. Navigation */
+            nav {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                padding: 10px;
+                gap: 5px;
+            }
+            nav a { 
+                margin: 5px 10px; 
+                padding: 8px 0;
+            }
+
+            /* 3. Show Card Adjustments */
+            .show-card {
+                padding: 20px;
+                /* Reduce shadow so it doesn't cause horizontal scrolling */
+                box-shadow: 8px 8px 0px var(--ocean-blue); 
+            }
+            .show-card h2 {
+                font-size: 1.5rem;
+            }
+
+            /* 4. Table Wrapper (Requires HTML update below) */
+            .table-wrapper {
+                overflow-x: auto;
+                display: block;
+                width: 100%;
+                border-radius: 4px;
+            }
+
+            /* 5. Audio Player Resizing */
+            audio {
+                width: 150px; /* Make audio player slightly smaller */
+            }
+
+            /* 6. Modal Close Button */
+            .close-modal {
+                top: 10px;
+                right: 15px;
+                font-size: 40px;
+            }
+        }
+        
     </style>
+
+    
 </head>
+    
 <body id="top">
 
 <header>
@@ -279,8 +342,11 @@
         </div>
     </section>
 
+    
     <section id="music">
         <h2 style="text-align:center;">The Catalog</h2>
+
+        <div class="table-wrapper">
         <table>
             <thead>
                 <tr>
@@ -333,6 +399,7 @@
                 </tr>
             </tbody>
         </table>
+        </div>
     </section>
 </div>
 
