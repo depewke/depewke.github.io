@@ -156,6 +156,50 @@
 
         footer { background: var(--navy); color: white; text-align: center; padding: 60px 20px; margin-top: 80px; }
 
+        /* Custom Modal Styles */
+        .custom-modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 31, 63, 0.8); /* Navy overlay */
+        }
+
+        .custom-modal-content {
+            background-color: white;
+            margin: 20% auto;
+            padding: 30px;
+            border: 5px solid var(--gold);
+            width: 80%;
+            max-width: 400px;
+            text-align: center;
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .close-modal-btn {
+            background: var(--navy);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-weight: bold;
+            margin-top: 15px;
+            cursor: pointer;
+            border-radius: 50px;
+            text-transform: uppercase;
+            box-shadow: 0 4px 0 #000a14;
+            transition: 0.2s;
+        }
+        
+        .close-modal-btn:hover { 
+            background: var(--ocean-blue); 
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 #000a14;
+        }
+
         /* =========================================
            📱 MOBILE RESPONSIVENESS (Screens under 768px)
            ========================================= */
@@ -397,7 +441,7 @@
 
 </div>
 
-    <script>
+   <script>
     const buyButtons = document.querySelectorAll('.buy-button');
     const cartCount = document.getElementById('cart-count');
 
@@ -420,13 +464,34 @@
             localStorage.setItem('deckShopCart', JSON.stringify(cart));
             
             updateCartCount();
-            alert(`${product.name} added to your sea chest!`);
+            
+            // NEW MODAL CODE (Replaces the alert)
+            // 1. Inject the specific item name into the modal text
+            document.getElementById('added-item-name').innerText = product.name;
+            // 2. Show the modal
+            document.getElementById('cart-modal').style.display = 'block';
         });
     });
+
+    // Function to close the modal when they click "Keep Shopping"
+    function closeCartModal() {
+        document.getElementById('cart-modal').style.display = 'none';
+    }
 
     // Initialize count on load
     updateCartCount();
 </script>
+
+    <div id="cart-modal" class="custom-modal">
+    <div class="custom-modal-content">
+        <h2 style="color: var(--ocean-blue); margin-top: 0;">Ahoy!</h2>
+        <p><strong id="added-item-name"></strong> has been added to your sea chest!</p>
+        
+        <button class="close-modal-btn" onclick="closeCartModal()">Keep Shopping</button>
+        <br>
+        <a href="cart.html" class="buy-button" style="margin-top: 15px; display: inline-block;">View Sea Chest</a>
+    </div>
+</div>
 
 <footer>
     <p>&copy; 2026 Diamond Rock Monument Productions</p>
