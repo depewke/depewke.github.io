@@ -224,7 +224,48 @@
             color: var(--text-gray);
         }
 
-/* =========================================
+        /* =========================================
+           📱 TABLET RESPONSIVENESS (iPads, up to 1024px)
+           ========================================= */
+        @media (max-width: 1024px) {
+            /* 1. Navigation & Padding */
+            nav {
+                padding: 20px 5%; /* Reclaim screen edge space */
+            }
+            .container {
+                padding: 80px 5%;
+            }
+            .sound-city {
+                padding: 100px 5%;
+            }
+
+            /* 2. Scale Down the Hero Title */
+            .hero h1 {
+                font-size: 3rem; /* Scaled down from the massive 4.5rem */
+                letter-spacing: 6px;
+            }
+            .tagline {
+                font-size: 1rem;
+            }
+
+            /* 3. Tighten the Grids */
+            .bio-grid {
+                gap: 30px; /* Brings the text and image closer together */
+            }
+            .venue-cards {
+                gap: 20px; 
+            }
+
+            /* 4. Adjust Body Text */
+            .large-p {
+                font-size: 1.2rem;
+            }
+            blockquote {
+                font-size: 1.5rem;
+            }
+        }
+        
+        /* =========================================
            📱 MOBILE RESPONSIVENESS (Screens under 768px)
            ========================================= */
         @media (max-width: 768px) {
