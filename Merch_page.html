@@ -201,6 +201,45 @@
         }
 
         /* =========================================
+           📱 TABLET RESPONSIVENESS (iPads, up to 1024px)
+           ========================================= */
+        @media (max-width: 1024px) {
+            /* 1. Header Adjustments */
+            header {
+                padding: 60px 20px; 
+            }
+            h1 { 
+                font-size: 2.8rem; /* Scaled down slightly from desktop, larger than mobile */
+            }
+
+            /* 2. Navigation Wrapping */
+            nav {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                padding: 12px;
+            }
+            nav a { 
+                margin: 5px 12px; /* Prevents links from squishing together */
+            }
+
+            /* 3. Merch Grid & Container Fixes */
+            .container {
+                padding: 30px 15px;
+            }
+            
+            .merch-grid {
+                /* Forces a neat 2-column grid on iPads instead of awkwardly squeezing 3 or 4 */
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+            
+            .merch-card img {
+                height: 250px; /* Slightly shorter images to fit the screen better */
+            }
+        }
+        
+        /* =========================================
            📱 MOBILE RESPONSIVENESS (Screens under 768px)
            ========================================= */
         @media (max-width: 768px) {
