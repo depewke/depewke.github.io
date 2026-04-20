@@ -218,6 +218,17 @@
             <button class="close-modal-btn" onclick="closeCheckoutModal()">Understood</button>
         </div>
     </div>
+
+    <div id="clear-cart-modal" class="custom-modal">
+        <div class="custom-modal-content">
+            <h2 style="color: var(--ocean-blue); margin-top: 0;">Tossing Cargo?</h2>
+            <p>Are you sure you want to throw your entire sea chest overboard?</p>
+            <div style="margin-top: 20px;">
+                <button class="close-modal-btn" style="background: var(--sunset-orange); margin-right: 10px;" onclick="confirmClearCart()">Yes, Empty It</button>
+                <button class="close-modal-btn" style="background: gray;" onclick="closeClearCartModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
     
 </div>
 
@@ -272,11 +283,21 @@
         renderCart();
     }
 
-    function clearCart() {
-        if(confirm("Are you sure you want to clear your sea chest?")) {
-            localStorage.removeItem('deckShopCart');
-            renderCart();
-        }
+   function clearCart() {
+        // Show our custom confirmation modal instead of the browser confirm()
+        document.getElementById('clear-cart-modal').style.display = 'block';
+    }
+
+    function confirmClearCart() {
+        // If they click "Yes", delete the cart, re-render, and close the modal
+        localStorage.removeItem('deckShopCart');
+        renderCart();
+        closeClearCartModal();
+    }
+
+    function closeClearCartModal() {
+        // If they click "Cancel", just hide the modal
+        document.getElementById('clear-cart-modal').style.display = 'none';
     }
 
    function checkout() {
