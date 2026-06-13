@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smooth Sailin' - A Yacht Rock Game</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@600&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #2b2b2b;
+            color: white;
+            font-family: 'Quicksand', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            font-family: 'Pacifico', cursive;
+            color: #ff9e80;
+            margin: 20px 0 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        p.subtitle {
+            margin: 0 0 20px;
+            color: #ffd180;
+        }
+
+        #game-container {
+            position: relative;
+            width: 400px;
+            height: 600px;
+            /* Default Level 1 Background */
+            background: linear-gradient(to bottom, #ff7e5f, #feb47b, #86a8e7, #91eae4); 
+            border: 8px solid #fff;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            overflow: hidden;
+            transition: background 0.1s; /* Smooth transition for the flash */
+        }
+
+        /* Class for the red damage flash effect */
+        #game-container.flash-red {
+            background: #ff4d4d !important;
+        }
+        
+        /* Class for the green healing flash effect */
+        #game-container.flash-green {
+            background: #50c878 !important;
+        }
+
+        #ui-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 10px 20px;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: space-between;
+            font-size: 18px;
+            font-weight: bold;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+            z-index: 10;
+        }
+
+        #overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.75); /* Darkened slightly for better text readability */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 20;
+        }
+
+        /* Avatar Selection Styles */
+      #avatar-selection {
+            display: flex;
+             flex-direction: column;
+             align-items: center;
+             margin-top: 15px;
+            margin-bottom: 10px;
+        }
+
+    #avatar-buttons {
+             display: flex;
+              gap: 15px;
+        }
+
+        .avatar-btn {
+            font-size: 35px;
+            cursor: pointer;
+            padding: 5px 10px;
+            border: 3px solid transparent;
+            border-radius: 15px;
+            background: rgba(0,0,0,0.4);
+            transition: all 0.2s;
+            user-select: none;
+        }
+
+        .avatar-btn:hover {
+            transform: scale(1.1);
+            background: rgba(0,0,0,0.6);
+        }
+
+        .avatar-btn.active {
+            border-color: #ff9e80;
+            background: rgba(255, 158, 128, 0.3);
+            transform: scale(1.15);
+        }
+
+        button#start-btn {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 20px;
+            padding: 12px 24px;
+            background-color: #ff7e5f;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            transition: transform 0.1s, background-color 0.2s;
+            margin-top: 15px;
+        }
+
+        button#start-btn:hover {
+            background-color: #ff6b4a;
+            transform: scale(1.05);
+        }
+
+        button#start-btn:active {
+            transform: scale(0.95);
+        }
+
+        canvas {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Smooth Sailin'</h1>
+    <p class="subtitle">Catch the smooth vibes. Avoid the vibe killers.</p>
+
+    <div id="game-container">
+        <div id="ui-layer">
+            <span>Level: <span id="levelDisplay">1</span> | Score: <span id="scoreDisplay">0</span></span>
+            <span>Smoothness: <span id="vibeDisplay">100</span>%</span>
+        </div>
+        
+        <div id="overlay">
+            <div id="end-message" style="font-family: 'Pacifico', cursive; font-size: 32px; text-align: center; color: #fff; margin: 0;"></div>
+            
+           <div id="avatar-selection">
+                <div style="color: #ffd180; margin-bottom: 10px;">Choose your ride:</div>
+                <div id="avatar-buttons">
+                <div class="avatar-btn active" data-emoji="🛥️">🛥️</div>
+                <div class="avatar-btn" data-emoji="⛵">⛵</div>
+                <div class="avatar-btn" data-emoji="🚤">🚤</div>
+                <div class="avatar-btn" data-emoji="🏄">🏄</div>
+            </div>
+        </div>
+
+            <button id="start-btn">Set Sail</button>
+        </div>
+
+        <canvas id="gameCanvas" width="400" height="600"></canvas>
+    </div>
+
+    <script>
+        const gameContainer = document.getElementById('game-container'); 
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const scoreDisplay = document.getElementById('scoreDisplay');
+        const levelDisplay = document.getElementById('levelDisplay');
+        const vibeDisplay = document.getElementById('vibeDisplay');
+        const overlay = document.getElementById('overlay');
+        const startBtn = document.getElementById('start-btn');
+        const endMessage = document.getElementById('end-message');
+        const avatarSelectionDiv = document.getElementById('avatar-selection');
+        const avatarBtns = document.querySelectorAll('.avatar-btn');
+
+        // Game State
+        let playing = false;
+        let score = 0;
+        let level = 1;
+        let smoothness = 100;
+        let frameCount = 0;
+        let nextHeartScore = 2300; 
+        let items = [];
+        let erratics = []; 
+
+        // Emojis for the game 
+        let playerEmoji = '🛥️'; // Now a variable so it can be changed!
+        const smoothVibes = ['🎷', '🍹', '🌴', '⚓', '🎹']; 
+        const harshVibes = ['🎸', '🌩️', '🦈']; 
+        const erraticEmoji = '🦑'; 
+        const heartEmoji = '❤️';
+
+        // Level Backgrounds
+        const backgrounds = [
+            "linear-gradient(to bottom, #ff7e5f, #feb47b, #86a8e7, #91eae4)",
+            "linear-gradient(to bottom, #1cb5e0, #000046, #000000)", 
+            "linear-gradient(to bottom, #bdc3c7, #2c3e50, #4ca1af, #c4e0e5)", 
+            "linear-gradient(to bottom, #8E2DE2, #4A00E0, #00C9FF)", 
+            "linear-gradient(to bottom, #FF416C, #FF4B2B, #2B32B2)"
+        ];
+
+        // Player Object
+        const player = {
+            x: 175,
+            y: 520,
+            size: 50,
+            speed: 6
+        };
+
+        // Avatar Selection Logic
+        avatarBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                // Remove active class from all buttons
+                avatarBtns.forEach(b => b.classList.remove('active'));
+                // Add active class to the clicked button
+                e.currentTarget.classList.add('active');
+                // Set the chosen emoji
+                playerEmoji = e.currentTarget.getAttribute('data-emoji');
+            });
+        });
+
+        // Keyboard Controls
+        const keys = {
+            ArrowLeft: false,
+            ArrowRight: false
+        };
+
+        window.addEventListener('keydown', (e) => {
+            if (keys.hasOwnProperty(e.code)) keys[e.code] = true;
+        });
+
+        window.addEventListener('keyup', (e) => {
+            if (keys.hasOwnProperty(e.code)) keys[e.code] = false;
+        });
+
+        // Mouse/Touch Controls for extra smoothness
+        canvas.addEventListener('mousemove', (e) => {
+            if (!playing) return;
+            const rect = canvas.getBoundingClientRect();
+            let newX = e.clientX - rect.left - player.size / 2;
+            player.x = Math.max(0, Math.min(newX, canvas.width - player.size));
+        });
+
+        canvas.addEventListener('touchmove', (e) => {
+            if (!playing) return;
+            e.preventDefault();
+            const rect = canvas.getBoundingClientRect();
+            let newX = e.touches[0].clientX - rect.left - player.size / 2;
+            player.x = Math.max(0, Math.min(newX, canvas.width - player.size));
+        }, { passive: false });
+
+        function triggerHarshVibeEffect(damage) {
+            smoothness -= damage; 
+            // Screen shake effect for bad vibes
+            canvas.style.transform = `translate(${Math.random()*12-6}px, ${Math.random()*12-6}px)`;
+            
+            // Red background flash effect
+            gameContainer.classList.add('flash-red');
+            
+            setTimeout(() => {
+                canvas.style.transform = 'translate(0,0)';
+                gameContainer.classList.remove('flash-red');
+            }, 100);
+        }
+
+        function triggerHealEffect(amount) {
+            smoothness = Math.min(100, smoothness + amount); // Heal, but cap at 100
+            
+            // Green healing flash effect
+            gameContainer.classList.add('flash-green');
+            setTimeout(() => {
+                gameContainer.classList.remove('flash-green');
+            }, 100);
+        }
+
+        function spawnItem() {
+            // 70% chance for a smooth vibe, 30% for a standard harsh vibe
+            const isSmooth = Math.random() > 0.3;
+            const array = isSmooth ? smoothVibes : harshVibes;
+            const emoji = array[Math.floor(Math.random() * array.length)];
+            
+            let itemSpeed = 2 + Math.random() * 3 + (level * 0.8);
+
+            items.push({
+                x: Math.random() * (canvas.width - 40),
+                y: -50,
+                size: 40,
+                speed: itemSpeed, 
+                isSmooth: isSmooth,
+                isHeart: false,
+                emoji: emoji
+            });
+        }
+
+        function update() {
+            if (!playing) return;
+
+            // Move Player via Keyboard
+            if (keys.ArrowLeft && player.x > 0) player.x -= player.speed;
+            if (keys.ArrowRight && player.x < canvas.width - player.size) player.x += player.speed;
+
+            // Heart Spawn Logic (Level 3+ every 300 points)
+            if (level >= 3 && score >= nextHeartScore) {
+                items.push({
+                    x: Math.random() * (canvas.width - 40),
+                    y: -50,
+                    size: 40,
+                    speed: 3 + (level * 0.8), 
+                    isSmooth: false,
+                    isHeart: true, 
+                    emoji: heartEmoji
+                });
+                nextHeartScore += 300; 
+            }
+
+            // Spawn Regular Items
+            frameCount++;
+            let spawnRate = Math.max(20, 45 - (level * 2));
+            if (frameCount % spawnRate === 0) {
+                spawnItem();
+            }
+
+            // Move & Check Regular Items
+            for (let i = items.length - 1; i >= 0; i--) {
+                let item = items[i];
+                item.y += item.speed;
+
+                const hitMargin = 10;
+                if (item.x + hitMargin < player.x + player.size - hitMargin &&
+                    item.x + item.size - hitMargin > player.x + hitMargin &&
+                    item.y + hitMargin < player.y + player.size - hitMargin &&
+                    item.size + item.y - hitMargin > player.y + hitMargin) {
+                    
+                    if (item.isHeart) {
+                        triggerHealEffect(50); 
+                    } else if (item.isSmooth) {
+                        score += 10;
+                        smoothness = Math.min(100, smoothness + 5);
+                        
+                        // Check for Level Up
+                        if (score >= level * 1000) {
+                            levelComplete();
+                            break; 
+                        }
+                    } else {
+                        triggerHarshVibeEffect(25); 
+                    }
+                    
+                    items.splice(i, 1);
+                    updateUI();
+                } else if (item.y > canvas.height) {
+                    items.splice(i, 1);
+                }
+            }
+
+            // Move & Check Erratic Vibes
+            for (let i = 0; i < erratics.length; i++) {
+                let e = erratics[i];
+                e.y += e.speedY;
+                e.x += e.speedX;
+
+                // Erratic bouncing off walls
+                if (e.x < 0 || e.x > canvas.width - e.size) {
+                    e.speedX *= -1;
+                    e.x = Math.max(0, Math.min(e.x, canvas.width - e.size));
+                }
+
+                // Wrap to top if it misses the player
+                if (e.y > canvas.height + 50) {
+                    e.y = -100;
+                    e.x = Math.random() * (canvas.width - e.size);
+                }
+
+                // Check Collision
+                const hitMargin = 15;
+                if (e.x + hitMargin < player.x + player.size - hitMargin &&
+                    e.x + e.size - hitMargin > player.x + hitMargin &&
+                    e.y + hitMargin < player.y + player.size - hitMargin &&
+                    e.size + e.y - hitMargin > player.y + hitMargin) {
+                    
+                    triggerHarshVibeEffect(40); 
+                    
+                    // Reset to the top after hit
+                    e.y = -100;
+                    e.x = Math.random() * (canvas.width - e.size);
+                    updateUI();
+                }
+            }
+
+            // Check Game Over
+            if (smoothness <= 0) {
+                gameOver();
+            }
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            if (!playing && items.length === 0 && erratics.length === 0) return;
+
+            // Draw Regular Items & Hearts
+            ctx.font = '35px Arial';
+            ctx.textAlign = 'left';
+            ctx.textBaseline = 'top';
+            items.forEach(item => {
+                ctx.fillText(item.emoji, item.x, item.y);
+            });
+
+            // Draw Erratic Vibes
+            erratics.forEach(e => {
+                ctx.font = '75px Arial'; 
+                ctx.fillText(e.emoji, e.x, e.y);
+            });
+
+            // Draw Player using the selected Emoji
+            ctx.font = '50px Arial';
+            ctx.fillText(playerEmoji, player.x, player.y);
+        }
+
+        function gameLoop() {
+            update();
+            draw();
+            requestAnimationFrame(gameLoop);
+        }
+
+        function updateUI() {
+            scoreDisplay.innerText = score;
+            levelDisplay.innerText = level;
+            vibeDisplay.innerText = Math.max(0, smoothness); 
+            if (smoothness < 30) {
+                vibeDisplay.style.color = '#ff4d4d'; 
+            } else {
+                vibeDisplay.style.color = 'white';
+            }
+        }
+
+        function setLevelBackground() {
+            let bgIndex = Math.min(level - 1, backgrounds.length - 1);
+            gameContainer.style.background = backgrounds[bgIndex];
+        }
+
+        function levelComplete() {
+            playing = false;
+            overlay.style.display = 'flex';
+            
+            // Hide avatar selection between levels
+            avatarSelectionDiv.style.display = 'none';
+
+            endMessage.innerHTML = `Right On!<br><span style="font-size:20px; font-family:'Quicksand'">Level ${level} Cleared.</span>`;
+            startBtn.innerText = "Keep Cruisin'";
+            level++; 
+
+            setLevelBackground();
+
+            erratics.push({
+                x: Math.random() * (canvas.width - 75),
+                y: -150 - (Math.random() * 200), 
+                size: 75, 
+                speedY: 2.5 + Math.random() * 2.5,
+                speedX: (Math.random() > 0.5 ? 2.5 : -2.5), 
+                emoji: erraticEmoji
+            });
+        }
+
+        function gameOver() {
+            playing = false;
+            overlay.style.display = 'flex';
+            
+            // Show avatar selection so they can switch characters on retry
+            avatarSelectionDiv.style.display = 'flex';
+
+            endMessage.innerHTML = `Harsh Vibes, Man.<br><span style="font-size:20px; font-family:'Quicksand'">Final Score: ${score}<br>Reached Level: ${level}</span>`;
+            startBtn.innerText = "Try Again";
+        }
+
+        startBtn.addEventListener('click', () => {
+            if (smoothness <= 0) {
+                // Total reset for Game Over
+                score = 0;
+                level = 1;
+                smoothness = 100;
+                nextHeartScore = 2300; 
+                erratics = []; 
+                setLevelBackground(); 
+            } else if (score === 0) {
+                // Clear the Welcome message but keep everything else running
+                endMessage.innerHTML = "";
+            }
+            
+            playing = true;
+            items = []; 
+            frameCount = 0;
+            player.x = 175; 
+            
+            updateUI();
+            overlay.style.display = 'none';
+        });
+
+        // Initialize UI with Instructions
+        endMessage.innerHTML = `
+            Welcome to the Sunset Cruise
+            <div style="font-family: 'Quicksand', sans-serif; font-size: 16px; text-align: left; background: rgba(0,0,0,0.5); padding: 15px; border-radius: 10px; margin-top: 20px; line-height: 1.6; text-shadow: none;">
+                <strong>Controls:</strong> Left/Right Arrows or Mouse/Touch<br>
+                <span style="color: #91eae4;"><strong>Smooth Vibes:</strong></span> 🎷 🍹 🌴 ⚓ 🎹 <span style="font-size:12px;">(+10 pts)</span><br>
+                <span style="color: #ff4d4d;"><strong>Harsh Vibes:</strong></span> 🎸 🌩️ 🦈 🦑 <span style="font-size:12px;">(Damage!)</span><br>
+                <span style="color: #ffb6c1;"><strong>Level 3+:</strong></span> ❤️ <span style="font-size:12px;">(+50 Smoothness)</span>
+            </div>
+        `;
+        updateUI();
+
+        // Start the rendering loop
+        requestAnimationFrame(gameLoop);
+    </script>
+</body>
+</html>
