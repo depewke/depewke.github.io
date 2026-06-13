@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smooth Sailin' - A Yacht Rock Game</title>
+    <title>Sunset Cruise - A Yacht Rock Game</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@600&display=swap');
 
@@ -26,8 +26,22 @@
         }
 
         p.subtitle {
-            margin: 0 0 20px;
+            margin: 0 0 8px;
             color: #ffd180;
+        }
+
+        .game-link {
+            display: inline-block; /* Allows vertical margins to work */
+            color: #91eae4;
+            text-decoration: none;
+            font-size: 16px;
+            margin-bottom: 25px; /* Creates the space before the game window */
+            transition: color 0.2s;
+        }
+
+        .game-link:hover {
+            color: #ff9e80; 
+            text-decoration: underline;
         }
 
         #game-container {
@@ -151,7 +165,8 @@
 
     <h1>Smooth Sailin'</h1>
     <p class="subtitle">Catch the smooth vibes. Avoid the vibe killers.</p>
-
+    <a href="https://www.diamondrockmonument.band/shows.html" class="game-link" >>>> Back to the band <<<</a>
+    
     <div id="game-container">
         <div id="ui-layer">
             <span>Level: <span id="levelDisplay">1</span> | Score: <span id="scoreDisplay">0</span></span>
