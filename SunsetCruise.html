@@ -98,7 +98,7 @@
             display: flex;
              flex-direction: column;
              align-items: center;
-             margin-top: 15px;
+             margin-top: 10px;
             margin-bottom: 10px;
         }
 
@@ -140,7 +140,7 @@
             cursor: pointer;
             box-shadow: 0 4px 6px rgba(0,0,0,0.3);
             transition: transform 0.1s, background-color 0.2s;
-            margin-top: 15px;
+            margin-top: 10px;
         }
 
         button#start-btn:hover {
@@ -170,10 +170,10 @@
         </div>
         
         <div id="overlay">
-            <div id="end-message" style="font-family: 'Pacifico', cursive; font-size: 32px; text-align: center; color: #fff; margin: 0;"></div>
+            <div id="end-message" style="font-family: 'Pacifico', cursive; font-size: 32px; text-align: center; color: #fff; margin: 0; width: 90%;"></div>
             
            <div id="avatar-selection">
-                <div style="color: #ffd180; margin-bottom: 10px;">Choose your ride:</div>
+                <div style="color: #ffd180; margin-bottom: 5px; font-size: 14px;">Choose your ride:</div>
                 <div id="avatar-buttons">
                 <div class="avatar-btn active" data-emoji="🛥️">🛥️</div>
                 <div class="avatar-btn" data-emoji="⛵">⛵</div>
@@ -204,6 +204,7 @@
         // Game State
         let playing = false;
         let score = 0;
+        let levelScore = 0; // Tracks points strictly for the current level
         let level = 1;
         let smoothness = 100;
         let frameCount = 0;
@@ -220,11 +221,13 @@
         const heartEmoji = '❤️';
         const dolphinEmoji = '🐬'; 
 
-        // Level Stats Tracker
+        // Level & Global Stats Trackers
         let levelStats = {};
+        let globalStats = {};
 
-        // Helper function to reset detailed stats safely
-        function resetStats() {
+        // Helper function to reset level stats safely
+        function resetLevelStats() {
+            levelScore = 0; // Wipe the level points tracker
             levelStats = {
                 collected: {},
                 missed: {},
@@ -234,20 +237,38 @@
                 dolphinsCollected: 0,
                 dolphinsMissed: 0
             };
-            
-            // Initialize every smooth vibe count to 0
             smoothVibes.forEach(v => {
                 levelStats.collected[v] = 0;
                 levelStats.missed[v] = 0;
             });
-            
-            // Initialize every harsh/erratic vibe count to 0
             harshVibes.forEach(v => levelStats.harshHit[v] = 0);
             levelStats.harshHit[erraticEmoji] = 0;
         }
 
+        // Helper function to reset global stats safely (only resets on full Game Over)
+        function resetGlobalStats() {
+            globalStats = {
+                collected: {},
+                missed: {},
+                harshHit: {},
+                heartsCollected: 0,
+                heartsMissed: 0,
+                dolphinsCollected: 0,
+                dolphinsMissed: 0,
+                totalSmoothCollected: 0,
+                totalSmoothMissed: 0
+            };
+            smoothVibes.forEach(v => {
+                globalStats.collected[v] = 0;
+                globalStats.missed[v] = 0;
+            });
+            harshVibes.forEach(v => globalStats.harshHit[v] = 0);
+            globalStats.harshHit[erraticEmoji] = 0;
+        }
+
         // Call immediately to establish initial state
-        resetStats();
+        resetLevelStats();
+        resetGlobalStats();
 
         // Level Backgrounds
         const backgrounds = [
@@ -400,10 +421,13 @@
                     
                     if (item.isHeart) {
                         levelStats.heartsCollected++;
+                        globalStats.heartsCollected++;
                         triggerHealEffect(50); 
                     } else if (item.isDolphin) {
                         levelStats.dolphinsCollected++;
+                        globalStats.dolphinsCollected++;
                         score += 100;
+                        levelScore += 100; // Increment level-specific score
                         triggerHealEffect(10); 
                         
                         if (score >= level * 1000) {
@@ -413,7 +437,11 @@
                     } else if (item.isSmooth) {
                         // Track specific smooth emoji hit
                         levelStats.collected[item.emoji]++;
+                        globalStats.collected[item.emoji]++;
+                        globalStats.totalSmoothCollected++;
+                        
                         score += 10;
+                        levelScore += 10; // Increment level-specific score
                         smoothness = Math.min(100, smoothness + 5);
                         
                         if (score >= level * 1000) {
@@ -423,6 +451,7 @@
                     } else {
                         // Track specific harsh emoji hit
                         levelStats.harshHit[item.emoji]++;
+                        globalStats.harshHit[item.emoji]++;
                         triggerHarshVibeEffect(25); 
                     }
                     
@@ -432,11 +461,15 @@
                     // Missed item logic
                     if (item.isHeart) {
                         levelStats.heartsMissed++;
+                        globalStats.heartsMissed++;
                     } else if (item.isDolphin) {
                         levelStats.dolphinsMissed++;
+                        globalStats.dolphinsMissed++;
                     } else if (item.isSmooth) {
                         // Track specific smooth emoji missed
                         levelStats.missed[item.emoji]++;
+                        globalStats.missed[item.emoji]++;
+                        globalStats.totalSmoothMissed++;
                     }
                     items.splice(i, 1);
                 }
@@ -466,6 +499,7 @@
                     
                     // Track specific erratic hit
                     levelStats.harshHit[e.emoji]++;
+                    globalStats.harshHit[e.emoji]++;
                     triggerHarshVibeEffect(40); 
                     
                     e.y = -100;
@@ -526,50 +560,74 @@
             gameContainer.style.background = backgrounds[bgIndex];
         }
 
+        function generateEndScreenHTML(titleMsg, titleSubMsg, btnText) {
+            // Global percentages
+            let totalGlobalSmooth = globalStats.totalSmoothCollected + globalStats.totalSmoothMissed;
+            let globalHitPercentage = totalGlobalSmooth > 0 ? Math.round((globalStats.totalSmoothCollected / totalGlobalSmooth) * 100) : 0;
+
+            // Level percentages
+            let totalLevelSmoothCollected = 0;
+            let totalLevelSmoothMissed = 0;
+            smoothVibes.forEach(emoji => {
+                totalLevelSmoothCollected += levelStats.collected[emoji];
+                totalLevelSmoothMissed += levelStats.missed[emoji];
+            });
+            let totalLevelSpawns = totalLevelSmoothCollected + totalLevelSmoothMissed;
+            let levelHitPercentage = totalLevelSpawns > 0 ? Math.round((totalLevelSmoothCollected / totalLevelSpawns) * 100) : 0;
+
+            // Generate HTML badges for Smooth Vibes (Level specific)
+            let smoothDetails = smoothVibes.map(emoji => 
+                `<span style="display:inline-block; background:rgba(255,255,255,0.15); padding:3px 6px; margin:2px; border-radius:5px;">${emoji} ${levelStats.collected[emoji]}/${levelStats.missed[emoji]}</span>`
+            ).join('');
+
+            // Generate HTML badges for Harsh Vibes (Level specific)
+            let harshDetails = [...harshVibes, erraticEmoji].map(emoji => 
+                `<span style="display:inline-block; background:rgba(255,77,77,0.2); padding:3px 6px; margin:2px; border-radius:5px;">${emoji} ${levelStats.harshHit[emoji]}</span>`
+            ).join('');
+
+            let statsHTML = `
+                <div style="font-family: 'Quicksand', sans-serif; font-size: 13px; text-align: left; background: rgba(0,0,0,0.5); padding: 12px; border-radius: 10px; margin-top: 10px; line-height: 1.4; text-shadow: none;">
+                    
+                    <div style="color: #ffd180; margin-bottom: 8px; font-size: 14px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 5px;">
+                        <strong>Overall Score: ${score} | Overall Collection: ${globalHitPercentage}%</strong>
+                    </div>
+
+                    <div style="color: #91eae4; margin-bottom: 5px;">
+                        <strong>Level ${level} Score: ${levelScore} | Level Collection: ${levelHitPercentage}%</strong><br>
+                        <div style="margin-top: 5px;">${smoothDetails}</div>
+                    </div>
+
+                    <div style="color: #ff4d4d; margin-top: 10px; margin-bottom: 5px;">
+                        <strong>Level ${level} Harsh Vibes Hit:</strong><br>
+                        <div style="margin-top: 5px;">${harshDetails}</div>
+                    </div>
+            `;
+            
+            if (levelStats.heartsCollected > 0 || levelStats.heartsMissed > 0 || level >= 3) {
+                statsHTML += `<div style="color: #ffb6c1; margin-top: 10px;"><strong>Hearts:</strong> ${levelStats.heartsCollected} collected / ${levelStats.heartsMissed} missed</div>`;
+            }
+            if (levelStats.dolphinsCollected > 0 || levelStats.dolphinsMissed > 0 || level >= 4) {
+                statsHTML += `<div style="color: #87ceeb; margin-top: 5px;"><strong>Dolphins:</strong> ${levelStats.dolphinsCollected} collected / ${levelStats.dolphinsMissed} missed</div>`;
+            }
+            
+            statsHTML += `</div>`;
+
+            endMessage.innerHTML = `${titleMsg}<br><span style="font-size:18px; font-family:'Quicksand'">${titleSubMsg}</span>${statsHTML}`;
+            startBtn.innerText = btnText;
+        }
+
         function levelComplete() {
             playing = false;
             overlay.style.display = 'flex';
             avatarSelectionDiv.style.display = 'none';
 
-            // Generate HTML badges for Smooth Vibes
-            let smoothDetails = smoothVibes.map(emoji => 
-                `<span style="display:inline-block; background:rgba(255,255,255,0.15); padding:3px 6px; margin:2px; border-radius:5px;">${emoji} ${levelStats.collected[emoji]}/${levelStats.missed[emoji]}</span>`
-            ).join('');
+            generateEndScreenHTML(
+                `Right On!`, 
+                `Level ${level} Cleared.`, 
+                `Keep Cruisin'`
+            );
 
-            // Generate HTML badges for Harsh Vibes (including Erratics)
-            let harshDetails = [...harshVibes, erraticEmoji].map(emoji => 
-                `<span style="display:inline-block; background:rgba(255,77,77,0.2); padding:3px 6px; margin:2px; border-radius:5px;">${emoji} ${levelStats.harshHit[emoji]}</span>`
-            ).join('');
-
-            // Build dynamic stats display
-            let statsHTML = `
-                <div style="font-family: 'Quicksand', sans-serif; font-size: 14px; text-align: left; background: rgba(0,0,0,0.5); padding: 15px; border-radius: 10px; margin-top: 15px; line-height: 1.4; text-shadow: none;">
-                    
-                    <div style="color: #91eae4; margin-bottom: 5px;">
-                        <strong>Smooth Vibes (Hit/Missed):</strong><br>
-                        <div style="margin-top: 5px;">${smoothDetails}</div>
-                    </div>
-
-                    <div style="color: #ff4d4d; margin-top: 10px; margin-bottom: 5px;">
-                        <strong>Harsh Vibes Hit:</strong><br>
-                        <div style="margin-top: 5px;">${harshDetails}</div>
-                    </div>
-            `;
-            
-            // Only add conditional levels if they were played on THIS level before incrementing
-            if (level >= 3) {
-                statsHTML += `<div style="color: #ffb6c1; margin-top: 10px;"><strong>Hearts:</strong> ${levelStats.heartsCollected} hit / ${levelStats.heartsMissed} missed</div>`;
-            }
-            if (level >= 4) {
-                statsHTML += `<div style="color: #87ceeb; margin-top: 5px;"><strong>Dolphins:</strong> ${levelStats.dolphinsCollected} hit / ${levelStats.dolphinsMissed} missed</div>`;
-            }
-            
-            statsHTML += `</div>`;
-
-            endMessage.innerHTML = `Right On!<br><span style="font-size:20px; font-family:'Quicksand'">Level ${level} Cleared.</span>${statsHTML}`;
-            startBtn.innerText = "Keep Cruisin'";
             level++; 
-
             setLevelBackground();
 
             erratics.push({
@@ -587,8 +645,11 @@
             overlay.style.display = 'flex';
             avatarSelectionDiv.style.display = 'flex';
 
-            endMessage.innerHTML = `Harsh Vibes, Man.<br><span style="font-size:20px; font-family:'Quicksand'">Final Score: ${score}<br>Reached Level: ${level}</span>`;
-            startBtn.innerText = "Try Again";
+            generateEndScreenHTML(
+                `Harsh Vibes, Man.`, 
+                `Final Level Reached: ${level}`, 
+                `Try Again`
+            );
         }
 
         startBtn.addEventListener('click', () => {
@@ -601,12 +662,14 @@
                 nextDolphinScore = 3400;
                 erratics = []; 
                 setLevelBackground(); 
+                resetGlobalStats(); // Wipe entire run history
             } else if (score === 0) {
                 endMessage.innerHTML = "";
+                resetGlobalStats(); // Good measure for initial start
             }
             
-            // Wipe detailed stats object back to zero
-            resetStats();
+            // Always wipe detailed level stats and level score back to zero
+            resetLevelStats();
             
             playing = true;
             items = []; 
@@ -620,12 +683,12 @@
         // Initialize UI with Instructions
         endMessage.innerHTML = `
             Welcome to the Sunset Cruise
-            <div style="font-family: 'Quicksand', sans-serif; font-size: 16px; text-align: left; background: rgba(0,0,0,0.5); padding: 15px; border-radius: 10px; margin-top: 20px; line-height: 1.6; text-shadow: none;">
+            <div style="font-family: 'Quicksand', sans-serif; font-size: 15px; text-align: left; background: rgba(0,0,0,0.5); padding: 15px; border-radius: 10px; margin-top: 15px; line-height: 1.6; text-shadow: none;">
                 <strong>Controls:</strong> Left/Right Arrows or Mouse/Touch<br>
-                <span style="color: #91eae4;"><strong>Smooth Vibes:</strong></span> 🎷 🍹 🌴 ⚓ 🎹 <span style="font-size:12px;">(+10 pts)</span><br>
-                <span style="color: #ff4d4d;"><strong>Harsh Vibes:</strong></span> 🎸 🌩️ 🦈 🦑 <span style="font-size:12px;">(-25 Smoothness Damage!)</span><br>
+                <span style="color: #91eae4;"><strong>Smooth Vibes:</strong></span> 🎷 🍹 🌴 ⚓ 🎹 <span style="font-size:12px;">(+10 points)</span><br>
+                <span style="color: #ff4d4d;"><strong>Harsh Vibes:</strong></span> 🎸 🌩️ 🦈 🦑 <span style="font-size:12px;">(-25 Smoothness)</span><br>
                 <span style="color: #ffb6c1;"><strong>Level 3+:</strong></span> ❤️ <span style="font-size:12px;">(+50 Smoothness)</span><br>
-                <span style="color: #87ceeb;"><strong>Level 4+:</strong></span> 🐬 <span style="font-size:12px;">(+100 pts)</span>
+                <span style="color: #87ceeb;"><strong>Level 4+:</strong></span> 🐬 <span style="font-size:12px;">(+100 points)</span>
             </div>
         `;
         updateUI();
