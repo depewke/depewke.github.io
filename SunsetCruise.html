@@ -31,11 +31,11 @@
         }
 
         .game-link {
-            display: inline-block; /* Allows vertical margins to work */
+            display: inline-block;
             color: #91eae4;
             text-decoration: none;
             font-size: 16px;
-            margin-bottom: 25px; /* Creates the space before the game window */
+            margin-bottom: 25px;
             transition: color 0.2s;
         }
 
@@ -48,21 +48,18 @@
             position: relative;
             width: 400px;
             height: 600px;
-            /* Default Level 1 Background */
             background: linear-gradient(to bottom, #ff7e5f, #feb47b, #86a8e7, #91eae4); 
             border: 8px solid #fff;
             border-radius: 15px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             overflow: hidden;
-            transition: background 0.1s; /* Smooth transition for the flash */
+            transition: background 0.1s;
         }
 
-        /* Class for the red damage flash effect */
         #game-container.flash-red {
             background: #ff4d4d !important;
         }
         
-        /* Class for the green healing flash effect */
         #game-container.flash-green {
             background: #50c878 !important;
         }
@@ -89,7 +86,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.75); /* Darkened slightly for better text readability */
+            background: rgba(0, 0, 0, 0.75);
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -97,7 +94,6 @@
             z-index: 20;
         }
 
-        /* Avatar Selection Styles */
       #avatar-selection {
             display: flex;
              flex-direction: column;
@@ -212,15 +208,17 @@
         let smoothness = 100;
         let frameCount = 0;
         let nextHeartScore = 2300; 
+        let nextDolphinScore = 3400; // Level 4 starts at 3000, spawn first dolphin at 3400
         let items = [];
         let erratics = []; 
 
         // Emojis for the game 
-        let playerEmoji = '🛥️'; // Now a variable so it can be changed!
-        const smoothVibes = ['🎷', '🍹', '🌴', '⚓', '🎹']; 
+        let playerEmoji = '🛥️';
+        const smoothVibes = ['🎷', '🍹', '🌴', '⚓', '🎹', '🐬']; 
         const harshVibes = ['🎸', '🌩️', '🦈']; 
         const erraticEmoji = '🦑'; 
         const heartEmoji = '❤️';
+        const dolphinEmoji = '🐬'; // New dolphin emoji
 
         // Level Backgrounds
         const backgrounds = [
@@ -242,11 +240,8 @@
         // Avatar Selection Logic
         avatarBtns.forEach(btn => {
             btn.addEventListener('click', (e) => {
-                // Remove active class from all buttons
                 avatarBtns.forEach(b => b.classList.remove('active'));
-                // Add active class to the clicked button
                 e.currentTarget.classList.add('active');
-                // Set the chosen emoji
                 playerEmoji = e.currentTarget.getAttribute('data-emoji');
             });
         });
@@ -283,12 +278,8 @@
 
         function triggerHarshVibeEffect(damage) {
             smoothness -= damage; 
-            // Screen shake effect for bad vibes
             canvas.style.transform = `translate(${Math.random()*12-6}px, ${Math.random()*12-6}px)`;
-            
-            // Red background flash effect
             gameContainer.classList.add('flash-red');
-            
             setTimeout(() => {
                 canvas.style.transform = 'translate(0,0)';
                 gameContainer.classList.remove('flash-red');
@@ -296,9 +287,7 @@
         }
 
         function triggerHealEffect(amount) {
-            smoothness = Math.min(100, smoothness + amount); // Heal, but cap at 100
-            
-            // Green healing flash effect
+            smoothness = Math.min(100, smoothness + amount);
             gameContainer.classList.add('flash-green');
             setTimeout(() => {
                 gameContainer.classList.remove('flash-green');
@@ -306,7 +295,6 @@
         }
 
         function spawnItem() {
-            // 70% chance for a smooth vibe, 30% for a standard harsh vibe
             const isSmooth = Math.random() > 0.3;
             const array = isSmooth ? smoothVibes : harshVibes;
             const emoji = array[Math.floor(Math.random() * array.length)];
@@ -320,6 +308,7 @@
                 speed: itemSpeed, 
                 isSmooth: isSmooth,
                 isHeart: false,
+                isDolphin: false,
                 emoji: emoji
             });
         }
@@ -340,9 +329,25 @@
                     speed: 3 + (level * 0.8), 
                     isSmooth: false,
                     isHeart: true, 
+                    isDolphin: false,
                     emoji: heartEmoji
                 });
                 nextHeartScore += 300; 
+            }
+
+            // Dolphin Spawn Logic (Level 4+ every 400 points)
+            if (level >= 4 && score >= nextDolphinScore) {
+                items.push({
+                    x: Math.random() * (canvas.width - 40),
+                    y: -50,
+                    size: 40,
+                    speed: 3.5 + (level * 0.8), // A slightly faster speed for bonus item
+                    isSmooth: false,
+                    isHeart: false,
+                    isDolphin: true,
+                    emoji: dolphinEmoji
+                });
+                nextDolphinScore += 400; 
             }
 
             // Spawn Regular Items
@@ -365,6 +370,15 @@
                     
                     if (item.isHeart) {
                         triggerHealEffect(50); 
+                    } else if (item.isDolphin) {
+                        score += 100;
+                        triggerHealEffect(10); // Give a mini visual heal effect when hitting bonus
+                        
+                        // Check for Level Up here too since grabbing 100 pts might trigger it
+                        if (score >= level * 1000) {
+                            levelComplete();
+                            break; 
+                        }
                     } else if (item.isSmooth) {
                         score += 10;
                         smoothness = Math.min(100, smoothness + 5);
@@ -391,19 +405,16 @@
                 e.y += e.speedY;
                 e.x += e.speedX;
 
-                // Erratic bouncing off walls
                 if (e.x < 0 || e.x > canvas.width - e.size) {
                     e.speedX *= -1;
                     e.x = Math.max(0, Math.min(e.x, canvas.width - e.size));
                 }
 
-                // Wrap to top if it misses the player
                 if (e.y > canvas.height + 50) {
                     e.y = -100;
                     e.x = Math.random() * (canvas.width - e.size);
                 }
 
-                // Check Collision
                 const hitMargin = 15;
                 if (e.x + hitMargin < player.x + player.size - hitMargin &&
                     e.x + e.size - hitMargin > player.x + hitMargin &&
@@ -412,7 +423,6 @@
                     
                     triggerHarshVibeEffect(40); 
                     
-                    // Reset to the top after hit
                     e.y = -100;
                     e.x = Math.random() * (canvas.width - e.size);
                     updateUI();
@@ -430,7 +440,7 @@
 
             if (!playing && items.length === 0 && erratics.length === 0) return;
 
-            // Draw Regular Items & Hearts
+            // Draw Regular Items, Hearts, and Dolphins
             ctx.font = '35px Arial';
             ctx.textAlign = 'left';
             ctx.textBaseline = 'top';
@@ -474,8 +484,6 @@
         function levelComplete() {
             playing = false;
             overlay.style.display = 'flex';
-            
-            // Hide avatar selection between levels
             avatarSelectionDiv.style.display = 'none';
 
             endMessage.innerHTML = `Right On!<br><span style="font-size:20px; font-family:'Quicksand'">Level ${level} Cleared.</span>`;
@@ -497,8 +505,6 @@
         function gameOver() {
             playing = false;
             overlay.style.display = 'flex';
-            
-            // Show avatar selection so they can switch characters on retry
             avatarSelectionDiv.style.display = 'flex';
 
             endMessage.innerHTML = `Harsh Vibes, Man.<br><span style="font-size:20px; font-family:'Quicksand'">Final Score: ${score}<br>Reached Level: ${level}</span>`;
@@ -512,10 +518,10 @@
                 level = 1;
                 smoothness = 100;
                 nextHeartScore = 2300; 
+                nextDolphinScore = 3400; // Reset Dolphin Tracker
                 erratics = []; 
                 setLevelBackground(); 
             } else if (score === 0) {
-                // Clear the Welcome message but keep everything else running
                 endMessage.innerHTML = "";
             }
             
@@ -535,7 +541,8 @@
                 <strong>Controls:</strong> Left/Right Arrows or Mouse/Touch<br>
                 <span style="color: #91eae4;"><strong>Smooth Vibes:</strong></span> 🎷 🍹 🌴 ⚓ 🎹 <span style="font-size:12px;">(+10 pts)</span><br>
                 <span style="color: #ff4d4d;"><strong>Harsh Vibes:</strong></span> 🎸 🌩️ 🦈 🦑 <span style="font-size:12px;">(Damage!)</span><br>
-                <span style="color: #ffb6c1;"><strong>Level 3+:</strong></span> ❤️ <span style="font-size:12px;">(+50 Smoothness)</span>
+                <span style="color: #ffb6c1;"><strong>Level 3+:</strong></span> ❤️ <span style="font-size:12px;">(+50 Smoothness)</span><br>
+                <span style="color: #87ceeb;"><strong>Level 4+:</strong></span> 🐬 <span style="font-size:12px;">(+100 pts)</span>
             </div>
         `;
         updateUI();
