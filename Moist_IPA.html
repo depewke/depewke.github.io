@@ -50,7 +50,6 @@
         .hero-overlay {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            /* Lightened by 25% (0.4 alpha reduced to 0.3) */
             background: rgba(15, 32, 39, 0.3); 
         }
 
@@ -65,8 +64,8 @@
 
         /* Styling for the Moist IPA Logo */
         .hero-logo {
-            max-width: 95%; /* Prevents horizontal scrolling on tiny screens */
-            width: 700px; /* Increased by 40% from previous 500px */
+            max-width: 95%; 
+            width: 700px; 
             height: auto;
             margin-bottom: 20px;
             filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.5));
@@ -79,18 +78,41 @@
             text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
         }
 
-        /* Full-Width Image Sections with Text Overlay (Natural Scroll) */
+        /* Clean White Text Section */
+        .white-text-section {
+            background-color: var(--white);
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .white-text-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .white-text-content h2 {
+            font-size: 3rem;
+            color: var(--ocean-blue);
+            margin-bottom: 20px;
+        }
+
+        .white-text-content p {
+            font-size: 1.25rem;
+            margin-bottom: 20px;
+        }
+
+        /* Full-Width Image Sections with Text Overlay */
         .full-width-section {
             position: relative;
             background-size: cover;
             background-position: center;
             color: var(--white);
-            text-align: center;
-            padding: 120px 20px;
+            padding: 120px 5%;
         }
 
-        .full-width-section.welcome-bg {
+        .full-width-section.tasting-bg {
             background-image: url('6 tidal 2.jpg');
+            text-align: center;
         }
 
         .full-width-section.treasure-bg {
@@ -100,84 +122,97 @@
         .section-overlay {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(15, 32, 39, 0.65); /* Dark navy overlay for readability */
+            background: rgba(15, 32, 39, 0.65); /* Standard dark overlay */
+        }
+        
+        .treasure-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(15, 32, 39, 0.45); /* Lightened by 25% to reveal more chest/ship */
         }
 
         .full-width-content {
             position: relative;
             z-index: 1;
-            max-width: 900px;
+            max-width: 1200px;
             margin: 0 auto;
         }
 
-        .full-width-content h2 {
+        /* Tasting Notes Layout (Flanking Columns) */
+        .tasting-title {
+            font-size: 3rem;
+            color: var(--gold);
+            margin-bottom: 40px;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.9);
+        }
+
+        .split-columns {
+            display: flex;
+            justify-content: space-between;
+            gap: 40%; /* Pushes text to the sides, leaving center clear for the six-pack */
+            text-align: left;
+        }
+
+        .split-columns p {
+            font-size: 1.25rem;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.9);
+            margin-bottom: 15px;
+        }
+
+        /* Treasure Section Layout (Text on Left) */
+        .treasure-content {
+            text-align: left;
+            max-width: 500px;
+            margin: 0; /* Keeps it locked to the left side */
+        }
+
+        .treasure-content h2 {
             font-size: 3rem;
             color: var(--gold);
             margin-bottom: 20px;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.9);
         }
 
-        .full-width-content p {
+        .treasure-content p {
             font-size: 1.25rem;
             margin-bottom: 20px;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.9);
         }
 
-        /* Two-Column Content Sections */
-        .section {
-            padding: 80px 10%;
+        /* 3-Column Tide Section (Img | Text | Img) */
+        .tide-section {
             display: flex;
             align-items: center;
-            gap: 50px;
+            justify-content: center;
+            gap: 40px;
+            padding: 80px 5%;
+            background-color: var(--sand);
         }
 
-        .section.reverse {
-            flex-direction: row-reverse;
-        }
-
-        .section-text {
+        .tide-img {
             flex: 1;
         }
 
-        .section-text h2 {
-            font-size: 2.5rem;
+        .tide-img img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .tide-text {
+            flex: 1.5;
+            text-align: center;
+        }
+
+        .tide-text h2 {
+            font-size: 2.8rem;
             color: var(--ocean-blue);
             margin-bottom: 20px;
         }
 
-        .section-text p {
-            font-size: 1.1rem;
-            margin-bottom: 20px;
-        }
-
-        .section-image {
-            flex: 1;
-        }
-
-        .section-image img {
-            width: 100%;
-            border-radius: 4px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-
-        /* Full Width Banner */
-        .banner {
-            background-color: var(--ocean-blue);
-            color: var(--white);
-            text-align: center;
-            padding: 60px 20px;
-        }
-
-        .banner h3 {
-            font-size: 2rem;
-            margin-bottom: 15px;
-            color: var(--gold);
-        }
-
-        .banner p {
+        .tide-text p {
             font-size: 1.2rem;
-            max-width: 800px;
-            margin: 0 auto;
+            margin-bottom: 20px;
         }
 
         /* Footer */
@@ -211,11 +246,12 @@
 
         /* Styling for the DRM Brewing Logo */
         .footer-logo {
-            width: 85vw; /* Dynamically scaled to 85% of the viewport width */
+            width: 85vw; /* Dynamically scaled to 85% of viewport */
             max-width: 85vw;
             height: auto;
             margin-bottom: 20px;
-            filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.5));
+            /* Added brightness(1.35) to lighten logo by 35% */
+            filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.5)) brightness(1.35); 
         }
 
         .footer-content a {
@@ -232,16 +268,26 @@
         }
 
         /* Responsive Design */
-        @media (max-width: 768px) {
-            .section, .section.reverse {
+        @media (max-width: 900px) {
+            .tide-section {
                 flex-direction: column;
-                padding: 50px 20px;
+            }
+            .split-columns {
+                flex-direction: column;
+                gap: 30px;
                 text-align: center;
             }
-            .hero-logo {
-                width: 420px; /* scaled up from the original mobile width */
+            .treasure-content {
+                margin: 0 auto;
+                text-align: center;
             }
-            .full-width-content h2 {
+        }
+        
+        @media (max-width: 768px) {
+            .hero-logo {
+                width: 420px; 
+            }
+            .white-text-content h2, .tasting-title, .treasure-content h2 {
                 font-size: 2.2rem;
             }
         }
@@ -258,52 +304,55 @@
         </div>
     </header>
 
-    <!-- Intro Section (Full Width, Natural Scroll) -->
-    <section class="full-width-section welcome-bg">
-        <div class="section-overlay"></div>
-        <div class="full-width-content">
+    <!-- Welcome Aboard (Clean White Background) -->
+    <section class="white-text-section">
+        <div class="white-text-content">
             <h2>Welcome Aboard</h2>
             <p>When the sails are lowered, the golden hour hits the water, and the groove of a smooth bassline drifts across the deck, there is only one beverage meant for your hand.</p>
             <p>Brewed exclusively by Diamond Rock Monument Brewing Co., Moist IPA is a perfectly balanced, super drinkable companion for the sophisticated voyager. It goes down as effortlessly as a warm ocean breeze.</p>
         </div>
     </section>
 
-    <!-- Tasting Notes Section -->
-    <section class="section reverse" style="background-color: var(--white);">
-        <div class="section-text">
-            <h2>Tasting Notes for the Discerning Sailor</h2>
-            <p>Expect a refreshing, perfectly calibrated hop profile that doesn't overwhelm the palate, ensuring you stay steady at the helm.</p>
-            <p>It’s light enough for a sun-drenched afternoon on the bow, yet complex enough to savor as the sun dips below the horizon. Whether navigating the high seas or dropping anchor in your own backyard, every bottle is an invitation to kick back.</p>
-        </div>
-        <div class="section-image">
-            <img src="Bottle in water 1.jpg" alt="Moist IPA bottle standing in the crisp ocean shallows">
-        </div>
-    </section>
-
-    <!-- Mid-Page Banner -->
-    <div class="banner">
-        <h3>Chilled by the Tide</h3>
-        <p>Let the ocean chill your bottle and the music warm your soul. Slip off your deck shoes, wade into the shallows, and taste the sophistication of smooth sailing.</p>
-    </div>
-
-    <!-- Treasure Section (Full Width, Natural Scroll) -->
-    <section class="full-width-section treasure-bg">
+    <!-- Tasting Notes Section (Full Width Image with Flanking Text) -->
+    <section class="full-width-section tasting-bg">
         <div class="section-overlay"></div>
         <div class="full-width-content">
-            <h2>A Liquid Treasure</h2>
-            <p>Forget gold doubloons and sunken silver; true coastal wealth is found in the perfect pour. Washed ashore for those who seek the ultimate refreshment, Moist IPA is a buried treasure of flavor.</p>
-            <p>With an ancient galleon on the horizon and a wooden chest open on the sand, it's time to claim your bounty of crisp, perfectly balanced nectar. Drink like a captain, and let the liquid gold flow.</p>
+            <h2 class="tasting-title">Tasting Notes for the Discerning Sailor</h2>
+            <div class="split-columns">
+                <div class="col-left">
+                    <p>Expect a refreshing, perfectly calibrated hop profile that doesn't overwhelm the palate, ensuring you stay steady at the helm.</p>
+                </div>
+                <div class="col-right">
+                    <p>It’s light enough for a sun-drenched afternoon on the bow, yet complex enough to savor as the sun dips below the horizon. Whether navigating the high seas or dropping anchor in your own backyard, every bottle is an invitation to kick back.</p>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- Final Image Break -->
-    <section class="section reverse" style="background-color: var(--white);">
-        <div class="section-text">
-            <h2>Let the Current Take You</h2>
+    <!-- Chilled by the Tide (3-Column Layout) -->
+    <section class="tide-section">
+        <div class="tide-img">
+            <img src="Bottle in water 1.jpg" alt="Moist IPA bottle standing in the crisp ocean shallows">
+        </div>
+        <div class="tide-text">
+            <h2>Chilled by the Tide</h2>
+            <p>Let the ocean chill your bottle and the music warm your soul. Slip off your deck shoes, wade into the shallows, and taste the sophistication of smooth sailing.</p>
             <p>When the compass points to leisure, Moist IPA is the only provision you need. Crafted for those who appreciate the rhythm of the waves and the undeniable groove of a smooth saxophone solo, this IPA is best enjoyed where the water meets the sand.</p>
         </div>
-        <div class="section-image">
+        <div class="tide-img">
             <img src="bottle under water.jpg" alt="Moist IPA bottle resting gently in the surf">
+        </div>
+    </section>
+
+    <!-- Treasure Section (Lightened Background, Text on Left) -->
+    <section class="full-width-section treasure-bg">
+        <div class="treasure-overlay"></div>
+        <div class="full-width-content">
+            <div class="treasure-content">
+                <h2>A Liquid Treasure</h2>
+                <p>Forget gold doubloons and sunken silver; true coastal wealth is found in the perfect pour. Washed ashore for those who seek the ultimate refreshment, Moist IPA is a buried treasure of flavor.</p>
+                <p>With an ancient galleon on the horizon and a wooden chest open on the sand, it's time to claim your bounty of crisp, perfectly balanced nectar. Drink like a captain, and let the liquid gold flow.</p>
+            </div>
         </div>
     </section>
 
