@@ -50,7 +50,6 @@
         .hero-overlay {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            /* Alpha channel reduced to .25 */
             background: rgba(15, 32, 39, 0.25); 
         }
 
@@ -150,8 +149,11 @@
         .split-columns {
             display: flex;
             justify-content: space-between;
-            gap: 40%; /* Pushes text to the sides, leaving center clear for the six-pack */
             text-align: left;
+        }
+
+        .col-left, .col-right {
+            flex: 0 0 30%; /* Locks both columns to exactly 30% width */
         }
 
         .split-columns p {
@@ -276,6 +278,10 @@
                 flex-direction: column;
                 gap: 30px;
                 text-align: center;
+            }
+            .col-left, .col-right {
+                flex: auto;
+                width: 100%;
             }
             .treasure-content {
                 margin: 0 auto;
