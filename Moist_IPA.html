@@ -33,25 +33,32 @@
             letter-spacing: 1px;
         }
 
-        /* Sticky Logo Wrapper Container */
+        /* Sticky Logo Container with Dual Logos */
         .sticky-logo-container {
             position: sticky;
             top: 0;
             z-index: 1000;
-            background-color: rgba(15, 32, 39, 0.85);
+            background-color: rgba(15, 32, 39, 0.9);
             backdrop-filter: blur(8px);
-            padding: 10px 20px;
+            padding: 10px 30px;
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
             transition: all 0.3s ease;
         }
 
-        /* Scaled-down version of the logo when sticky */
-        .sticky-logo-container .hero-logo {
+        /* Sticky container logo adjustments */
+        .sticky-logo-container .sticky-drm-logo {
             width: 180px;
+            height: auto;
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.5));
+        }
+
+        .sticky-logo-container .hero-logo {
+            width: 140px;
             margin-bottom: 0;
+            height: auto;
         }
 
         /* Hero Section with Parallax Background */
@@ -350,8 +357,14 @@
             .hero-logo {
                 width: 420px; 
             }
+            .sticky-logo-container {
+                padding: 8px 15px;
+            }
+            .sticky-logo-container .sticky-drm-logo {
+                width: 110px;
+            }
             .sticky-logo-container .hero-logo {
-                width: 140px;
+                width: 100px;
             }
             .white-text-content h2, .tasting-title, .treasure-mobile-content h2 {
                 font-size: 2.2rem;
@@ -361,16 +374,17 @@
 </head>
 <body>
 
-    <!-- Sticky Logo Bar (Appears at top upon scrolling) -->
+    <!-- Sticky Logo Bar with DRM Brewing on Left and Moist IPA on Right -->
     <div class="sticky-logo-container">
-        <img src="Moist IPA Sticker_clr1.png" alt="Moist IPA" class="hero-logo">
+        <img src="DRM Brewing_clear.png" alt="Diamond Rock Monument Brewing Co." class="sticky-drm-logo" />
+        <img src="Moist IPA Sticker_clr1.png" alt="Moist IPA" class="hero-logo" />
     </div>
 
     <!-- Hero Section -->
     <header class="hero">
         <div class="hero-overlay"></div>
         <div class="hero-content">
-            <img src="Moist IPA Sticker_clr1.png" alt="Moist IPA" class="hero-logo">
+            <img src="Moist IPA Sticker_clr1.png" alt="Moist IPA" class="hero-logo" />
             <p>The Captain’s Choice for Smooth Sailing</p>
         </div>
     </header>
@@ -403,7 +417,7 @@
     <!-- Chilled by the Tide (3-Column Layout) -->
     <section class="tide-section">
         <div class="tide-img">
-            <img src="Bottle in water 1.jpg" alt="Moist IPA bottle standing in the crisp ocean shallows">
+            <img src="Bottle in water 1.jpg" alt="Moist IPA bottle standing in the crisp ocean shallows" />
         </div>
         <div class="tide-text">
             <h2>Chilled by the Tide</h2>
@@ -411,7 +425,7 @@
             <p>When the compass points to leisure, Moist IPA is the only provision you need. Crafted for those who appreciate the rhythm of the waves and the undeniable groove of a smooth saxophone solo, this IPA is best enjoyed where the water meets the sand.</p>
         </div>
         <div class="tide-img">
-            <img src="bottle under water.jpg" alt="Moist IPA bottle resting gently in the surf">
+            <img src="bottle under water.jpg" alt="Moist IPA bottle resting gently in the surf" />
         </div>
     </section>
 
@@ -443,7 +457,7 @@
     <footer>
         <div class="footer-overlay"></div>
         <div class="footer-content">
-            <img src="DRM Brewing_clear.png" alt="Diamond Rock Monument Brewing Co." class="footer-logo">
+            <img src="DRM Brewing_clear.png" alt="Diamond Rock Monument Brewing Co." class="footer-logo" />
             <p style="margin-bottom: 20px;">Turn up the music. Let the tide wash the day away.</p>
             <a href="https://diamondrockmonument.band">Return to the Band Homepage</a>
         </div>
