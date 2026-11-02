@@ -122,14 +122,12 @@
         .section-overlay {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            /* Alpha channel reduced to .05 */
             background: rgba(15, 32, 39, 0.05); 
         }
         
         .treasure-overlay {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            /* Alpha channel reduced to .1 */
             background: rgba(15, 32, 39, 0.1); 
         }
 
@@ -155,7 +153,7 @@
         }
 
         .col-left, .col-right {
-            flex: 0 0 30%; /* Locks both columns to exactly 30% width */
+            flex: 0 0 30%; 
         }
 
         .split-columns p {
@@ -164,24 +162,49 @@
             margin-bottom: 15px;
         }
 
-        /* Treasure Section Layout (Text on Left) */
-        .treasure-content {
+        /* Treasure Section Layout (Desktop: On Image Left / Mobile: Hidden here) */
+        .treasure-content-desktop {
             text-align: left;
             max-width: 500px;
-            margin: 0; /* Keeps it locked to the left side */
+            margin: 0; 
         }
 
-        .treasure-content h2 {
+        .treasure-content-desktop h2 {
             font-size: 3rem;
             color: var(--gold);
             margin-bottom: 20px;
             text-shadow: 2px 2px 5px rgba(0,0,0,0.9);
         }
 
-        .treasure-content p {
+        .treasure-content-desktop p {
             font-size: 1.25rem;
             margin-bottom: 20px;
             text-shadow: 2px 2px 5px rgba(0,0,0,0.9);
+        }
+
+        /* Mobile White Space Section for Treasure Text */
+        .treasure-mobile-section {
+            display: none; /* Hidden on desktop */
+            background-color: var(--white);
+            color: var(--navy);
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .treasure-mobile-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .treasure-mobile-content h2 {
+            font-size: 2.5rem;
+            color: var(--ocean-blue);
+            margin-bottom: 20px;
+        }
+
+        .treasure-mobile-content p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
         }
 
         /* 3-Column Tide Section (Img | Text | Img) */
@@ -237,7 +260,6 @@
         .footer-overlay {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            /* Alpha channel reduced to .1 */
             background: rgba(15, 32, 39, 0.1);
         }
 
@@ -252,7 +274,7 @@
 
         /* Styling for the DRM Brewing Logo */
         .footer-logo {
-            width: 85vw; /* Dynamically scaled to 85% of viewport */
+            width: 85vw; 
             max-width: 85vw;
             height: auto;
             margin-bottom: 20px;
@@ -286,9 +308,12 @@
                 flex: auto;
                 width: 100%;
             }
-            .treasure-content {
-                margin: 0 auto;
-                text-align: center;
+            /* Hide desktop text overlay on narrow screens, show mobile white space section */
+            .treasure-content-desktop {
+                display: none;
+            }
+            .treasure-mobile-section {
+                display: block;
             }
         }
         
@@ -296,7 +321,7 @@
             .hero-logo {
                 width: 420px; 
             }
-            .white-text-content h2, .tasting-title, .treasure-content h2 {
+            .white-text-content h2, .tasting-title, .treasure-mobile-content h2 {
                 font-size: 2.2rem;
             }
         }
@@ -353,15 +378,24 @@
         </div>
     </section>
 
-    <!-- Treasure Section (Lightened Background, Text on Left) -->
+    <!-- Treasure Section (Desktop: Text on Left over Image) -->
     <section class="full-width-section treasure-bg">
         <div class="treasure-overlay"></div>
         <div class="full-width-content">
-            <div class="treasure-content">
+            <div class="treasure-content-desktop">
                 <h2>A Liquid Treasure</h2>
                 <p>Forget gold doubloons and sunken silver; true coastal wealth is found in the perfect pour. Washed ashore for those who seek the ultimate refreshment, Moist IPA is a buried treasure of flavor.</p>
                 <p>With an ancient galleon on the horizon and a wooden chest open on the sand, it's time to claim your bounty of crisp, perfectly balanced nectar. Drink like a captain, and let the liquid gold flow.</p>
             </div>
+        </div>
+    </section>
+
+    <!-- Treasure Section (Mobile/Narrow: White Space Below Image) -->
+    <section class="treasure-mobile-section">
+        <div class="treasure-mobile-content">
+            <h2>A Liquid Treasure</h2>
+            <p>Forget gold doubloons and sunken silver; true coastal wealth is found in the perfect pour. Washed ashore for those who seek the ultimate refreshment, Moist IPA is a buried treasure of flavor.</p>
+            <p>With an ancient galleon on the horizon and a wooden chest open on the sand, it's time to claim your bounty of crisp, perfectly balanced nectar. Drink like a captain, and let the liquid gold flow.</p>
         </div>
     </section>
 
