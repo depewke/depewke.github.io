@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moist IPA | Diamond Rock Monument Brewing Co.</title>
+    <style>
+        /* CSS Variables for Yacht Rock Palette */
+        :root {
+            --navy: #0F2027;
+            --ocean-blue: #203A43;
+            --sand: #F5F1E7;
+            --white: #FFFFFF;
+            --gold: #D4AF37;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            color: var(--navy);
+            background-color: var(--sand);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Georgia', serif;
+            font-weight: normal;
+            letter-spacing: 1px;
+        }
+
+        /* Hero Section with Parallax Background */
+        .hero {
+            position: relative;
+            height: 90vh;
+            background-image: url('sun on water 2.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(15, 32, 39, 0.4);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            padding: 0 20px;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero-content p {
+            font-size: 1.5rem;
+            font-style: italic;
+            color: var(--sand);
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+
+        /* Two-Column Content Sections */
+        .section {
+            padding: 80px 10%;
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .section.reverse {
+            flex-direction: row-reverse;
+        }
+
+        .section-text {
+            flex: 1;
+        }
+
+        .section-text h2 {
+            font-size: 2.5rem;
+            color: var(--ocean-blue);
+            margin-bottom: 20px;
+        }
+
+        .section-text p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        .section-image {
+            flex: 1;
+        }
+
+        .section-image img {
+            width: 100%;
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        /* Full Width Banner */
+        .banner {
+            background-color: var(--ocean-blue);
+            color: var(--white);
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .banner h3 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: var(--gold);
+        }
+
+        .banner p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Footer */
+        footer {
+            background-image: url('ocean 1.jpg');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            text-align: center;
+            padding: 100px 20px;
+            position: relative;
+        }
+
+        .footer-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(15, 32, 39, 0.6);
+        }
+
+        .footer-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-content h2 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .footer-content a {
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 1.2rem;
+            border-bottom: 1px solid var(--gold);
+            padding-bottom: 2px;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-content a:hover {
+            opacity: 0.8;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .section, .section.reverse {
+                flex-direction: column;
+                padding: 50px 20px;
+                text-align: center;
+            }
+            .hero-content h1 {
+                font-size: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Moist IPA</h1>
+            <p>The Captain’s Choice for Smooth Sailing</p>
+        </div>
+    </header>
+
+    <!-- Intro Section -->
+    <section class="section">
+        <div class="section-text">
+            <h2>Welcome Aboard</h2>
+            <p>When the sails are lowered, the golden hour hits the water, and the groove of a smooth bassline drifts across the deck, there is only one beverage meant for your hand.</p>
+            <p>Brewed exclusively by Diamond Rock Monument Brewing Co., Moist IPA is a perfectly balanced, super drinkable companion for the sophisticated voyager. It goes down as effortlessly as a warm ocean breeze.</p>
+        </div>
+        <div class="section-image">
+            <img src="6 tidal 2.jpg" alt="Moist IPA six pack on the shoreline">
+        </div>
+    </section>
+
+    <!-- Tasting Notes Section -->
+    <section class="section reverse" style="background-color: var(--white);">
+        <div class="section-text">
+            <h2>Tasting Notes for the Discerning Sailor</h2>
+            <p>Expect a refreshing, perfectly calibrated hop profile that doesn't overwhelm the palate, ensuring you stay steady at the helm.</p>
+            <p>It’s light enough for a sun-drenched afternoon on the bow, yet complex enough to savor as the sun dips below the horizon. Whether navigating the high seas or dropping anchor in your own backyard, every bottle is an invitation to kick back.</p>
+        </div>
+        <div class="section-image">
+            <img src="Bottle in water 1.jpg" alt="Moist IPA bottle standing in the crisp ocean shallows">
+        </div>
+    </section>
+
+    <!-- Mid-Page Banner -->
+    <div class="banner">
+        <h3>Chilled by the Tide</h3>
+        <p>Let the ocean chill your bottle and the music warm your soul. Slip off your deck shoes, wade into the shallows, and taste the sophistication of smooth sailing.</p>
+    </div>
+
+    <!-- Treasure Section -->
+    <section class="section">
+        <div class="section-text">
+            <h2>A Liquid Treasure</h2>
+            <p>Forget gold doubloons and sunken silver; true coastal wealth is found in the perfect pour. Washed ashore for those who seek the ultimate refreshment, Moist IPA is a buried treasure of flavor.</p>
+            <p>With an ancient galleon on the horizon and a wooden chest open on the sand, it's time to claim your bounty of crisp, perfectly balanced nectar. Drink like a captain, and let the liquid gold flow.</p>
+        </div>
+        <div class="section-image">
+            <img src="treasure chest 3 ship.jpg" alt="Moist IPA bottles inside a treasure chest on the beach with a ship in the background">
+        </div>
+    </section>
+
+    <!-- Final Image Break -->
+    <section class="section reverse" style="background-color: var(--white);">
+        <div class="section-text">
+            <h2>Let the Current Take You</h2>
+            <p>When the compass points to leisure, Moist IPA is the only provision you need. Crafted for those who appreciate the rhythm of the waves and the undeniable groove of a smooth saxophone solo, this IPA is best enjoyed where the water meets the sand.</p>
+        </div>
+        <div class="section-image">
+            <img src="bottle under water.jpg" alt="Moist IPA bottle resting gently in the surf">
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-overlay"></div>
+        <div class="footer-content">
+            <h2>Diamond Rock Monument Brewing Co.</h2>
+            <p style="margin-bottom: 20px;">Turn up the music. Let the tide wash the day away.</p>
+            <a href="https://diamondrockmonument.band">Return to the Band Homepage</a>
+        </div>
+    </footer>
+
+</body>
+</html>
