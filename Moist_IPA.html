@@ -50,7 +50,8 @@
         .hero-overlay {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(15, 32, 39, 0.3); 
+            /* Alpha channel reduced to .25 */
+            background: rgba(15, 32, 39, 0.25); 
         }
 
         .hero-content {
@@ -128,7 +129,7 @@
         .treasure-overlay {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(15, 32, 39, 0.45); /* Lightened by 25% to reveal more chest/ship */
+            background: rgba(15, 32, 39, 0.45); /* Lightened overlay to reveal more chest/ship */
         }
 
         .full-width-content {
@@ -232,7 +233,7 @@
         .footer-overlay {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(15, 32, 39, 0.6);
+            background: rgba(15, 32, 39, 0.36);
         }
 
         .footer-content {
@@ -250,8 +251,7 @@
             max-width: 85vw;
             height: auto;
             margin-bottom: 20px;
-            /* Added brightness(1.35) to lighten logo by 35% */
-            filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.5)) brightness(1.35); 
+            filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.5)); 
         }
 
         .footer-content a {
@@ -299,7 +299,7 @@
     <header class="hero">
         <div class="hero-overlay"></div>
         <div class="hero-content">
-            <img src="Moist IPA Sticker_clr1.png" alt="Moist IPA" class="hero-logo">
+            <img src="Moist IPA Sticker_clear1.png" alt="Moist IPA" class="hero-logo">
             <p>The Captain’s Choice for Smooth Sailing</p>
         </div>
     </header>
