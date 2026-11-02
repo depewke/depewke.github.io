@@ -75,6 +75,51 @@
             text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
         }
 
+        /* Full-Width Image Sections with Text Overlay */
+        .full-width-section {
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: var(--white);
+            text-align: center;
+            padding: 120px 20px;
+        }
+
+        .full-width-section.welcome-bg {
+            background-image: url('6 tidal 2.jpg');
+        }
+
+        .full-width-section.treasure-bg {
+            background-image: url('treasure chest 3 ship.jpg');
+        }
+
+        .section-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(15, 32, 39, 0.65); /* Dark navy overlay for readability */
+        }
+
+        .full-width-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .full-width-content h2 {
+            font-size: 3rem;
+            color: var(--gold);
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+        }
+
+        .full-width-content p {
+            font-size: 1.25rem;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+        }
+
         /* Two-Column Content Sections */
         .section {
             padding: 80px 10%;
@@ -182,6 +227,9 @@
             .hero-content h1 {
                 font-size: 3rem;
             }
+            .full-width-content h2 {
+                font-size: 2.2rem;
+            }
         }
     </style>
 </head>
@@ -196,15 +244,13 @@
         </div>
     </header>
 
-    <!-- Intro Section -->
-    <section class="section">
-        <div class="section-text">
+    <!-- Intro Section (Now Full Width) -->
+    <section class="full-width-section welcome-bg">
+        <div class="section-overlay"></div>
+        <div class="full-width-content">
             <h2>Welcome Aboard</h2>
             <p>When the sails are lowered, the golden hour hits the water, and the groove of a smooth bassline drifts across the deck, there is only one beverage meant for your hand.</p>
             <p>Brewed exclusively by Diamond Rock Monument Brewing Co., Moist IPA is a perfectly balanced, super drinkable companion for the sophisticated voyager. It goes down as effortlessly as a warm ocean breeze.</p>
-        </div>
-        <div class="section-image">
-            <img src="6 tidal 2.jpg" alt="Moist IPA six pack on the shoreline">
         </div>
     </section>
 
@@ -226,38 +272,15 @@
         <p>Let the ocean chill your bottle and the music warm your soul. Slip off your deck shoes, wade into the shallows, and taste the sophistication of smooth sailing.</p>
     </div>
 
-    <!-- Treasure Section -->
-    <section class="section">
-        <div class="section-text">
+    <!-- Treasure Section (Now Full Width) -->
+    <section class="full-width-section treasure-bg">
+        <div class="section-overlay"></div>
+        <div class="full-width-content">
             <h2>A Liquid Treasure</h2>
             <p>Forget gold doubloons and sunken silver; true coastal wealth is found in the perfect pour. Washed ashore for those who seek the ultimate refreshment, Moist IPA is a buried treasure of flavor.</p>
             <p>With an ancient galleon on the horizon and a wooden chest open on the sand, it's time to claim your bounty of crisp, perfectly balanced nectar. Drink like a captain, and let the liquid gold flow.</p>
         </div>
-        <div class="section-image">
-            <img src="treasure chest 3 ship.jpg" alt="Moist IPA bottles inside a treasure chest on the beach with a ship in the background">
-        </div>
     </section>
-
-    <!-- Final Image Break -->
-    <section class="section reverse" style="background-color: var(--white);">
-        <div class="section-text">
-            <h2>Let the Current Take You</h2>
-            <p>When the compass points to leisure, Moist IPA is the only provision you need. Crafted for those who appreciate the rhythm of the waves and the undeniable groove of a smooth saxophone solo, this IPA is best enjoyed where the water meets the sand.</p>
-        </div>
-        <div class="section-image">
-            <img src="bottle under water.jpg" alt="Moist IPA bottle resting gently in the surf">
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="footer-overlay"></div>
-        <div class="footer-content">
-            <h2>Diamond Rock Monument Brewing Co.</h2>
-            <p style="margin-bottom: 20px;">Turn up the music. Let the tide wash the day away.</p>
-            <a href="https://diamondrockmonument.band">Return to the Band Homepage</a>
-        </div>
-    </footer>
 
 </body>
 </html>
