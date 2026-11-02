@@ -33,6 +33,27 @@
             letter-spacing: 1px;
         }
 
+        /* Sticky Logo Wrapper Container */
+        .sticky-logo-container {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background-color: rgba(15, 32, 39, 0.85);
+            backdrop-filter: blur(8px);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+        }
+
+        /* Scaled-down version of the logo when sticky */
+        .sticky-logo-container .hero-logo {
+            width: 180px;
+            margin-bottom: 0;
+        }
+
         /* Hero Section with Parallax Background */
         .hero {
             position: relative;
@@ -62,13 +83,14 @@
             align-items: center;
         }
 
-        /* Styling for the Moist IPA Logo */
+        /* Styling for the Moist IPA Logo in Hero */
         .hero-logo {
             max-width: 95%; 
             width: 700px; 
             height: auto;
             margin-bottom: 20px;
             filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.5));
+            transition: width 0.3s ease;
         }
 
         .hero-content p {
@@ -328,6 +350,9 @@
             .hero-logo {
                 width: 420px; 
             }
+            .sticky-logo-container .hero-logo {
+                width: 140px;
+            }
             .white-text-content h2, .tasting-title, .treasure-mobile-content h2 {
                 font-size: 2.2rem;
             }
@@ -336,11 +361,16 @@
 </head>
 <body>
 
+    <!-- Sticky Logo Bar (Appears at top upon scrolling) -->
+    <div class="sticky-logo-container">
+        <img src="Moist IPA Sticker_clr1.png" alt="Moist IPA" class="hero-logo">[cite: 21]
+    </div>
+
     <!-- Hero Section -->
     <header class="hero">
         <div class="hero-overlay"></div>
         <div class="hero-content">
-            <img src="Moist IPA Sticker_clr1.png" alt="Moist IPA" class="hero-logo">
+            <img src="Moist IPA Sticker_clr1.png" alt="Moist IPA" class="hero-logo">[cite: 21]
             <p>The Captain’s Choice for Smooth Sailing</p>
         </div>
     </header>
@@ -373,7 +403,7 @@
     <!-- Chilled by the Tide (3-Column Layout) -->
     <section class="tide-section">
         <div class="tide-img">
-            <img src="Bottle in water 1.jpg" alt="Moist IPA bottle standing in the crisp ocean shallows">
+            <img src="Bottle in water 1.jpg" alt="Moist IPA bottle standing in the crisp ocean shallows">[cite: 11]
         </div>
         <div class="tide-text">
             <h2>Chilled by the Tide</h2>
@@ -381,7 +411,7 @@
             <p>When the compass points to leisure, Moist IPA is the only provision you need. Crafted for those who appreciate the rhythm of the waves and the undeniable groove of a smooth saxophone solo, this IPA is best enjoyed where the water meets the sand.</p>
         </div>
         <div class="tide-img">
-            <img src="bottle under water.jpg" alt="Moist IPA bottle resting gently in the surf">
+            <img src="bottle under water.jpg" alt="Moist IPA bottle resting gently in the surf">[cite: 14]
         </div>
     </section>
 
@@ -413,7 +443,7 @@
     <footer>
         <div class="footer-overlay"></div>
         <div class="footer-content">
-            <img src="DRM Brewing_clear.png" alt="Diamond Rock Monument Brewing Co." class="footer-logo">
+            <img src="DRM Brewing_clear.png" alt="Diamond Rock Monument Brewing Co." class="footer-logo">[cite: 22]
             <p style="margin-bottom: 20px;">Turn up the music. Let the tide wash the day away.</p>
             <a href="https://diamondrockmonument.band">Return to the Band Homepage</a>
         </div>
