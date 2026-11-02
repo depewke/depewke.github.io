@@ -40,7 +40,6 @@
             background-image: url('sun on water 2.jpg');
             background-size: cover;
             background-position: center;
-            background-attachment: fixed;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -58,14 +57,18 @@
             position: relative;
             z-index: 1;
             padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        .hero-content h1 {
-            font-size: 4rem;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        /* Styling for the new Moist IPA Logo */
+        .hero-logo {
+            max-width: 90%;
+            width: 500px;
+            height: auto;
+            margin-bottom: 20px;
+            filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.5));
         }
 
         .hero-content p {
@@ -185,6 +188,9 @@
             text-align: center;
             padding: 100px 20px;
             position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .footer-overlay {
@@ -196,11 +202,18 @@
         .footer-content {
             position: relative;
             z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        .footer-content h2 {
-            font-size: 2rem;
-            margin-bottom: 10px;
+        /* Styling for the new DRM Brewing Logo */
+        .footer-logo {
+            max-width: 90%;
+            width: 400px;
+            height: auto;
+            margin-bottom: 20px;
+            filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.5));
         }
 
         .footer-content a {
@@ -223,8 +236,11 @@
                 padding: 50px 20px;
                 text-align: center;
             }
-            .hero-content h1 {
-                font-size: 3rem;
+            .hero-logo {
+                width: 300px;
+            }
+            .footer-logo {
+                width: 250px;
             }
             .full-width-content h2 {
                 font-size: 2.2rem;
@@ -238,7 +254,7 @@
     <header class="hero">
         <div class="hero-overlay"></div>
         <div class="hero-content">
-            <h1>Moist IPA</h1>
+            <img src="Moist IPA Sticker_clr1.jpg" alt="Moist IPA" class="hero-logo">
             <p>The Captain’s Choice for Smooth Sailing</p>
         </div>
     </header>
@@ -296,7 +312,7 @@
     <footer>
         <div class="footer-overlay"></div>
         <div class="footer-content">
-            <h2>Diamond Rock Monument Brewing Co.</h2>
+            <img src="DRM Brewing_clear.jpg" alt="Diamond Rock Monument Brewing Co." class="footer-logo">
             <p style="margin-bottom: 20px;">Turn up the music. Let the tide wash the day away.</p>
             <a href="https://diamondrockmonument.band">Return to the Band Homepage</a>
         </div>
