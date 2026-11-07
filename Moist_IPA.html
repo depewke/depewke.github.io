@@ -550,7 +550,7 @@
 </head>
 <body>
 
-    <!-- Background Audio Element with updated file name -->
+    <!-- Background Audio Element -->
     <audio id="bgAudio" loop preload="auto">
         <source src="0_After_Five_at_the_Bay.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
@@ -669,7 +669,7 @@
     <section class="treasure-mobile-section">
         <div class="treasure-mobile-content">
             <h2>A Liquid Treasure</h2>
-            <p>Forget gold doubloons and sunken silver; true coastal wealth is found in the perfect pour. Washed ashore for those who seek the ultimate refreshment, Moist IPA is a buried treasure of flavor.</p>
+            <p>Forget gold doubloons and sunken silver; true coastal wealth is found in the persistent pour. Washed ashore for those who seek the ultimate refreshment, Moist IPA is a buried treasure of flavor.</p>
             <p>With an ancient galleon on the horizon and a wooden chest open on the sand, it's time to claim your bounty of crisp, perfectly balanced nectar. Drink like a captain, and let the liquid gold flow.</p>
         </div>
     </section>
@@ -714,7 +714,7 @@
             }
         });
 
-        // Audio Toggle Functionality (Icon Only)
+        // Audio Toggle Functionality with Safe State & Error Handling
         const audio = document.getElementById('bgAudio');
         const audioToggleBtn = document.getElementById('audioToggleBtn');
         const audioIcon = document.getElementById('audioIcon');
@@ -725,6 +725,7 @@
                     audioIcon.textContent = '🔊';
                 }).catch(err => {
                     console.log("Audio play failed or was blocked by browser policy:", err);
+                    audioIcon.textContent = '🔇';
                 });
             } else {
                 audio.pause();
