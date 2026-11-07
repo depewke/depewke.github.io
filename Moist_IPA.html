@@ -63,25 +63,26 @@
         /* Hero Section with Video Background */
         .hero {
             position: relative;
-            height: 90vh;
+            height: 85vh;
             overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
             color: var(--white);
-            background-color: var(--navy);
+            background-color: var(--navy); /* Fills any side letterbox gaps on ultra-wide screens */
         }
 
-        /* Controlled Video Scaling for Wide Screens to Limit Cropping */
+        /* Capped width with object-fit: contain ensures full video visibility without cropping */
         .hero-video {
             position: absolute;
             top: 50%;
             left: 50%;
             width: 100%;
             height: 100%;
-            transform: translate(-50%, -50%) scale(1.15); 
-            object-fit: cover; 
+            max-width: 1400px; /* Limits maximum width on wide screens so sides aren't lost */
+            transform: translate(-50%, -50%);
+            object-fit: contain; 
             z-index: 0;
         }
 
@@ -311,14 +312,14 @@
             filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.5)); 
         }
 
-        /* Footer text styled to match section title font height and navy color */
+        /* Footer text styled in gold font color */
         .footer-text {
             font-family: 'Georgia', serif;
             font-size: 2.8rem;
-            color: var(--navy);
+            color: var(--gold);
             margin-bottom: 25px;
             letter-spacing: 1px;
-            text-shadow: 1px 1px 3px rgba(255,255,255,0.4);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
         }
 
         .footer-content a {
@@ -375,9 +376,6 @@
             }
             .white-text-content h2, .tasting-title, .treasure-mobile-content h2 {
                 font-size: 2.2rem;
-            }
-            .hero-video {
-                transform: translate(-50%, -50%) scale(1); 
             }
         }
     </style>
@@ -486,7 +484,7 @@
             setTimeout(function() {
                 video.currentTime = 0; 
                 video.play();          
-            }, 1000); // 10-second freeze delay
+            }, 10000); // 10-second freeze delay
         });
     </script>
 </body>
