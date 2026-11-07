@@ -225,7 +225,7 @@
             margin-bottom: 20px;
         }
 
-        /* Full-Width Image Sections with Text Overlay */
+        /* Full-Width Image Sections with Text Overlay (Desktop) */
         .full-width-section {
             position: relative;
             background-size: cover;
@@ -284,6 +284,44 @@
             font-size: 1.25rem;
             text-shadow: 2px 2px 5px rgba(0,0,0,0.9);
             margin-bottom: 15px;
+        }
+
+        /* Mobile Tasting Notes Section (Hidden on desktop) */
+        .tasting-mobile-section {
+            display: none;
+            background-color: var(--sand);
+            color: var(--navy);
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .tasting-mobile-img {
+            max-width: 400px;
+            margin: 0 auto 30px auto;
+        }
+
+        .tasting-mobile-img img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+            display: block;
+        }
+
+        .tasting-mobile-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .tasting-mobile-content h2 {
+            font-size: 2.5rem;
+            color: var(--ocean-blue);
+            margin-bottom: 20px;
+        }
+
+        .tasting-mobile-content p {
+            font-size: 1.2rem;
+            color: var(--navy);
+            margin-bottom: 20px;
         }
 
         /* Treasure Section Layout (Desktop: On Image Left) */
@@ -496,6 +534,12 @@
 
         /* Responsive Design */
         @media (max-width: 900px) {
+            .full-width-section.tasting-bg {
+                display: none; /* Hide desktop overlay version on narrow screens */
+            }
+            .tasting-mobile-section {
+                display: block; /* Show mobile version with image on top and sand background text below */
+            }
             .tide-section {
                 display: none; 
             }
@@ -510,11 +554,6 @@
             .col-left, .col-right {
                 flex: auto;
                 width: 100%;
-            }
-            /* Change tasting notes body text to navy on narrow screens */
-            .full-width-section.tasting-bg .split-columns p {
-                color: var(--navy);
-                text-shadow: 1px 1px 3px rgba(255,255,255,0.8);
             }
             .treasure-content-desktop {
                 display: none;
@@ -547,7 +586,7 @@
                 width: 34px;
                 height: 34px;
             }
-            .white-text-content h2, .tasting-title, .treasure-mobile-content h2, .tide-mobile-content h2 {
+            .white-text-content h2, .tasting-title, .treasure-mobile-content h2, .tide-mobile-content h2, .tasting-mobile-content h2 {
                 font-size: 2.2rem;
             }
         }
@@ -612,7 +651,7 @@
         </div>
     </section>
 
-    <!-- Tasting Notes Section (Full Width Image with Flanking Text) -->
+    <!-- Tasting Notes Section (Desktop: Full Width Image with Flanking Text) -->
     <section class="full-width-section tasting-bg">
         <div class="section-overlay"></div>
         <div class="full-width-content">
@@ -625,6 +664,18 @@
                     <p>It’s light enough for a sun-drenched afternoon on the bow, yet complex enough to savor as the sun dips below the horizon. Whether navigating the high seas or dropping anchor in your own backyard, every bottle is an invitation to kick back.</p>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- Tasting Notes Section (Narrow/Mobile: Image on top, text below on sand background) -->
+    <section class="tasting-mobile-section">
+        <div class="tasting-mobile-img">
+            <img src="6 tidal 2.jpg" alt="Moist IPA tasting notes tidal background" />
+        </div>
+        <div class="tasting-mobile-content">
+            <h2>Tasting Notes for the Discerning Sailor</h2>
+            <p>Expect a refreshing, perfectly calibrated hop profile that doesn't overwhelm the palate, ensuring you stay steady at the helm.</p>
+            <p>It’s light enough for a sun-drenched afternoon on the bow, yet complex enough to savor as the sun dips below the horizon. Whether navigating the high seas or dropping anchor in your own backyard, every bottle is an invitation to kick back.</p>
         </div>
     </section>
 
