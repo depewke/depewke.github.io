@@ -271,19 +271,38 @@
         /* Narrow format wrapper for Chilled by the Tide (hidden on desktop) */
         .tide-mobile-wrapper {
             display: none;
+            background-color: var(--sand);
+            padding: 40px 20px;
+        }
+
+        .tide-mobile-single-img {
+            max-width: 400px;
+            margin: 0 auto 30px auto;
+        }
+
+        .tide-mobile-single-img img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+            display: block;
+        }
+
+        .tide-mobile-text-container {
             position: relative;
             background-size: cover;
             background-position: center;
             color: var(--white);
-            padding: 120px 5%;
+            padding: 80px 20px;
             text-align: center;
             background-image: url('bottle under water.jpg');
+            border-radius: 8px;
+            overflow: hidden;
         }
 
         .tide-mobile-overlay {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(15, 32, 39, 0.05); /* Reduced to 5% opacity as requested */
+            background: rgba(15, 32, 39, 0.05); /* 5% overlay as requested */
         }
 
         .tide-mobile-content {
@@ -380,7 +399,7 @@
                 display: none; /* Hide 3-column layout on narrow screens */
             }
             .tide-mobile-wrapper {
-                display: block; /* Show mobile layout with single background image + overlay text */
+                display: block; /* Show mobile layout with bottle in water image + text container with bottle under water background */
             }
             .split-columns {
                 flex-direction: column;
@@ -483,13 +502,18 @@
         </div>
     </section>
 
-    <!-- Chilled by the Tide (Narrow/Mobile: Text over 'bottle under water.jpg' with 5% overlay) -->
+    <!-- Chilled by the Tide (Narrow/Mobile: Bottle in water image + text container with bottle under water background) -->
     <div class="tide-mobile-wrapper">
-        <div class="tide-mobile-overlay"></div>
-        <div class="tide-mobile-content">
-            <h2>Chilled by the Tide</h2>
-            <p>Let the ocean chill your bottle and the music warm your soul. Slip off your deck shoes, wade into the shallows, and taste the sophistication of smooth sailing.</p>
-            <p>When the compass points to leisure, Moist IPA is the only provision you need. Crafted for those who appreciate the rhythm of the waves and the undeniable groove of a smooth saxophone solo, this IPA is best enjoyed where the water meets the sand.</p>
+        <div class="tide-mobile-single-img">
+            <img src="Bottle in water 1.jpg" alt="Moist IPA bottle standing in the crisp ocean shallows" />
+        </div>
+        <div class="tide-mobile-text-container">
+            <div class="tide-mobile-overlay"></div>
+            <div class="tide-mobile-content">
+                <h2>Chilled by the Tide</h2>
+                <p>Let the ocean chill your bottle and the music warm your soul. Slip off your deck shoes, wade into the shallows, and taste the sophistication of smooth sailing.</p>
+                <p>When the compass points to leisure, Moist IPA is the only provision you need. Crafted for those who appreciate the rhythm of the waves and the undeniable groove of a smooth saxophone solo, this IPA is best enjoyed where the water meets the sand.</p>
+            </div>
         </div>
     </div>
 
