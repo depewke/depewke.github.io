@@ -60,20 +60,20 @@
             height: auto;
         }
 
-        /* Hero Section with Video Background (25% taller on wide screens: 90vh -> 112.5vh) */
+        /* Hero Section with Video Background */
         .hero {
             position: relative;
-            height: 112.5vh;
+            height: 85vh;
             overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
             color: var(--white);
-            background-color: var(--navy); /* Fallback color */
+            background-color: var(--navy); /* Fills any side gaps on ultra-wide screens */
         }
 
-        /* Dynamic Video Sizing for Desktop & Mobile */
+        /* Updated for Laptops: object-fit: contain prevents cropping so lower text is fully visible */
         .hero-video {
             position: absolute;
             top: 50%;
@@ -81,7 +81,7 @@
             width: 100%;
             height: 100%;
             transform: translate(-50%, -50%);
-            object-fit: cover; /* Ensures desktop fills nicely */
+            object-fit: contain; 
             z-index: 0;
         }
 
@@ -110,13 +110,6 @@
             margin-bottom: 20px;
             filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.5));
             transition: width 0.3s ease;
-        }
-
-        .hero-content p {
-            font-size: 1.5rem;
-            font-style: italic;
-            color: var(--sand);
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
         }
 
         /* Clean White Text Section */
@@ -342,7 +335,7 @@
             opacity: 0.8;
         }
 
-        /* Responsive Design & Mobile Video Scaling */
+        /* Responsive Design */
         @media (max-width: 900px) {
             .tide-section {
                 flex-direction: column;
@@ -365,9 +358,6 @@
         }
         
         @media (max-width: 768px) {
-            .hero {
-                height: 90vh; /* Resets to standard height on mobile */
-            }
             .hero-logo {
                 width: 420px; 
             }
@@ -382,11 +372,6 @@
             }
             .white-text-content h2, .tasting-title, .treasure-mobile-content h2 {
                 font-size: 2.2rem;
-            }
-            /* Dynamically adjust video fit for narrow vertical mobile displays */
-            .hero-video {
-                object-fit: contain;
-                background-color: var(--navy);
             }
         }
     </style>
