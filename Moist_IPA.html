@@ -64,7 +64,7 @@
         .sticky-center-controls {
             display: flex;
             align-items: center;
-            gap: 25px;
+            gap: 20px;
             position: relative;
         }
 
@@ -134,20 +134,19 @@
             color: var(--gold);
         }
 
-        /* Audio Toggle Button */
+        /* Audio Toggle Button (Icon Only) */
         .audio-toggle-btn {
             background: none;
             border: 2px solid var(--gold);
             color: var(--gold);
             cursor: pointer;
-            font-size: 0.9rem;
-            padding: 6px 12px;
-            border-radius: 20px;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
-            gap: 6px;
+            justify-content: center;
             transition: all 0.3s ease;
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
         }
 
         .audio-toggle-btn:hover {
@@ -156,7 +155,8 @@
         }
 
         .audio-icon {
-            font-size: 1rem;
+            font-size: 1.1rem;
+            line-height: 1;
         }
 
         /* Hero Section with Video Background */
@@ -539,8 +539,8 @@
                 width: 75px;
             }
             .audio-toggle-btn {
-                padding: 4px 8px;
-                font-size: 0.8rem;
+                width: 34px;
+                height: 34px;
             }
             .white-text-content h2, .tasting-title, .treasure-mobile-content h2, .tide-mobile-content h2 {
                 font-size: 2.2rem;
@@ -551,7 +551,7 @@
 <body>
 
     <!-- Hidden Background Audio Element (Defaults to muted / off) -->
-    <audio id="bgAudio" loop>
+    <audio id="bgAudio" loop preload="auto">
         <source src="yacht-rock-tune.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
@@ -575,9 +575,9 @@
                 </div>
             </div>
 
-            <button class="audio-toggle-btn" id="audioToggleBtn" aria-label="Toggle Audio">
+            <!-- Icon-only Audio Toggle Button -->
+            <button class="audio-toggle-btn" id="audioToggleBtn" aria-label="Toggle Audio" title="Toggle Audio">
                 <span class="audio-icon" id="audioIcon">🔇</span>
-                <span id="audioText">Audio Off</span>
             </button>
         </div>
 
@@ -714,27 +714,21 @@
             }
         });
 
-        // Audio Toggle Functionality (Defaults to Off)
+        // Audio Toggle Functionality (Defaults to Off / Muted)
         const audio = document.getElementById('bgAudio');
         const audioToggleBtn = document.getElementById('audioToggleBtn');
         const audioIcon = document.getElementById('audioIcon');
-        const audioText = document.getElementById('audioText');
-        let isAudioPlaying = false;
 
         audioToggleBtn.addEventListener('click', function() {
-            if (isAudioPlaying) {
-                audio.pause();
-                audioIcon.textContent = '🔇';
-                audioText.textContent = 'Audio Off';
-                isAudioPlaying = false;
-            } else {
+            if (audio.paused) {
                 audio.play().then(() => {
                     audioIcon.textContent = '🔊';
-                    audioText.textContent = 'Audio On';
-                    isAudioPlaying = true;
-                }).catch(e => {
-                    console.log("Audio playback prevented by browser policy:", e);
+                }).catch(err => {
+                    console.log("Audio play blocked or failed:", err);
                 });
+            } else {
+                audio.pause();
+                audioIcon.textContent = '🔇';
             }
         });
     </script>
