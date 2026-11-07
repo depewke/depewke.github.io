@@ -86,7 +86,6 @@
             z-index: 0;
         }
 
-        /* Turned off overlay as requested */
         .hero-overlay {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -103,7 +102,7 @@
             align-items: center;
         }
 
-        /* Welcome Aboard Section (Updated to match Chilled by the Tide sand background) */
+        /* Welcome Aboard Section */
         .white-text-section {
             background-color: var(--sand);
             padding: 80px 20px;
@@ -187,7 +186,7 @@
             margin-bottom: 15px;
         }
 
-        /* Treasure Section Layout (Desktop: On Image Left / Mobile: Hidden here) */
+        /* Treasure Section Layout (Desktop: On Image Left) */
         .treasure-content-desktop {
             text-align: left;
             max-width: 500px;
@@ -207,9 +206,9 @@
             text-shadow: 2px 2px 5px rgba(0,0,0,0.9);
         }
 
-        /* Mobile Section for Treasure Text (Updated to match sand background) */
+        /* Mobile Section for Treasure Text */
         .treasure-mobile-section {
-            display: none; /* Hidden on desktop */
+            display: none; 
             background-color: var(--sand);
             color: var(--navy);
             padding: 60px 20px;
@@ -232,14 +231,7 @@
             margin-bottom: 20px;
         }
 
-        /* Narrow White Area Above Footer */
-        .footer-separator {
-            background-color: var(--white);
-            height: 30px;
-            width: 100%;
-        }
-
-        /* 3-Column Tide Section (Img | Text | Img) */
+        /* Chilled by the Tide Section (Desktop: 3 columns) */
         .tide-section {
             display: flex;
             align-items: center;
@@ -257,6 +249,7 @@
             width: 100%;
             border-radius: 8px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            display: block;
         }
 
         .tide-text {
@@ -273,6 +266,51 @@
         .tide-text p {
             font-size: 1.2rem;
             margin-bottom: 20px;
+        }
+
+        /* Narrow format wrapper for Chilled by the Tide (hidden on desktop) */
+        .tide-mobile-wrapper {
+            display: none;
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            padding: 80px 20px;
+            text-align: center;
+            background-image: url('bottle under water.jpg');
+        }
+
+        .tide-mobile-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(15, 32, 39, 0.65);
+        }
+
+        .tide-mobile-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .tide-mobile-content h2 {
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.9);
+        }
+
+        .tide-mobile-content p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.9);
+        }
+
+        /* Narrow White Area Above Footer */
+        .footer-separator {
+            background-color: var(--white);
+            height: 30px;
+            width: 100%;
         }
 
         /* Footer */
@@ -339,7 +377,10 @@
         /* Responsive Design */
         @media (max-width: 900px) {
             .tide-section {
-                flex-direction: column;
+                display: none; /* Hide 3-column layout on narrow screens */
+            }
+            .tide-mobile-wrapper {
+                display: block; /* Show mobile overlay layout */
             }
             .split-columns {
                 flex-direction: column;
@@ -374,7 +415,7 @@
             .sticky-logo-container .hero-logo {
                 width: 100px;
             }
-            .white-text-content h2, .tasting-title, .treasure-mobile-content h2 {
+            .white-text-content h2, .tasting-title, .treasure-mobile-content h2, .tide-mobile-content h2 {
                 font-size: 2.2rem;
             }
         }
@@ -427,7 +468,7 @@
         </div>
     </section>
 
-    <!-- Chilled by the Tide (3-Column Layout) -->
+    <!-- Chilled by the Tide (Desktop: 3-Column Layout) -->
     <section class="tide-section">
         <div class="tide-img">
             <img src="Bottle in water 1.jpg" alt="Moist IPA bottle standing in the crisp ocean shallows" />
@@ -441,6 +482,16 @@
             <img src="bottle under water.jpg" alt="Moist IPA bottle resting gently in the surf" />
         </div>
     </section>
+
+    <!-- Chilled by the Tide (Narrow/Mobile: Text over 'bottle under water.jpg') -->
+    <div class="tide-mobile-wrapper">
+        <div class="tide-mobile-overlay"></div>
+        <div class="tide-mobile-content">
+            <h2>Chilled by the Tide</h2>
+            <p>Let the ocean chill your bottle and the music warm your soul. Slip off your deck shoes, wade into the shallows, and taste the sophistication of smooth sailing.</p>
+            <p>When the compass points to leisure, Moist IPA is the only provision you need. Crafted for those who appreciate the rhythm of the waves and the undeniable groove of a smooth saxophone solo, this IPA is best enjoyed where the water meets the sand.</p>
+        </div>
+    </div>
 
     <!-- Treasure Section (Desktop: Text on Left over Image) -->
     <section class="full-width-section treasure-bg">
