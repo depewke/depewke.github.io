@@ -12,6 +12,7 @@
             --sand: #F5F1E7;
             --white: #FFFFFF;
             --gold: #D4AF37;
+            --dark-gold: #C5A028; /* Rich dark gold for mobile contrast */
         }
 
         * {
@@ -510,6 +511,11 @@
             .col-left, .col-right {
                 flex: auto;
                 width: 100%;
+            }
+            /* Change tasting notes body text to dark gold on narrow screens for readability */
+            .full-width-section.tasting-bg .split-columns p {
+                color: var(--dark-gold);
+                text-shadow: 1px 1px 3px rgba(0,0,0,0.95);
             }
             .treasure-content-desktop {
                 display: none;
