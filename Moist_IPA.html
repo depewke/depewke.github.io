@@ -60,7 +60,7 @@
             height: auto;
         }
 
-        /* Hero Section with Video Background / Fallback Image */
+        /* Hero Section with Video Background */
         .hero {
             position: relative;
             height: 90vh;
@@ -84,18 +84,6 @@
             height: auto;
             transform: translate(-50%, -50%);
             object-fit: cover;
-            z-index: 0;
-        }
-
-        /* Fallback / Final Frame Image (Hidden until video ends) */
-        .hero-fallback-img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: none; /* Controlled by JS */
             z-index: 0;
         }
 
@@ -406,14 +394,10 @@
 
     <!-- Hero Section with Video Background -->
     <header class="hero">
-        <!-- Background Video (Replace 'hero-video.mp4' with your actual video filename) -->
         <video autoplay muted playsinline class="hero-video" id="heroVideo">
             <source src="hero-video.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
-
-        <!-- Fallback/Switch Image (sun on water 2.jpg) that displays when video ends -->
-        <img src="sun on water 2.jpg" alt="Sun on water background" class="hero-fallback-img" id="heroImage" />
 
         <div class="hero-overlay"></div>
         <div class="hero-content">
@@ -478,7 +462,7 @@
     <section class="treasure-mobile-section">
         <div class="treasure-mobile-content">
             <h2>A Liquid Treasure</h2>
-            <p>Forget gold doubloons and sunken silver; true coastal wealth is found in the persistent pour. Washed ashore for those who seek the ultimate refreshment, Moist IPA is a buried treasure of flavor.</p>
+            <p>Forget gold doubloons and sunken silver; true coastal wealth is found in the perfect pour. Washed ashore for those who seek the ultimate refreshment, Moist IPA is a buried treasure of flavor.</p>
             <p>With an ancient galleon on the horizon and a wooden chest open on the sand, it's time to claim your bounty of crisp, perfectly balanced nectar. Drink like a captain, and let the liquid gold flow.</p>
         </div>
     </section>
@@ -496,14 +480,16 @@
         </div>
     </footer>
 
-    <!-- JavaScript to seamlessly switch from video to static image on completion -->
+    <!-- JavaScript to freeze for 10 seconds on the last frame, then replay -->
     <script>
         const video = document.getElementById('heroVideo');
-        const fallbackImage = document.getElementById('heroImage');
 
         video.addEventListener('ended', function() {
-            video.style.display = 'none';
-            fallbackImage.style.display = 'block';
+            // Video naturally stays frozen on the final frame when ended
+            setTimeout(function() {
+                video.currentTime = 0; // Rewind to the beginning
+                video.play();          // Restart playback
+            }, 10000); // 10,000 milliseconds = 10-second freeze delay
         });
     </script>
 </body>
