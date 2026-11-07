@@ -550,9 +550,9 @@
 </head>
 <body>
 
-    <!-- Hidden Background Audio Element (Defaults to muted / off) -->
+    <!-- Background Audio Element with updated file name -->
     <audio id="bgAudio" loop preload="auto">
-        <source src="yacht-rock-tune.mp3" type="audio/mpeg">
+        <source src="0_After_Five_at_the_Bay.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
 
@@ -560,7 +560,7 @@
     <div class="sticky-logo-container">
         <img src="DRM Brewing_clear.png" alt="Diamond Rock Monument Brewing Co." class="sticky-drm-logo" />
         
-        <!-- Center Controls: Hamburger Menu & Audio Toggle -->
+        <!-- Center Controls: Hamburger Menu & Audio Toggle Icon -->
         <div class="sticky-center-controls">
             <div class="menu-container">
                 <button class="hamburger-btn" id="menuBtn" aria-label="Toggle Navigation Menu">
@@ -714,7 +714,7 @@
             }
         });
 
-        // Audio Toggle Functionality (Defaults to Off / Muted)
+        // Audio Toggle Functionality (Icon Only)
         const audio = document.getElementById('bgAudio');
         const audioToggleBtn = document.getElementById('audioToggleBtn');
         const audioIcon = document.getElementById('audioIcon');
@@ -724,7 +724,7 @@
                 audio.play().then(() => {
                     audioIcon.textContent = '🔊';
                 }).catch(err => {
-                    console.log("Audio play blocked or failed:", err);
+                    console.log("Audio play failed or was blocked by browser policy:", err);
                 });
             } else {
                 audio.pause();
