@@ -296,12 +296,14 @@
         }
 
         .tasting-mobile-img {
-            max-width: 400px;
+            max-width: 100%; /* Let it expand fully inside the padding */
             margin: 0 auto 30px auto;
         }
 
         .tasting-mobile-img img {
             width: 100%;
+            height: 400px; /* Preserve a generous height */
+            object-fit: cover; /* Crop the width dynamically without squishing */
             border-radius: 8px;
             box-shadow: 0 10px 20px rgba(0,0,0,0.15);
             display: block;
@@ -535,10 +537,10 @@
         /* Responsive Design */
         @media (max-width: 900px) {
             .full-width-section.tasting-bg {
-                display: none; /* Hide desktop overlay version on narrow screens */
+                display: none; 
             }
             .tasting-mobile-section {
-                display: block; /* Show mobile version with image on top and sand background text below */
+                display: block; 
             }
             .tide-section {
                 display: none; 
