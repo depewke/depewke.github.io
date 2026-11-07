@@ -63,25 +63,25 @@
         /* Hero Section with Video Background */
         .hero {
             position: relative;
-            height: 85vh;
+            height: 90vh;
             overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
             color: var(--white);
-            background-color: var(--navy); /* Fills any side gaps on ultra-wide screens */
+            background-color: var(--navy);
         }
 
-        /* Updated for Laptops: object-fit: contain prevents cropping so lower text is fully visible */
+        /* Controlled Video Scaling for Wide Screens to Limit Cropping */
         .hero-video {
             position: absolute;
             top: 50%;
             left: 50%;
             width: 100%;
             height: 100%;
-            transform: translate(-50%, -50%);
-            object-fit: contain; 
+            transform: translate(-50%, -50%) scale(1.15); /* Gentle scale to limit cropping to preferred thresholds */
+            object-fit: cover; 
             z-index: 0;
         }
 
@@ -100,16 +100,6 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-        }
-
-        /* Styling for the Moist IPA Logo in Hero */
-        .hero-logo {
-            max-width: 95%; 
-            width: 700px; 
-            height: auto;
-            margin-bottom: 20px;
-            filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.5));
-            transition: width 0.3s ease;
         }
 
         /* Clean White Text Section */
@@ -372,6 +362,9 @@
             }
             .white-text-content h2, .tasting-title, .treasure-mobile-content h2 {
                 font-size: 2.2rem;
+            }
+            .hero-video {
+                transform: translate(-50%, -50%) scale(1); /* Reset scale on mobile */
             }
         }
     </style>
