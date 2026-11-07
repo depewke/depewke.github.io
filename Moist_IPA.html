@@ -33,12 +33,12 @@
             letter-spacing: 1px;
         }
 
-        /* Sticky Logo Container with Dual Logos */
+        /* Sticky Logo Container with Navigation & Audio Toggle */
         .sticky-logo-container {
             position: sticky;
             top: 0;
             z-index: 1000;
-            background-color: rgba(15, 32, 39, 0.9);
+            background-color: rgba(15, 32, 39, 0.95);
             backdrop-filter: blur(8px);
             padding: 10px 30px;
             display: flex;
@@ -58,6 +58,105 @@
             width: 140px;
             margin-bottom: 0;
             height: auto;
+        }
+
+        /* Central Navigation & Audio Controls Container */
+        .sticky-center-controls {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            position: relative;
+        }
+
+        /* Hamburger Menu Styling */
+        .menu-container {
+            position: relative;
+        }
+
+        .hamburger-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 22px;
+            padding: 0;
+        }
+
+        .hamburger-btn span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background-color: var(--gold);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        /* Dropdown Menu */
+        .nav-dropdown {
+            display: none;
+            position: absolute;
+            top: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--ocean-blue);
+            min-width: 240px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+            border-radius: 6px;
+            overflow: hidden;
+            z-index: 1001;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .nav-dropdown.active {
+            display: block;
+        }
+
+        .nav-dropdown a {
+            display: block;
+            padding: 14px 20px;
+            color: var(--sand);
+            text-decoration: none;
+            font-size: 1.05rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            transition: background 0.2s ease, color 0.2s ease;
+            text-align: center;
+        }
+
+        .nav-dropdown a:last-child {
+            border-bottom: none;
+        }
+
+        .nav-dropdown a:hover {
+            background-color: var(--navy);
+            color: var(--gold);
+        }
+
+        /* Audio Toggle Button */
+        .audio-toggle-btn {
+            background: none;
+            border: 2px solid var(--gold);
+            color: var(--gold);
+            cursor: pointer;
+            font-size: 0.9rem;
+            padding: 6px 12px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.3s ease;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+
+        .audio-toggle-btn:hover {
+            background-color: var(--gold);
+            color: var(--navy);
+        }
+
+        .audio-icon {
+            font-size: 1rem;
         }
 
         /* Hero Section with Video Background */
@@ -122,6 +221,7 @@
 
         .white-text-content p {
             font-size: 1.25rem;
+            color: var(--navy);
             margin-bottom: 20px;
         }
 
@@ -228,6 +328,7 @@
 
         .treasure-mobile-content p {
             font-size: 1.2rem;
+            color: var(--navy);
             margin-bottom: 20px;
         }
 
@@ -302,7 +403,7 @@
         .tide-mobile-overlay {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(15, 32, 39, 0.05); /* 5% overlay as requested */
+            background: rgba(15, 32, 39, 0.05); 
         }
 
         .tide-mobile-content {
@@ -325,9 +426,9 @@
             text-shadow: 2px 2px 5px rgba(0,0,0,0.9);
         }
 
-        /* Narrow White Area Above Footer */
+        /* Footer Separator */
         .footer-separator {
-            background-color: var(--white);
+            background-color: var(--sand);
             height: 30px;
             width: 100%;
         }
@@ -396,10 +497,10 @@
         /* Responsive Design */
         @media (max-width: 900px) {
             .tide-section {
-                display: none; /* Hide 3-column layout on narrow screens */
+                display: none; 
             }
             .tide-mobile-wrapper {
-                display: block; /* Show mobile layout with bottle in water image + text container with bottle under water background */
+                display: block; 
             }
             .split-columns {
                 flex-direction: column;
@@ -419,20 +520,27 @@
             .footer-text {
                 font-size: 2rem;
             }
+            .sticky-logo-container {
+                padding: 10px 15px;
+            }
+            .sticky-logo-container .sticky-drm-logo {
+                width: 120px;
+            }
+            .sticky-logo-container .hero-logo {
+                width: 90px;
+            }
         }
         
         @media (max-width: 768px) {
-            .hero-logo {
-                width: 420px; 
-            }
-            .sticky-logo-container {
-                padding: 8px 15px;
-            }
             .sticky-logo-container .sticky-drm-logo {
-                width: 110px;
+                width: 100px;
             }
             .sticky-logo-container .hero-logo {
-                width: 100px;
+                width: 75px;
+            }
+            .audio-toggle-btn {
+                padding: 4px 8px;
+                font-size: 0.8rem;
             }
             .white-text-content h2, .tasting-title, .treasure-mobile-content h2, .tide-mobile-content h2 {
                 font-size: 2.2rem;
@@ -442,9 +550,37 @@
 </head>
 <body>
 
-    <!-- Sticky Logo Bar with DRM Brewing on Left and Moist IPA on Right -->
+    <!-- Hidden Background Audio Element (Defaults to muted / off) -->
+    <audio id="bgAudio" loop>
+        <source src="yacht-rock-tune.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- Sticky Logo Bar with DRM Brewing (Left), Center Nav & Audio, and Moist IPA (Right) -->
     <div class="sticky-logo-container">
         <img src="DRM Brewing_clear.png" alt="Diamond Rock Monument Brewing Co." class="sticky-drm-logo" />
+        
+        <!-- Center Controls: Hamburger Menu & Audio Toggle -->
+        <div class="sticky-center-controls">
+            <div class="menu-container">
+                <button class="hamburger-btn" id="menuBtn" aria-label="Toggle Navigation Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <div class="nav-dropdown" id="navDropdown">
+                    <a href="https://www.diamondrockmonument.band/">Return to DRM Band</a>
+                    <a href="https://www.diamondrockmonument.band/Merch_page.html">Return to Quartermaster</a>
+                    <a href="https://www.diamondrockmonument.band/SunsetCruise.html">Skylarking</a>
+                </div>
+            </div>
+
+            <button class="audio-toggle-btn" id="audioToggleBtn" aria-label="Toggle Audio">
+                <span class="audio-icon" id="audioIcon">🔇</span>
+                <span id="audioText">Audio Off</span>
+            </button>
+        </div>
+
         <img src="Moist IPA Sticker_clr1.png" alt="Moist IPA" class="hero-logo" />
     </div>
 
@@ -529,7 +665,7 @@
         </div>
     </section>
 
-    <!-- Treasure Section (Mobile/Narrow: Sand Background Below Image) -->
+    <!-- Treasure Section (Mobile/Narrow: Sand Background) -->
     <section class="treasure-mobile-section">
         <div class="treasure-mobile-content">
             <h2>A Liquid Treasure</h2>
@@ -538,7 +674,7 @@
         </div>
     </section>
 
-    <!-- Narrow White Area Above Footer -->
+    <!-- Sand Colored Area Above Footer -->
     <div class="footer-separator"></div>
 
     <!-- Footer -->
@@ -551,15 +687,55 @@
         </div>
     </footer>
 
-    <!-- JavaScript to freeze for 10 seconds on the last frame, then replay -->
+    <!-- JavaScript for Video Loop, Hamburger Dropdown, and Audio Toggle -->
     <script>
+        // Hero Video Loop with 10-Second Freeze
         const video = document.getElementById('heroVideo');
-
         video.addEventListener('ended', function() {
             setTimeout(function() {
                 video.currentTime = 0; 
                 video.play();          
-            }, 1); // 10-second freeze delay
+            }, 10000); 
+        });
+
+        // Hamburger Menu Toggle
+        const menuBtn = document.getElementById('menuBtn');
+        const navDropdown = document.getElementById('navDropdown');
+
+        menuBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            navDropdown.classList.toggle('active');
+        });
+
+        // Close dropdown when clicking outside
+        window.addEventListener('click', function() {
+            if (navDropdown.classList.contains('active')) {
+                navDropdown.classList.remove('active');
+            }
+        });
+
+        // Audio Toggle Functionality (Defaults to Off)
+        const audio = document.getElementById('bgAudio');
+        const audioToggleBtn = document.getElementById('audioToggleBtn');
+        const audioIcon = document.getElementById('audioIcon');
+        const audioText = document.getElementById('audioText');
+        let isAudioPlaying = false;
+
+        audioToggleBtn.addEventListener('click', function() {
+            if (isAudioPlaying) {
+                audio.pause();
+                audioIcon.textContent = '🔇';
+                audioText.textContent = 'Audio Off';
+                isAudioPlaying = false;
+            } else {
+                audio.play().then(() => {
+                    audioIcon.textContent = '🔊';
+                    audioText.textContent = 'Audio On';
+                    isAudioPlaying = true;
+                }).catch(e => {
+                    console.log("Audio playback prevented by browser policy:", e);
+                });
+            }
         });
     </script>
 </body>
