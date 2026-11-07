@@ -73,24 +73,23 @@
             background-color: var(--navy); /* Fallback color */
         }
 
-        /* Video Background Styling */
+        /* Dynamic Video Sizing for Desktop & Mobile */
         .hero-video {
             position: absolute;
             top: 50%;
             left: 50%;
-            min-width: 100%;
-            min-height: 100%;
-            width: auto;
-            height: auto;
+            width: 100%;
+            height: 100%;
             transform: translate(-50%, -50%);
-            object-fit: cover;
+            object-fit: cover; /* Ensures desktop fills nicely */
             z-index: 0;
         }
 
+        /* Turned off overlay as requested */
         .hero-overlay {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(15, 32, 39, 0.25); 
+            background: transparent; 
             z-index: 1;
         }
 
@@ -343,7 +342,7 @@
             opacity: 0.8;
         }
 
-        /* Responsive Design */
+        /* Responsive Design & Mobile Video Scaling */
         @media (max-width: 900px) {
             .tide-section {
                 flex-direction: column;
@@ -381,6 +380,11 @@
             .white-text-content h2, .tasting-title, .treasure-mobile-content h2 {
                 font-size: 2.2rem;
             }
+            /* Dynamically adjust video fit for narrow vertical mobile displays */
+            .hero-video {
+                object-fit: contain;
+                background-color: var(--navy);
+            }
         }
     </style>
 </head>
@@ -401,7 +405,7 @@
 
         <div class="hero-overlay"></div>
         <div class="hero-content">
-            <img src="Moist IPA Sticker_clr1.png" alt="Moist IPA" class="hero-logo" />
+            <!-- <img src="Moist IPA Sticker_clr1.png" alt="Moist IPA" class="hero-logo" /> -->
             <p>The Captain’s Choice for Smooth Sailing</p>
         </div>
     </header>
@@ -485,11 +489,10 @@
         const video = document.getElementById('heroVideo');
 
         video.addEventListener('ended', function() {
-            // Video naturally stays frozen on the final frame when ended
             setTimeout(function() {
-                video.currentTime = 0; // Rewind to the beginning
-                video.play();          // Restart playback
-            }, 10000); // 10,000 milliseconds = 10-second freeze delay
+                video.currentTime = 0; 
+                video.play();          
+            }, 10000); // 10-second freeze delay
         });
     </script>
 </body>
